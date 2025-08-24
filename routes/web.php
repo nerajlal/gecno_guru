@@ -17,6 +17,9 @@ use App\Http\Controllers\AuthController;
 Route::get('/', function () {
     return view('index');
 });
+Route::get('/resume', function () {
+    return view('resume');
+});
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');

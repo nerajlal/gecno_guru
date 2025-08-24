@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Builder - GecnoGuru</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e40af 0%, #3730a3 50%, #581c87 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .glow {
+            box-shadow: 0 0 30px rgba(30, 64, 175, 0.4);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #60a5fa, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .pulse-ring {
+            animation: pulse-ring 2s infinite;
+        }
+        
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        /* Mobile menu styles */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        /* Hamburger menu */
+        .hamburger {
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            position: relative;
+        }
+        
+        .hamburger-top,
+        .hamburger-middle,
+        .hamburger-bottom {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 2px;
+            background: white;
+            transform: rotate(0);
+            transition: all 0.5s;
+        }
+        
+        .hamburger-middle {
+            transform: translateY(7px);
+        }
+        
+        .hamburger-bottom {
+            transform: translateY(14px);
+        }
+        
+        .open .hamburger-top {
+            transform: rotate(45deg) translateY(6px) translateX(6px);
+        }
+        
+        .open .hamburger-middle {
+            display: none;
+        }
+        
+        .open .hamburger-bottom {
+            transform: rotate(-45deg) translateY(6px) translateX(-6px);
+        }
+        
+        /* Resume Builder Specific Styles */
+        .template-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .template-card:hover {
+            border-color: #3b82f6;
+            transform: scale(1.03);
+        }
+        
+        .step-card {
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .feature-badge {
+            background: linear-gradient(135deg, #60a5fa, #a855f7);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-white shadow-lg" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-gray-900">
+                        <span class="text-blue-600">Gecno</span>Guru
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium">Home</a>
+                    <a href="index.html#services" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium">Services</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium">About</a>
+                    <a href="index.html#contact" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium">Contact</a>
+                </div>
+                <button class="hidden md:block bg-blue-600 px-6 py-2 rounded-full text-white font-semibold hover:bg-blue-700 transition-all duration-200">
+                    Get Started
+                </button>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="menu-btn" class="hamburger focus:outline-none">
+                        <span class="hamburger-top"></span>
+                        <span class="hamburger-middle"></span>
+                        <span class="hamburger-bottom"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="menu" class="mobile-menu fixed top-16 right-0 bottom-0 w-64 bg-white shadow-lg p-6 md:hidden">
+            <div class="flex flex-col space-y-6">
+                <a href="index.html" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium">Home</a>
+                <a href="index.html#services" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium">Services</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium">About</a>
+                <a href="index.html#contact" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium">Contact</a>
+                <button class="bg-blue-600 px-6 py-2 rounded-full text-white font-semibold hover:bg-blue-700 transition-all duration-200 w-full">
+                    Get Started
+                </button>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Why Choose Our AI Resume Builder?</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Powered by advanced AI technology to help you create the perfect resume</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-3xl card-hover">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-robot text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">AI-Powered Content</h3>
+                    <p class="text-gray-700">Our AI analyzes thousands of successful resumes to generate impactful content tailored to your industry.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-3xl card-hover">
+                    <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-filter text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">ATS Optimized</h3>
+                    <p class="text-gray-700">Ensure your resume passes through Applicant Tracking Systems with our optimized formatting and keywords.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-3xl card-hover">
+                    <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-palette text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Professional Designs</h3>
+                    <p class="text-gray-700">Choose from dozens of professionally designed templates that impress hiring managers.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-3xl card-hover">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-wand-magic-sparkles text-yellow-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">One-Click Customization</h3>
+                    <p class="text-gray-700">Change colors, fonts, and layouts with a single click to match your personal style.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-3xl card-hover">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-download text-red-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Multiple Formats</h3>
+                    <p class="text-gray-700">Download your resume in PDF, Word, or plain text formats with perfect formatting preserved.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-3xl card-hover">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-shield-alt text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Privacy First</h3>
+                    <p class="text-gray-700">Your data is always secure. We never share your information with third parties.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">How It Works</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Create a professional resume in just a few simple steps</p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="step-card bg-white p-6 rounded-2xl">
+                    <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg mb-4">1</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Select a Template</h3>
+                    <p class="text-gray-700">Choose from our collection of professionally designed resume templates.</p>
+                </div>
+                
+                <div class="step-card bg-white p-6 rounded-2xl">
+                    <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg mb-4">2</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Fill in Your Details</h3>
+                    <p class="text-gray-700">Enter your information or upload your existing resume for AI enhancement.</p>
+                </div>
+                
+                <div class="step-card bg-white p-6 rounded-2xl">
+                    <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg mb-4">3</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">AI Optimization</h3>
+                    <p class="text-gray-700">Our AI analyzes and optimizes your content for impact and ATS compatibility.</p>
+                </div>
+                
+                <div class="step-card bg-white p-6 rounded-2xl">
+                    <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg mb-4">4</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Download & Apply</h3>
+                    <p class="text-gray-700">Download your polished resume and start applying for your dream job.</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="bg-blue-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-700 transition-all duration-200">
+                    Start Building Now
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Templates Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Professional Resume Templates</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Designed to help you stand out in any industry</p>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="template-card bg-gray-100 rounded-2xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1542435503-956c469947f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Modern Resume Template" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Modern</h3>
+                        <p class="text-gray-700 mb-4">Clean and contemporary design for all industries</p>
+                        <span class="feature-badge text-white text-sm px-3 py-1 rounded-full">Most Popular</span>
+                    </div>
+                </div>
+                
+                <div class="template-card bg-gray-100 rounded-2xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1586281380117-5a60ae2050cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Executive Resume Template" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Executive</h3>
+                        <p class="text-gray-700 mb-4">Sophisticated design for leadership positions</p>
+                    </div>
+                </div>
+                
+                <div class="template-card bg-gray-100 rounded-2xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Creative Resume Template" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Creative</h3>
+                        <p class="text-gray-700 mb-4">For designers, artists, and creative professionals</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="text-blue-600 font-bold hover:text-blue-700 transition-colors duration-200 flex items-center justify-center">
+                    View All Templates 
+                    <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 gradient-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">Success Stories</h2>
+                <p class="text-xl text-blue-50 max-w-3xl mx-auto">See how our AI Resume Builder has helped professionals land their dream jobs</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-effect p-8 rounded-3xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-400 rounded-full"></div>
+                        <div class="ml-4">
+                            <h4 class="text-white font-bold">Sarah Johnson</h4>
+                            <p class="text-blue-100">Software Engineer at Google</p>
+                        </div>
+                    </div>
+                    <p class="text-blue-50">"The AI suggestions helped me highlight my achievements in a way I hadn't thought of. I got interview calls from 3 FAANG companies!"</p>
+                </div>
+                
+                <div class="glass-effect p-8 rounded-3xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-400 rounded-full"></div>
+                        <div class="ml-4">
+                            <h4 class="text-white font-bold">Michael Chen</h4>
+                            <p class="text-blue-100">Marketing Director at Nike</p>
+                        </div>
+                    </div>
+                    <p class="text-blue-50">"The ATS optimization feature is a game-changer. My resume was getting rejected before, but after using GecnoGuru, I landed 5 interviews."</p>
+                </div>
+                
+                <div class="glass-effect p-8 rounded-3xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-purple-400 rounded-full"></div>
+                        <div class="ml-4">
+                            <h4 class="text-white font-bold">Jessica Williams</h4>
+                            <p class="text-blue-100">Senior Product Manager at Airbnb</p>
+                        </div>
+                    </div>
+                    <p class="text-blue-50">"The templates are beautiful and professional. I received compliments on my resume from every interviewer. Worth every penny!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Simple, Transparent Pricing</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Choose the plan that works best for your career goals</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-200">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Basic</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-gray-900">$9</span>
+                        <span class="text-gray-600">/one-time</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-check text-green-500 mr-2"></i>
+                            <span>1 Resume Template</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-check text-green-500 mr-2"></i>
+                            <span>Basic AI Suggestions</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-check text-green-500 mr-2"></i>
+                            <span>PDF Download</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa-solid fa-xmark mr-2"></i>
+                            <span>ATS Optimization</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa-solid fa-xmark mr-2"></i>
+                            <span>Cover Letter Builder</span>
+                        </li>
+                    </ul>
+                    <button class="w-full bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200">
+                        Get Started
+                    </button>
+                </div>
+                
+                <div class="bg-blue-50 p-8 rounded-3xl border border-blue-200 relative">
+                    <span class="absolute top-0 right-0 bg-blue-600 text-white px-4 py-1 rounded-bl-lg rounded-tr-lg font-semibold">Most Popular</span>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Professional</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-gray-900">$19</span>
+                        <span class="text-gray-600">/one-time</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-check text-green-500 mr-2"></i>
+                            <span>All Resume Templates</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-check text-green-500 mr-2"></i>
+                            <span>Advanced AI Suggestions</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-check text-green-500 mr-2"></i>
+                            <span>Multiple Format Downloads</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-check text-green-500 mr-2"></i>
+                            <span>ATS Optimization</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-check text-green-500 mr-2"></i>
+                            <span>Cover Letter Builder</span>
+                        </li>
+                    </ul>
+                    <button class="w-full bg-blue-600 text-white py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
+                        Get Started
+                    </button>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-200">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Premium</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-gray-900">$39</span>
+                        <span class="text-gray-600">/one-time</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-check text-green-500 mr-2"></i>
+                            <span>All Professional Features</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-check text-green-500 mr-2"></i>
+                            <span>LinkedIn Profile Optimization</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-check text-green-500 mr-2"></i>
+                            <span>1-on-1 Career Consultation</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-check text-green-500 mr-2"></i>
+                            <span>Interview Preparation Guide</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-check text-green-500 mr-2"></i>
+                            <span>Job Search Strategy Session</span>
+                        </li>
+                    </ul>
+                    <button class="w-full bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200">
+                        Get Started
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="py-16 gradient-bg relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-10 left-10 w-32 h-32 bg-white bg-opacity-10 rounded-full floating"></div>
+            <div class="absolute bottom-10 right-10 w-24 h-24 bg-white bg-opacity-10 rounded-full floating" style="animation-delay: -3s;"></div>
+        </div>
+        
+        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 drop-shadow-lg">Ready to Create Your Winning Resume?</h2>
+            <p class="text-lg sm:text-xl text-blue-50 mb-10 max-w-2xl mx-auto drop-shadow-md">Join thousands of professionals who have transformed their careers with our AI Resume Builder.</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:scale-105 transition-all duration-200 glow shadow-lg">
+                    Start Building Now
+                </button>
+                <button class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30">
+                    View Live Demo
+                </button>
+            </div>
+            
+            <p class="text-blue-100 mt-8 text-sm">No credit card required. 7-day money-back guarantee.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-2">
+                    <div class="text-2xl sm:text-3xl font-bold mb-4">
+                        <span class="text-blue-400">Gecno</span>Guru
+                    </div>
+                    <p class="text-gray-300 mb-6 max-w-md">Empowering careers through innovative technology and expert guidance. Your success is our mission.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors duration-200">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors duration-200">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-white">Services</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-blue-400 transition-colors duration-200">Resume Builder</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors duration-200">Cover Letters</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors duration-200">Portfolio Sites</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors duration-200">Career Coaching</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-white">Contact</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>support@gecnoguru.com</li>
+                        <li>+1 (555) 123-4567</li>
+                        <li>San Francisco, CA</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-300 text-sm">
+                <p>&copy; 2024 GecnoGuru. All rights reserved. Built with ❤️ for career success.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        const menuBtn = document.getElementById('menu-btn');
+        const menu = document.getElementById('menu');
+        
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('open');
+            menu.classList.toggle('active');
+            document.body.classList.toggle('overflow-hidden');
+        });
+        
+        // Close menu when clicking on links
+        document.querySelectorAll('#menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuBtn.classList.remove('open');
+                menu.classList.remove('active');
+                document.body.classList.remove('overflow-hidden');
+            });
+        });
+        
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
