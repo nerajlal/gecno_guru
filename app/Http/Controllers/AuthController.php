@@ -22,8 +22,6 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'user_type' => 'user',
-            'status' => 0,
         ]);
 
         if ($validator->fails()) {
@@ -36,6 +34,8 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'user_type' => 'user', 
+            'status' => 0, 
         ]);
 
         Auth::login($user);
