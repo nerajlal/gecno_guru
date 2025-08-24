@@ -207,6 +207,10 @@
                 <form action="{{ route('register') }}" method="POST">
                     @csrf
                     <div class="mb-4">
+                        <label for="register-name" class="block text-white mb-2">Name</label>
+                        <input type="text" id="register-name" name="name" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg py-2 px-4 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Your Name" required>
+                    </div>
+                    <div class="mb-4">
                         <label for="register-email" class="block text-white mb-2">Email</label>
                         <input type="email" id="register-email" name="email" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg py-2 px-4 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="your@email.com" required>
                     </div>
