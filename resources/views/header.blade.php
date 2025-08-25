@@ -141,16 +141,15 @@
                         <span class="text-blue-300">Gecno</span>Guru
                     </div>
                 </div>
-                <div class="hidden md:flex items-center space-x-4">
+                <div class="hidden md:flex space-x-8">
                     <a href="#home" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Home</a>
                     <a href="#services" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Services</a>
                     <a href="#about" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">About</a>
                     <a href="#contact" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Contact</a>
-                    <button class="text-white hover:text-blue-300 transition-colors duration-200 font-medium" id="login-btn">Login</button>
-                    <button class="glass-effect px-6 py-2 rounded-full text-white font-semibold hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30" id="register-btn">
-                        Get Started
-                    </button>
                 </div>
+                <button class="hidden md:block glass-effect px-6 py-2 rounded-full text-white font-semibold hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30 get-started-btn">
+                    Get Started
+                </button>
 
                 <!-- Mobile menu button -->
                 <div class="md:hidden">
@@ -241,8 +240,7 @@
             const modalContent = document.getElementById('modal-content');
             const closeModalBtn = document.getElementById('close-modal-btn');
 
-            const loginBtn = document.getElementById('login-btn');
-            const registerBtn = document.getElementById('register-btn');
+            const getStartedBtns = document.querySelectorAll('.get-started-btn');
 
             const loginForm = document.getElementById('login-form');
             const registerForm = document.getElementById('register-form');
@@ -250,7 +248,15 @@
             const showRegisterFormBtn = document.getElementById('show-register-form');
             const showLoginFormBtn = document.getElementById('show-login-form');
 
-            window.openModal = function() {
+            function openModal(showRegister = false) {
+                if (showRegister) {
+                    registerForm.classList.remove('hidden');
+                    loginForm.classList.add('hidden');
+                } else {
+                    loginForm.classList.remove('hidden');
+                    registerForm.classList.add('hidden');
+                }
+
                 authModal.classList.remove('hidden');
                 authModal.classList.add('flex');
                 setTimeout(() => {
@@ -260,7 +266,7 @@
                 }, 10);
             }
 
-            window.closeModal = function() {
+            function closeModal() {
                 modalContent.classList.remove('scale-100', 'opacity-100');
                 modalContent.classList.add('scale-95', 'opacity-0');
                 authModal.classList.remove('opacity-100');
@@ -270,18 +276,11 @@
                 }, 300);
             }
 
-            loginBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                loginForm.classList.remove('hidden');
-                registerForm.classList.add('hidden');
-                openModal();
-            });
-
-            registerBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                registerForm.classList.remove('hidden');
-                loginForm.classList.add('hidden');
-                openModal();
+            getStartedBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openModal();
+                });
             });
 
             showRegisterFormBtn.addEventListener('click', (e) => {
@@ -305,13 +304,10 @@
 
             // Handle validation errors
             @if($errors->any())
-                openModal();
                 @if($errors->has('name') || $errors->has('password_confirmation'))
-                    loginForm.classList.add('hidden');
-                    registerForm.classList.remove('hidden');
+                    openModal(true); // Open with register form
                 @else
-                    registerForm.classList.add('hidden');
-                    loginForm.classList.remove('hidden');
+                    openModal(); // Open with login form
                 @endif
             @endif
         });
