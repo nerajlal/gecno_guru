@@ -208,57 +208,57 @@
 
     <!-- Modals -->
     <div id="auth-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300">
-        <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full relative transform transition-all duration-300 scale-95 opacity-0" id="modal-content">
+        <div class="gradient-bg rounded-lg shadow-xl p-8 max-w-md w-full relative transform transition-all duration-300 scale-95 opacity-0" id="modal-content">
             <!-- Close button -->
-            <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-800" id="close-modal-btn">
+            <button class="absolute top-4 right-4 text-white hover:text-blue-200" id="close-modal-btn">
                 <i class="fa-solid fa-times text-2xl"></i>
             </button>
 
             <!-- Login Form -->
             <div id="login-form">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Welcome Back</h2>
+                <h2 class="text-3xl font-bold text-center text-white mb-6">Welcome Back</h2>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="mb-4">
-                        <label for="login-email" class="block text-gray-700 font-medium mb-2">Email Address</label>
-                        <input type="email" id="login-email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        <label for="login-email" class="block text-blue-200 font-medium mb-2">Email Address</label>
+                        <input type="email" id="login-email" name="email" class="w-full px-4 py-3 bg-white/10 border border-white/30 text-white rounded-lg focus:ring-2 focus:ring-white focus:border-transparent placeholder-gray-400" placeholder="you@example.com" required>
                     </div>
                     <div class="mb-6">
-                        <label for="login-password" class="block text-gray-700 font-medium mb-2">Password</label>
-                        <input type="password" id="login-password" name="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        <label for="login-password" class="block text-blue-200 font-medium mb-2">Password</label>
+                        <input type="password" id="login-password" name="password" class="w-full px-4 py-3 bg-white/10 border border-white/30 text-white rounded-lg focus:ring-2 focus:ring-white focus:border-transparent placeholder-gray-400" placeholder="••••••••" required>
                     </div>
-                    <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-200">Login</button>
+                    <button type="submit" class="w-full bg-white text-blue-700 font-bold py-3 px-4 rounded-lg hover:bg-blue-100 transition-colors duration-200 glow">Login</button>
                 </form>
-                <p class="text-center text-gray-600 mt-6">
-                    Don't have an account? <button class="text-blue-600 font-semibold hover:underline" id="show-register-form">Sign up</button>
+                <p class="text-center text-blue-200 mt-6">
+                    Don't have an account? <button class="text-white font-semibold hover:underline" id="show-register-form">Sign up</button>
                 </p>
             </div>
 
             <!-- Registration Form -->
             <div id="register-form" class="hidden">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Create Your Account</h2>
+                <h2 class="text-3xl font-bold text-center text-white mb-6">Create Your Account</h2>
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
                     <div class="mb-4">
-                        <label for="register-name" class="block text-gray-700 font-medium mb-2">Full Name</label>
-                        <input type="text" id="register-name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        <label for="register-name" class="block text-blue-200 font-medium mb-2">Full Name</label>
+                        <input type="text" id="register-name" name="name" class="w-full px-4 py-3 bg-white/10 border border-white/30 text-white rounded-lg focus:ring-2 focus:ring-white focus:border-transparent placeholder-gray-400" placeholder="John Doe" required>
                     </div>
                     <div class="mb-4">
-                        <label for="register-email" class="block text-gray-700 font-medium mb-2">Email Address</label>
-                        <input type="email" id="register-email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        <label for="register-email" class="block text-blue-200 font-medium mb-2">Email Address</label>
+                        <input type="email" id="register-email" name="email" class="w-full px-4 py-3 bg-white/10 border border-white/30 text-white rounded-lg focus:ring-2 focus:ring-white focus:border-transparent placeholder-gray-400" placeholder="you@example.com" required>
                     </div>
                     <div class="mb-4">
-                        <label for="register-password" class="block text-gray-700 font-medium mb-2">Password</label>
-                        <input type="password" id="register-password" name="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        <label for="register-password" class="block text-blue-200 font-medium mb-2">Password</label>
+                        <input type="password" id="register-password" name="password" class="w-full px-4 py-3 bg-white/10 border border-white/30 text-white rounded-lg focus:ring-2 focus:ring-white focus:border-transparent placeholder-gray-400" placeholder="••••••••" required>
                     </div>
                     <div class="mb-6">
-                        <label for="register-password-confirm" class="block text-gray-700 font-medium mb-2">Confirm Password</label>
-                        <input type="password" id="register-password-confirm" name="password_confirmation" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        <label for="register-password-confirm" class="block text-blue-200 font-medium mb-2">Confirm Password</label>
+                        <input type="password" id="register-password-confirm" name="password_confirmation" class="w-full px-4 py-3 bg-white/10 border border-white/30 text-white rounded-lg focus:ring-2 focus:ring-white focus:border-transparent placeholder-gray-400" placeholder="••••••••" required>
                     </div>
-                    <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-200">Create Account</button>
+                    <button type="submit" class="w-full bg-white text-blue-700 font-bold py-3 px-4 rounded-lg hover:bg-blue-100 transition-colors duration-200 glow">Create Account</button>
                 </form>
-                <p class="text-center text-gray-600 mt-6">
-                    Already have an account? <button class="text-blue-600 font-semibold hover:underline" id="show-login-form">Log in</button>
+                <p class="text-center text-blue-200 mt-6">
+                    Already have an account? <button class="text-white font-semibold hover:underline" id="show-login-form">Log in</button>
                 </p>
             </div>
         </div>
