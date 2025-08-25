@@ -21,13 +21,20 @@
                         Elevate your career with AI-powered resume building, expert guidance, and cutting-edge tools designed for the modern professional.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <button class="group relative bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg overflow-hidden hover:scale-105 transition-all duration-200 glow shadow-lg get-started-btn">
-                            <span class="relative z-10">Start Your Journey</span>
-                            <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-                        </button>
-                        <button class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30">
-                            Watch Demo
-                        </button>
+                        @guest
+                            <button class="group relative bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg overflow-hidden hover:scale-105 transition-all duration-200 glow shadow-lg login-trigger">
+                                <span class="relative z-10">Start Your Journey</span>
+                                <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                            </button>
+                            <button class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30 login-trigger">
+                                Watch Demo
+                            </button>
+                        @else
+                            <a href="{{ route('dashboard') }}" class="group relative bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg overflow-hidden hover:scale-105 transition-all duration-200 glow shadow-lg">
+                                <span class="relative z-10">Go to Dashboard</span>
+                                <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                            </a>
+                        @endguest
                     </div>
                     
                     <!-- Stats -->
@@ -74,10 +81,17 @@
                     </div>
                     <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">AI Resume Builder</h3>
                     <p class="text-gray-700 mb-6 leading-relaxed">Create stunning, ATS-optimized resumes with our intelligent builder. Stand out from the crowd with professional templates.</p>
-                    <button class="text-blue-600 font-bold hover:text-blue-700 transition-colors duration-200 flex items-center">
-                        Build Resume 
-                        <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
-                    </button>
+                    @guest
+                        <button class="text-blue-600 font-bold hover:text-blue-700 transition-colors duration-200 flex items-center login-trigger">
+                            Build Resume
+                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
+                        </button>
+                    @else
+                        <a href="{{ route('dashboard') }}" class="text-blue-600 font-bold hover:text-blue-700 transition-colors duration-200 flex items-center">
+                            Build Resume
+                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
+                        </a>
+                    @endguest
                 </div>
                 
                 <!-- Cover Letter Builder -->
@@ -87,10 +101,17 @@
                     </div>
                     <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Smart Cover Letters</h3>
                     <p class="text-gray-700 mb-6 leading-relaxed">Generate personalized, compelling cover letters that capture attention and showcase your unique value proposition.</p>
-                    <button class="text-green-600 font-bold hover:text-green-700 transition-colors duration-200 flex items-center">
-                        Write Cover Letter 
-                        <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
-                    </button>
+                    @guest
+                        <button class="text-green-600 font-bold hover:text-green-700 transition-colors duration-200 flex items-center login-trigger">
+                            Write Cover Letter
+                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
+                        </button>
+                    @else
+                        <a href="{{ route('dashboard') }}" class="text-green-600 font-bold hover:text-green-700 transition-colors duration-200 flex items-center">
+                            Write Cover Letter
+                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
+                        </a>
+                    @endguest
                 </div>
                 
                 <!-- Portfolio Website -->
@@ -100,10 +121,17 @@
                     </div>
                     <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Portfolio Websites</h3>
                     <p class="text-gray-700 mb-6 leading-relaxed">Build a stunning online presence with our portfolio builder. Showcase your work and attract opportunities.</p>
-                    <button class="text-purple-600 font-bold hover:text-purple-700 transition-colors duration-200 flex items-center">
-                        Build Portfolio 
-                        <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
-                    </button>
+                    @guest
+                        <button class="text-purple-600 font-bold hover:text-purple-700 transition-colors duration-200 flex items-center login-trigger">
+                            Build Portfolio
+                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
+                        </button>
+                    @else
+                        <a href="{{ route('dashboard') }}" class="text-purple-600 font-bold hover:text-purple-700 transition-colors duration-200 flex items-center">
+                            Build Portfolio
+                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
+                        </a>
+                    @endguest
                 </div>
             </div>
         </div>
@@ -172,12 +200,18 @@
             <p class="text-lg sm:text-xl text-blue-50 mb-10 max-w-2xl mx-auto drop-shadow-md">Join thousands of professionals who have transformed their careers with our premium platform.</p>
             
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button class="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:scale-105 transition-all duration-200 glow shadow-lg get-started-btn">
-                    Get Started Now
-                </button>
-                <button class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30">
-                    Start Free Trial
-                </button>
+                @guest
+                    <button class="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:scale-105 transition-all duration-200 glow shadow-lg login-trigger">
+                        Get Started Now
+                    </button>
+                    <button class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30 login-trigger">
+                        Start Free Trial
+                    </button>
+                @else
+                    <a href="{{ route('dashboard') }}" class="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:scale-105 transition-all duration-200 glow shadow-lg">
+                        Go to Dashboard
+                    </a>
+                @endguest
             </div>
         </div>
     </section>

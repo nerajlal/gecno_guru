@@ -143,9 +143,15 @@
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#home" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Home</a>
-                    <a href="#services" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Services</a>
-                    <a href="#about" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">About</a>
-                    <a href="#contact" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Contact</a>
+                    @guest
+                        <a href="#" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium login-trigger">Services</a>
+                        <a href="#" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium login-trigger">About</a>
+                        <a href="#" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium login-trigger">Contact</a>
+                    @else
+                        <a href="#services" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Services</a>
+                        <a href="#about" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">About</a>
+                        <a href="#contact" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Contact</a>
+                    @endguest
                     @auth
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -154,7 +160,7 @@
                             </button>
                         </form>
                     @else
-                        <button class="glass-effect px-6 py-2 rounded-full text-white font-semibold hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30 get-started-btn">
+                        <button class="glass-effect px-6 py-2 rounded-full text-white font-semibold hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30 login-trigger">
                             Get Started
                         </button>
                     @endauth
@@ -175,9 +181,15 @@
         <div id="menu" class="mobile-menu fixed top-16 right-0 bottom-0 w-64 gradient-bg glass-effect p-6 md:hidden">
             <div class="flex flex-col space-y-6">
                 <a href="#home" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Home</a>
-                <a href="#services" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Services</a>
-                <a href="#about" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">About</a>
-                <a href="#contact" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Contact</a>
+                @guest
+                    <a href="#" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium login-trigger">Services</a>
+                    <a href="#" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium login-trigger">About</a>
+                    <a href="#" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium login-trigger">Contact</a>
+                @else
+                    <a href="#services" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Services</a>
+                    <a href="#about" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">About</a>
+                    <a href="#contact" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Contact</a>
+                @endguest
                 @auth
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
@@ -186,7 +198,7 @@
                         </button>
                     </form>
                 @else
-                    <button class="glass-effect px-6 py-2 rounded-full text-white font-semibold hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30 w-full get-started-btn">
+                    <button class="glass-effect px-6 py-2 rounded-full text-white font-semibold hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30 w-full login-trigger">
                         Get Started
                     </button>
                 @endauth
@@ -258,7 +270,7 @@
             const modalContent = document.getElementById('modal-content');
             const closeModalBtn = document.getElementById('close-modal-btn');
 
-            const getStartedBtns = document.querySelectorAll('.get-started-btn');
+            const loginTriggers = document.querySelectorAll('.login-trigger');
 
             const loginForm = document.getElementById('login-form');
             const registerForm = document.getElementById('register-form');
@@ -294,8 +306,8 @@
                 }, 300);
             }
 
-            getStartedBtns.forEach(btn => {
-                btn.addEventListener('click', (e) => {
+            loginTriggers.forEach(trigger => {
+                trigger.addEventListener('click', (e) => {
                     e.preventDefault();
                     openModal();
                 });
