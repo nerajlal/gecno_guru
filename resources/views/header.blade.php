@@ -134,7 +134,7 @@
 </head>
 <body class="bg-gray-50 overflow-x-hidden">
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
+    <nav class="fixed w-full z-50 transition-all duration-300 gradient-bg" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
