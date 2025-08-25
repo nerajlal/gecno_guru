@@ -165,7 +165,7 @@
                             </button>
                         </form>
                     @else
-                        <button class="glass-effect px-6 py-2 rounded-full text-white font-semibold hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30 get-started-btn">
+                        <button class="glass-effect px-6 py-2 rounded-full text-white font-semibold hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30 login-trigger">
                             Get Started
                         </button>
                     @endauth
@@ -207,7 +207,7 @@
                         </button>
                     </form>
                 @else
-                <button class="glass-effect px-6 py-2 rounded-full text-white font-semibold hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30 w-full get-started-btn">
+                <button class="glass-effect px-6 py-2 rounded-full text-white font-semibold hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30 w-full login-trigger">
                         Get Started
                     </button>
                 @endauth

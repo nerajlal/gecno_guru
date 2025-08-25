@@ -143,6 +143,68 @@
                     mobileServicesDropdownMenu.classList.toggle('hidden');
                 });
             }
+
+            // Auth Modal functionality
+            const loginTriggers = document.querySelectorAll('.login-trigger');
+            const authModal = document.getElementById('auth-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const showRegisterFormLink = document.getElementById('show-register-form');
+            const showLoginFormLink = document.getElementById('show-login-form');
+
+            const openModal = () => {
+                if(authModal) {
+                    authModal.classList.remove('hidden');
+                    document.body.classList.add('overflow-hidden');
+                }
+            };
+
+            const closeModal = () => {
+                if(authModal) {
+                    authModal.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');
+                }
+            };
+
+            loginTriggers.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openModal();
+                });
+            });
+
+            if(closeModalBtn) {
+                closeModalBtn.addEventListener('click', closeModal);
+            }
+
+            if(authModal) {
+                authModal.addEventListener('click', (e) => {
+                    if (e.target === authModal) {
+                        closeModal();
+                    }
+                });
+            }
+
+            if(showRegisterFormLink) {
+                showRegisterFormLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if(loginForm && registerForm) {
+                        loginForm.classList.add('hidden');
+                        registerForm.classList.remove('hidden');
+                    }
+                });
+            }
+
+            if(showLoginFormLink) {
+                showLoginFormLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if(loginForm && registerForm) {
+                        registerForm.classList.add('hidden');
+                        loginForm.classList.remove('hidden');
+                    }
+                });
+            }
         });
     </script>
     <!-- Auth Modal -->

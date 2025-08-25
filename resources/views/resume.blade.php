@@ -117,9 +117,15 @@
             </div>
             
             <div class="text-center mt-12">
-                <button class="bg-blue-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-700 transition-all duration-200">
+                @guest
+                <button class="bg-blue-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-700 transition-all duration-200 login-trigger">
                     Start Building Now
                 </button>
+                @else
+                <a href="{{ route('resume-build') }}" class="bg-blue-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-700 transition-all duration-200">
+                    Start Building Now
+                </a>
+                @endguest
             </div>
         </div>
     </section>
@@ -160,10 +166,17 @@
             </div>
             
             <div class="text-center mt-12">
-                <button class="text-blue-600 font-bold hover:text-blue-700 transition-colors duration-200 flex items-center justify-center">
+                @guest
+                <button class="text-blue-600 font-bold hover:text-blue-700 transition-colors duration-200 flex items-center justify-center login-trigger">
                     View All Templates 
                     <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
                 </button>
+                @else
+                <a href="{{ route('resume-build') }}" class="text-blue-600 font-bold hover:text-blue-700 transition-colors duration-200 flex items-center justify-center">
+                    View All Templates
+                    <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
+                </a>
+                @endguest
             </div>
         </div>
     </section>
@@ -250,9 +263,15 @@
                             <span>Cover Letter Builder</span>
                         </li>
                     </ul>
-                    <button class="w-full bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200">
+                    @guest
+                    <button class="w-full bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200 login-trigger">
                         Get Started
                     </button>
+                    @else
+                    <a href="{{ route('resume-build') }}" class="w-full block text-center bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200">
+                        Get Started
+                    </a>
+                    @endguest
                 </div>
                 
                 <div class="bg-blue-50 p-8 rounded-3xl border border-blue-200 relative">
@@ -284,9 +303,15 @@
                             <span>Cover Letter Builder</span>
                         </li>
                     </ul>
-                    <button class="w-full bg-blue-600 text-white py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
+                    @guest
+                    <button class="w-full bg-blue-600 text-white py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200 login-trigger">
                         Get Started
                     </button>
+                    @else
+                    <a href="{{ route('resume-build') }}" class="w-full block text-center bg-blue-600 text-white py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
+                        Get Started
+                    </a>
+                    @endguest
                 </div>
                 
                 <div class="bg-gray-50 p-8 rounded-3xl border border-gray-200">
@@ -317,9 +342,15 @@
                             <span>Job Search Strategy Session</span>
                         </li>
                     </ul>
-                    <button class="w-full bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200">
+                    @guest
+                    <button class="w-full bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200 login-trigger">
                         Get Started
                     </button>
+                    @else
+                    <a href="{{ route('resume-build') }}" class="w-full block text-center bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200">
+                        Get Started
+                    </a>
+                    @endguest
                 </div>
             </div>
         </div>
@@ -337,12 +368,21 @@
             <p class="text-lg sm:text-xl text-blue-50 mb-10 max-w-2xl mx-auto drop-shadow-md">Join thousands of professionals who have transformed their careers with our AI Resume Builder.</p>
             
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button class="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:scale-105 transition-all duration-200 glow shadow-lg">
+                @guest
+                <button class="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:scale-105 transition-all duration-200 glow shadow-lg login-trigger">
                     Start Building Now
                 </button>
-                <button class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30">
+                <button class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30 login-trigger">
                     View Live Demo
                 </button>
+                @else
+                <a href="{{ route('resume-build') }}" class="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:scale-105 transition-all duration-200 glow shadow-lg">
+                    Start Building Now
+                </a>
+                <a href="{{ route('resume-build') }}" class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30">
+                    View Live Demo
+                </a>
+                @endguest
             </div>
             
             <p class="text-blue-100 mt-8 text-sm">No credit card required. 7-day money-back guarantee.</p>
