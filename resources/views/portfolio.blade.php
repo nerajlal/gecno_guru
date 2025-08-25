@@ -1,4 +1,4 @@
-@include('header')
+@include('includes.header')
 
     <!-- Hero Section -->
     <section class="relative pt-32 pb-20 gradient-bg overflow-hidden">
@@ -30,7 +30,7 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="bg-gray-50 p-8 rounded-3xl card-hover">
                     <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-sparkles text-blue-600 text-2xl"></i>
+                        <i class="fa-solid fa-wand-magic-sparkles text-blue-600 text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-4">AI-Curated Layouts</h3>
                     <p class="text-gray-700">Our AI analyzes your work and suggests the most impactful layout and presentation style for your portfolio.</p>
@@ -347,4 +347,4 @@
         </div>
     </section>
 
-@include('footer')
+@include('includes.footer')

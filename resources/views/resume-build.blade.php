@@ -1,4 +1,4 @@
-@include('header')
+@include('includes.header')
 
     <!-- Pricing Section -->
     <section class="py-16 bg-white pt-24">
@@ -112,4 +112,4 @@
         </div>
     </section>
 
-@include('footer')
+@include('includes.footer')

@@ -1,53 +1,98 @@
 <!-- Footer -->
     <footer id="contact" class="bg-gray-900 text-white py-12 sm:py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 sm:mb-12">
-                <div class="col-span-2">
+            <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-8 mb-8 sm:mb-12">
+                
+                <!-- GecnoGuru -->
+                <div class="md:col-span-2">
                     <div class="text-2xl sm:text-3xl font-bold mb-4">
                         <span class="text-blue-400">Gecno</span>Guru
                     </div>
-                    <p class="text-gray-300 mb-6 max-w-md">Empowering careers through innovative technology and expert guidance. Your success is our mission.</p>
+                    <p class="text-gray-300 mb-6 max-w-md">
+                        Empowering careers through innovative technology and expert guidance. Your success is our mission.
+                    </p>
                     <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors duration-200">
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-transform transform hover:scale-110">
                             <i class="fa-brands fa-twitter"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors duration-200">
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-transform transform hover:scale-110">
                             <i class="fa-brands fa-linkedin-in"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors duration-200">
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-transform transform hover:scale-110">
                             <i class="fa-brands fa-facebook"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors duration-200">
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-transform transform hover:scale-110">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
                     </div>
                 </div>
 
+                <!-- Services -->
                 <div>
                     <h4 class="text-lg font-semibold mb-4 text-white">Services</h4>
                     <ul class="space-y-2 text-gray-300">
-                        <li><a href="/resume" class="hover:text-blue-400 transition-colors duration-200">Resume Builder</a></li>
-                        <li><a href="/coverletter" class="hover:text-blue-400 transition-colors duration-200">Cover Letters</a></li>
-                        <li><a href="/portfolio" class="hover:text-blue-400 transition-colors duration-200">Portfolio Sites</a></li>
-                        <li><a href="#" class="hover:text-blue-400 transition-colors duration-200">Career Coaching</a></li>
+                        <li class="flex items-center">
+                            <i class="fa fa-briefcase mr-2 text-blue-400"></i>
+                            <a href="/resume" class="hover:text-blue-400 transition-colors duration-200">Resume Builder</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-file-alt mr-2 text-blue-400"></i>
+                            <a href="/coverletter" class="hover:text-blue-400 transition-colors duration-200">Cover Letters</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-globe mr-2 text-blue-400"></i>
+                            <a href="/portfolio" class="hover:text-blue-400 transition-colors duration-200">Portfolio Sites</a>
+                        </li>
                     </ul>
                 </div>
 
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-white">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-center">
+                            <i class="fa fa-shield-alt mr-2 text-blue-400"></i>
+                            <a href="/privacy-policy" class="hover:text-blue-400 transition-colors duration-200">Privacy Policy</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-undo-alt mr-2 text-blue-400"></i>
+                            <a href="/refund-policy" class="hover:text-blue-400 transition-colors duration-200">Refund Policy</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-gavel mr-2 text-blue-400"></i>
+                            <a href="/terms" class="hover:text-blue-400 transition-colors duration-200">Terms & Conditions</a>
+                        </li>
+                    </ul>
+                </div>  
+
+                <!-- Contact -->
                 <div>
                     <h4 class="text-lg font-semibold mb-4 text-white">Contact</h4>
                     <ul class="space-y-2 text-gray-300">
-                        <li>support@gecnoguru.com</li>
-                        <li>+1 (555) 123-4567</li>
-                        <li>San Francisco, CA</li>
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope mr-2 text-blue-400"></i>
+                            <a href="mailto:teamgecnoguru@gmail.com" class="hover:text-blue-400 whitespace-nowrap">teamgecnoguru@gmail.com</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-phone mr-2 text-blue-400"></i>
+                            <a href="tel:+918547470675" class="hover:text-blue-400">+91 85474 70675</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-phone mr-2 text-blue-400"></i>
+                            <a href="tel:+918547349691" class="hover:text-blue-400">+91 85473 49691</a>
+                        </li>
                     </ul>
                 </div>
+
             </div>
 
+            <!-- Bottom -->
             <div class="border-t border-gray-700 pt-8 text-center text-gray-300 text-sm">
                 <p>&copy; 2024 GecnoGuru. All rights reserved. Built with ❤️ for career success.</p>
             </div>
         </div>
     </footer>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {

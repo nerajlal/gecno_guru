@@ -1,4 +1,4 @@
-@include('header')
+@include('includes.header')
 
     <!-- Hero Section -->
     <section id="home" class="relative min-h-screen gradient-bg flex items-center overflow-hidden pt-16">
@@ -216,4 +216,4 @@
         </div>
     </section>
 
-@include('footer')
+@include('includes.footer')

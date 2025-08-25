@@ -1,4 +1,4 @@
-@include('header')
+@include('includes.header')
 
 
 
@@ -389,4 +389,4 @@
         </div>
     </section>
 
-    @include('footer')
+    @include('includes.footer')
