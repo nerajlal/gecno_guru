@@ -174,17 +174,7 @@
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="/" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Home</a>
-                    <div class="relative" id="services-dropdown">
-                        <button class="text-white hover:text-blue-300 transition-colors duration-200 font-medium flex items-center" id="services-dropdown-button">
-                            Services <i class="fas fa-chevron-down ml-2 text-xs"></i>
-                        </button>
-                        <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-white rounded-lg shadow-lg p-2 hidden" id="services-dropdown-menu">
-                            <a href="/services" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md">All Services</a>
-                                <a href="/resume" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md">Resume Builder</a>
-                                <a href="/portfolio" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md">Portfolio Builder</a>
-                                <a href="/coverletter" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md">Cover Letter Builder</a>
-                        </div>
-                    </div>
+                    <a href="/services" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Services</a>
                     <a href="#about" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">About</a>
                     <a href="#contact" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Contact</a>
                     @auth
@@ -216,17 +206,7 @@
         <div id="menu" class="mobile-menu fixed top-16 right-0 bottom-0 w-64 gradient-bg glass-effect p-6 md:hidden">
             <div class="flex flex-col space-y-6">
                 <a href="/" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Home</a>
-                <div class="relative" id="mobile-services-dropdown">
-                    <button class="text-white hover:text-blue-300 transition-colors duration-200 font-medium w-full text-left flex items-center justify-between" id="mobile-services-dropdown-button">
-                        Services <i class="fas fa-chevron-down ml-2 text-xs"></i>
-                    </button>
-                    <div class="mt-2 space-y-2 hidden" id="mobile-services-dropdown-menu">
-                        <a href="/services" class="block pl-4 text-white hover:text-blue-300 transition-colors duration-200 font-medium">All Services</a>
-                            <a href="/resume" class="block pl-4 text-white hover:text-blue-300 transition-colors duration-200 font-medium">Resume Builder</a>
-                            <a href="/portfolio" class="block pl-4 text-white hover:text-blue-300 transition-colors duration-200 font-medium">Portfolio Builder</a>
-                            <a href="/coverletter" class="block pl-4 text-white hover:text-blue-300 transition-colors duration-200 font-medium">Cover Letter Builder</a>
-                    </div>
-                </div>
+                <a href="/services" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Services</a>
                 <a href="#about" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">About</a>
                 <a href="#contact" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Contact</a>
                 @auth
@@ -386,27 +366,5 @@
                 openModal();
             @endif
 
-            // Services Dropdown
-            const servicesDropdown = document.getElementById('services-dropdown');
-            const servicesDropdownButton = document.getElementById('services-dropdown-button');
-            const servicesDropdownMenu = document.getElementById('services-dropdown-menu');
-
-            servicesDropdownButton.addEventListener('click', () => {
-                servicesDropdownMenu.classList.toggle('hidden');
-            });
-
-            document.addEventListener('click', (e) => {
-                if (!servicesDropdown.contains(e.target)) {
-                    servicesDropdownMenu.classList.add('hidden');
-                }
-            });
-
-            // Mobile Services Dropdown
-            const mobileServicesDropdownButton = document.getElementById('mobile-services-dropdown-button');
-            const mobileServicesDropdownMenu = document.getElementById('mobile-services-dropdown-menu');
-
-            mobileServicesDropdownButton.addEventListener('click', () => {
-                mobileServicesDropdownMenu.classList.toggle('hidden');
-            });
         });
     </script>
