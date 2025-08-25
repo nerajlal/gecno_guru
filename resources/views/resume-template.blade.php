@@ -188,11 +188,7 @@
                 <div id="skills-container">
                     <div class="skill-category-entry mb-4">
                         <input type="text" name="skill_category[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Skill Category (e.g., Programming Languages)">
-                        <div class="skills-list flex flex-wrap gap-2 mt-2">
-                            <input type="text" name="skills[0][]" class="border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="e.g., JavaScript">
-                            <input type="text" name="skills[0][]" class="border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="e.g., Python">
-                            <button type="button" class="add-skill-btn text-blue-600 hover:text-blue-700 font-semibold whitespace-nowrap">+ Add Skill</button>
-                        </div>
+                        <textarea name="skills[]" rows="3" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Enter each skill on a new line."></textarea>
                     </div>
                 </div>
                 <button type="button" id="add-skill-category-btn" class="text-blue-600 hover:text-blue-700 font-semibold">+ Add Skill Category</button>
@@ -265,7 +261,6 @@
         const addNewBtn = document.getElementById('add-new-btn');
         const addNewModal = document.getElementById('add-new-modal');
         const closeModalBtn = document.getElementById('close-modal-btn');
-        let skillCategoryIndex = 1;
 
         const openModal = () => {
             if (addNewModal) {
@@ -324,53 +319,13 @@
         // Dynamic Skills Section
         const skillsContainer = document.getElementById('skills-container');
         const addSkillCategoryBtn = document.getElementById('add-skill-category-btn');
-
-        const createNewSkillInput = (index) => {
-            const skillInput = document.createElement('input');
-            skillInput.type = 'text';
-            skillInput.name = `skills[${index}][]`;
-            skillInput.className = 'border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300';
-            skillInput.placeholder = 'e.g., JavaScript';
-            return skillInput;
-        };
-
-        skillsContainer.addEventListener('click', (e) => {
-            if (e.target.classList.contains('add-skill-btn')) {
-                const skillsList = e.target.closest('.skills-list');
-                const categoryIndex = skillsList.dataset.index;
-                const newSkillInput = createNewSkillInput(categoryIndex);
-                e.target.before(newSkillInput);
-            }
-        });
-
         if (addSkillCategoryBtn) {
             addSkillCategoryBtn.addEventListener('click', () => {
                 const newSkillCategory = skillsContainer.querySelector('.skill-category-entry').cloneNode(true);
-                const inputs = newSkillCategory.querySelectorAll('input');
+                const inputs = newSkillCategory.querySelectorAll('input, textarea');
                 inputs.forEach(input => input.value = '');
-
-                const skillsList = newSkillCategory.querySelector('.skills-list');
-                skillsList.dataset.index = skillCategoryIndex;
-                const skillInputs = skillsList.querySelectorAll('input[type="text"]');
-                skillInputs.forEach(input => input.name = `skills[${skillCategoryIndex}][]`);
-
-                const addSkillBtn = skillsList.querySelector('.add-skill-btn');
-
-                // Clear existing skill inputs and add two new ones
-                const allSkillInputs = skillsList.querySelectorAll('input[type="text"]');
-                allSkillInputs.forEach(input => input.remove());
-
-                skillsList.prepend(createNewSkillInput(skillCategoryIndex));
-                skillsList.prepend(createNewSkillInput(skillCategoryIndex));
-
                 skillsContainer.appendChild(newSkillCategory);
-                skillCategoryIndex++;
             });
-        }
-
-        const initialSkillsList = document.querySelector('.skills-list');
-        if(initialSkillsList) {
-            initialSkillsList.dataset.index = 0;
         }
 
         // Dynamic Certifications Section
