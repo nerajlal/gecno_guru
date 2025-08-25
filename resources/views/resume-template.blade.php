@@ -19,66 +19,59 @@
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <!-- Top Section -->
-            <div class="flex items-center justify-between mb-12">
-            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Select Your Template</h2>
-            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700 transition">
-                Add My Data
-            </button>
-            </div>
+    <section class="py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Heading -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Choose Your Resume Style</h2>
+      <p class="text-lg text-gray-600">Select from our professional templates designed to impress recruiters.</p>
+    </div>
 
-            <!-- Templates Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            
-            <!-- Template Card -->
-            <div class="bg-gray-50 rounded-2xl shadow-md flex flex-col items-center card-hover">
-                <div class="bg-white rounded-lg shadow-sm overflow-hidden" style="width:210px; height:297px;">
-                <img src="https://via.placeholder.com/210x297" alt="Template Preview" class="w-full h-full object-cover">
-                </div>
-                <div class="flex gap-3 mt-4">
-                <button class="glass-effect px-4 py-2 rounded-lg text-white">Live Preview</button>
-                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Use Template</button>
-                </div>
-            </div>
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-            <!-- Repeat 3 More Cards -->
-            <div class="bg-gray-50 rounded-2xl shadow-md flex flex-col items-center card-hover">
-                <div class="bg-white rounded-lg shadow-sm overflow-hidden" style="width:210px; height:297px;">
-                <img src="https://via.placeholder.com/210x297" alt="Template Preview" class="w-full h-full object-cover">
-                </div>
-                <div class="flex gap-3 mt-4">
-                <button class="glass-effect px-4 py-2 rounded-lg text-white">Live Preview</button>
-                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Use Template</button>
-                </div>
-            </div>
-
-            <div class="bg-gray-50 rounded-2xl shadow-md flex flex-col items-center card-hover">
-                <div class="bg-white rounded-lg shadow-sm overflow-hidden" style="width:210px; height:297px;">
-                <img src="https://via.placeholder.com/210x297" alt="Template Preview" class="w-full h-full object-cover">
-                </div>
-                <div class="flex gap-3 mt-4">
-                <button class="glass-effect px-4 py-2 rounded-lg text-white">Live Preview</button>
-                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Use Template</button>
-                </div>
-            </div>
-
-            <div class="bg-gray-50 rounded-2xl shadow-md flex flex-col items-center card-hover">
-                <div class="bg-white rounded-lg shadow-sm overflow-hidden" style="width:210px; height:297px;">
-                <img src="https://via.placeholder.com/210x297" alt="Template Preview" class="w-full h-full object-cover">
-                </div>
-                <div class="flex gap-3 mt-4">
-                <button class="glass-effect px-4 py-2 rounded-lg text-white">Live Preview</button>
-                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Use Template</button>
-                </div>
-            </div>
-
-            </div>
+      <!-- Card 1 -->
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+        <img src="https://via.placeholder.com/600x350" alt="Resume Template" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-gray-800">Modern Elegance</h3>
+          <p class="text-gray-600 mt-2 text-sm">Clean and stylish design for professionals.</p>
+          <div class="mt-6 flex gap-3">
+            <a href="#" class="px-4 py-2 bg-pink-600 text-white rounded-lg text-sm font-semibold hover:bg-pink-700 transition">Live Preview</a>
+            <a href="#" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+          </div>
         </div>
-    </section>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+        <img src="https://via.placeholder.com/600x350" alt="Resume Template" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-gray-800">Dark Professional</h3>
+          <p class="text-gray-600 mt-2 text-sm">Sophisticated dark theme with strong impact.</p>
+          <div class="mt-6 flex gap-3">
+            <a href="#" class="px-4 py-2 bg-pink-600 text-white rounded-lg text-sm font-semibold hover:bg-pink-700 transition">Live Preview</a>
+            <a href="#" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+        <img src="https://via.placeholder.com/600x350" alt="Resume Template" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-gray-800">Minimal White</h3>
+          <p class="text-gray-600 mt-2 text-sm">Simple white design with subtle highlights.</p>
+          <div class="mt-6 flex gap-3">
+            <a href="#" class="px-4 py-2 bg-pink-600 text-white rounded-lg text-sm font-semibold hover:bg-pink-700 transition">Live Preview</a>
+            <a href="#" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
     <!-- Final CTA Section -->
     <section class="py-16 gradient-bg relative overflow-hidden">
