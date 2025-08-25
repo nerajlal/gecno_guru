@@ -38,9 +38,7 @@ class AuthController extends Controller
             'status' => 0, 
         ]);
 
-        Auth::login($user);
-
-        return redirect('/');
+        return redirect('/')->with('registration_success', true);
     }
 
     /**

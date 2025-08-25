@@ -311,5 +311,10 @@
                     openModal(); // Open with login form
                 @endif
             @endif
+
+            // Handle successful registration redirect
+            @if(session('registration_success'))
+                openModal();
+            @endif
         });
     </script>
