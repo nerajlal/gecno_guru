@@ -141,15 +141,16 @@
                         <span class="text-blue-300">Gecno</span>Guru
                     </div>
                 </div>
-                <div class="hidden md:flex space-x-8">
+                <div class="hidden md:flex items-center space-x-4">
                     <a href="#home" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Home</a>
                     <a href="#services" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Services</a>
                     <a href="#about" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">About</a>
                     <a href="#contact" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Contact</a>
+                    <button class="text-white hover:text-blue-300 transition-colors duration-200 font-medium" id="login-btn">Login</button>
+                    <button class="glass-effect px-6 py-2 rounded-full text-white font-semibold hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30" id="register-btn">
+                        Get Started
+                    </button>
                 </div>
-                <button class="hidden md:block glass-effect px-6 py-2 rounded-full text-white font-semibold hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30 get-started-btn">
-                    Get Started
-                </button>
 
                 <!-- Mobile menu button -->
                 <div class="md:hidden">
@@ -175,3 +176,143 @@
             </div>
         </div>
     </nav>
+
+    <!-- Modals -->
+    <div id="auth-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300">
+        <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full relative transform transition-all duration-300 scale-95 opacity-0" id="modal-content">
+            <!-- Close button -->
+            <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-800" id="close-modal-btn">
+                <i class="fa-solid fa-times text-2xl"></i>
+            </button>
+
+            <!-- Login Form -->
+            <div id="login-form">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Welcome Back</h2>
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <div class="mb-4">
+                        <label for="login-email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                        <input type="email" id="login-email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="login-password" class="block text-gray-700 font-medium mb-2">Password</label>
+                        <input type="password" id="login-password" name="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-200">Login</button>
+                </form>
+                <p class="text-center text-gray-600 mt-6">
+                    Don't have an account? <button class="text-blue-600 font-semibold hover:underline" id="show-register-form">Sign up</button>
+                </p>
+            </div>
+
+            <!-- Registration Form -->
+            <div id="register-form" class="hidden">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Create Your Account</h2>
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
+                    <div class="mb-4">
+                        <label for="register-name" class="block text-gray-700 font-medium mb-2">Full Name</label>
+                        <input type="text" id="register-name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="register-email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                        <input type="email" id="register-email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="register-password" class="block text-gray-700 font-medium mb-2">Password</label>
+                        <input type="password" id="register-password" name="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="register-password-confirm" class="block text-gray-700 font-medium mb-2">Confirm Password</label>
+                        <input type="password" id="register-password-confirm" name="password_confirmation" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-200">Create Account</button>
+                </form>
+                <p class="text-center text-gray-600 mt-6">
+                    Already have an account? <button class="text-blue-600 font-semibold hover:underline" id="show-login-form">Log in</button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const authModal = document.getElementById('auth-modal');
+            const modalContent = document.getElementById('modal-content');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+
+            const loginBtn = document.getElementById('login-btn');
+            const registerBtn = document.getElementById('register-btn');
+
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+
+            const showRegisterFormBtn = document.getElementById('show-register-form');
+            const showLoginFormBtn = document.getElementById('show-login-form');
+
+            window.openModal = function() {
+                authModal.classList.remove('hidden');
+                authModal.classList.add('flex');
+                setTimeout(() => {
+                    authModal.classList.add('opacity-100');
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            }
+
+            window.closeModal = function() {
+                modalContent.classList.remove('scale-100', 'opacity-100');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                authModal.classList.remove('opacity-100');
+                setTimeout(() => {
+                    authModal.classList.add('hidden');
+                    authModal.classList.remove('flex');
+                }, 300);
+            }
+
+            loginBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginForm.classList.remove('hidden');
+                registerForm.classList.add('hidden');
+                openModal();
+            });
+
+            registerBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                registerForm.classList.remove('hidden');
+                loginForm.classList.add('hidden');
+                openModal();
+            });
+
+            showRegisterFormBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginForm.classList.add('hidden');
+                registerForm.classList.remove('hidden');
+            });
+
+            showLoginFormBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                registerForm.classList.add('hidden');
+                loginForm.classList.remove('hidden');
+            });
+
+            closeModalBtn.addEventListener('click', closeModal);
+            authModal.addEventListener('click', (e) => {
+                if (e.target === authModal) {
+                    closeModal();
+                }
+            });
+
+            // Handle validation errors
+            @if($errors->any())
+                openModal();
+                @if($errors->has('name') || $errors->has('password_confirmation'))
+                    loginForm.classList.add('hidden');
+                    registerForm.classList.remove('hidden');
+                @else
+                    registerForm.classList.add('hidden');
+                    loginForm.classList.remove('hidden');
+                @endif
+            @endif
+        });
+    </script>
