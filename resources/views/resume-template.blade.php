@@ -26,7 +26,7 @@
             <!-- Top Section -->
             <div class="flex items-center justify-between mb-12">
             <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Select Your Template</h2>
-            <button class="bg-blue-600 text-white px-6 py-3 rounded-xl shadow-md hover:bg-blue-700 transition">
+            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700 transition">
                 Add My Data
             </button>
             </div>
@@ -35,44 +35,44 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             
             <!-- Template Card -->
-            <div class="bg-gray-50 rounded-2xl shadow-md p-4 flex flex-col items-center card-hover">
-                <div class="bg-white border rounded-lg shadow-sm overflow-hidden" style="width:210px; height:297px;">
+            <div class="bg-gray-50 rounded-2xl shadow-md flex flex-col items-center card-hover">
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden" style="width:210px; height:297px;">
                 <img src="https://via.placeholder.com/210x297" alt="Template Preview" class="w-full h-full object-cover">
                 </div>
                 <div class="flex gap-3 mt-4">
-                <button class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Live Preview</button>
-                <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Use Template</button>
+                <button class="glass-effect px-4 py-2 rounded-lg text-white">Live Preview</button>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Use Template</button>
                 </div>
             </div>
 
             <!-- Repeat 3 More Cards -->
-            <div class="bg-gray-50 rounded-2xl shadow-md p-4 flex flex-col items-center card-hover">
-                <div class="bg-white border rounded-lg shadow-sm overflow-hidden" style="width:210px; height:297px;">
+            <div class="bg-gray-50 rounded-2xl shadow-md flex flex-col items-center card-hover">
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden" style="width:210px; height:297px;">
                 <img src="https://via.placeholder.com/210x297" alt="Template Preview" class="w-full h-full object-cover">
                 </div>
                 <div class="flex gap-3 mt-4">
-                <button class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Live Preview</button>
-                <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Use Template</button>
+                <button class="glass-effect px-4 py-2 rounded-lg text-white">Live Preview</button>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Use Template</button>
                 </div>
             </div>
 
-            <div class="bg-gray-50 rounded-2xl shadow-md p-4 flex flex-col items-center card-hover">
-                <div class="bg-white border rounded-lg shadow-sm overflow-hidden" style="width:210px; height:297px;">
+            <div class="bg-gray-50 rounded-2xl shadow-md flex flex-col items-center card-hover">
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden" style="width:210px; height:297px;">
                 <img src="https://via.placeholder.com/210x297" alt="Template Preview" class="w-full h-full object-cover">
                 </div>
                 <div class="flex gap-3 mt-4">
-                <button class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Live Preview</button>
-                <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Use Template</button>
+                <button class="glass-effect px-4 py-2 rounded-lg text-white">Live Preview</button>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Use Template</button>
                 </div>
             </div>
 
-            <div class="bg-gray-50 rounded-2xl shadow-md p-4 flex flex-col items-center card-hover">
-                <div class="bg-white border rounded-lg shadow-sm overflow-hidden" style="width:210px; height:297px;">
+            <div class="bg-gray-50 rounded-2xl shadow-md flex flex-col items-center card-hover">
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden" style="width:210px; height:297px;">
                 <img src="https://via.placeholder.com/210x297" alt="Template Preview" class="w-full h-full object-cover">
                 </div>
                 <div class="flex gap-3 mt-4">
-                <button class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Live Preview</button>
-                <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Use Template</button>
+                <button class="glass-effect px-4 py-2 rounded-lg text-white">Live Preview</button>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Use Template</button>
                 </div>
             </div>
 

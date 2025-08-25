@@ -30,10 +30,6 @@ Route::get('/portfolio', function () {
     return view('portfolio');
 });
 
-Route.get('/resume-template', function () {
-    return view('resume-template');
-});
-
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -42,6 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/resume-build', function () {
         return view('resume-build');
     })->name('resume-build');
+    Route::get('/resume-template', function () {
+        return view('resume-template');
+    })->name('resume-template');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
