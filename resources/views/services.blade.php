@@ -340,7 +340,7 @@
                         </div>
                     </div>
                     <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Portfolio example" class="rounded-2xl shadow-xl">
+                        <img src="https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2022/04/web-developer-portfolio.webp" alt="Portfolio example" class="rounded-2xl shadow-xl">
                         <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-pink-400 rounded-full opacity-20 floating"></div>
                         <div class="absolute -top-6 -right-6 w-16 h-16 bg-blue-400 rounded-full opacity-20 floating" style="animation-delay: -2s;"></div>
                     </div>
@@ -383,7 +383,7 @@
                         </div>
                     </div>
                     <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Career coaching" class="rounded-2xl shadow-xl">
+                        <img src="https://leapcoaching.ie/wp-content/uploads/2013/04/Career-Coaching-scaled.jpeg" alt="Career coaching" class="rounded-2xl shadow-xl">
                         <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-green-400 rounded-full opacity-20 floating"></div>
                         <div class="absolute -top-6 -right-6 w-16 h-16 bg-purple-400 rounded-full opacity-20 floating" style="animation-delay: -2s;"></div>
                     </div>
@@ -426,7 +426,7 @@
                         </div>
                     </div>
                     <div class="lg:order-1 relative">
-                        <img src="https://images.unsplash.com/photo-1588200908342-23b585c03e26?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Interview preparation" class="rounded-2xl shadow-xl">
+                        <img src="https://mycvcreator.com/administrator/postimages/67ac6bdd720109.00510634.jpg" alt="Interview preparation" class="rounded-2xl shadow-xl">
                         <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-red-400 rounded-full opacity-20 floating"></div>
                         <div class="absolute -top-6 -left-6 w-16 h-16 bg-blue-400 rounded-full opacity-20 floating" style="animation-delay: -3s;"></div>
                     </div>
