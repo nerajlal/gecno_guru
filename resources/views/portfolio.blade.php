@@ -1,7 +1,26 @@
 @include('header')
 
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 gradient-bg overflow-hidden">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-20 left-10 w-20 h-20 bg-white bg-opacity-10 rounded-full floating"></div>
+            <div class="absolute top-40 right-20 w-16 h-16 bg-white bg-opacity-10 rounded-full floating" style="animation-delay: -2s;"></div>
+            <div class="absolute bottom-40 left-1/4 w-12 h-12 bg-white bg-opacity-10 rounded-full floating" style="animation-delay: -4s;"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center text-white">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">AI Portfolio Builder</h1>
+                <p class="text-xl text-blue-50 mb-8 max-w-3xl mx-auto leading-relaxed">
+                    Create stunning portfolios that showcase your work and impress clients.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- Features Section -->
-    <section class="py-16 bg-white pt-24">
+    <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Why Choose Our AI Portfolio Builder?</h2>
