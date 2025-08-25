@@ -133,50 +133,72 @@
             <!-- Experience -->
             <div class="mb-6">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Experience</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="job_title" class="block text-gray-700 mb-2">Job Title</label>
-                        <input type="text" id="job_title" name="job_title" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Software Engineer">
-                    </div>
-                    <div>
-                        <label for="company" class="block text-gray-700 mb-2">Company</label>
-                        <input type="text" id="company" name="company" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Tech Corp">
-                    </div>
-                    <div>
-                        <label for="start_date" class="block text-gray-700 mb-2">Start Date</label>
-                        <input type="month" id="start_date" name="start_date" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300">
-                    </div>
-                    <div>
-                        <label for="end_date" class="block text-gray-700 mb-2">End Date</label>
-                        <input type="month" id="end_date" name="end_date" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                <div id="experience-container">
+                    <div class="experience-entry mb-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="job_title" class="block text-gray-700 mb-2">Job Title</label>
+                                <input type="text" name="job_title[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Software Engineer">
+                            </div>
+                            <div>
+                                <label for="company" class="block text-gray-700 mb-2">Company</label>
+                                <input type="text" name="company[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Tech Corp">
+                            </div>
+                            <div>
+                                <label for="start_date" class="block text-gray-700 mb-2">Start Date</label>
+                                <input type="month" name="start_date[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                            </div>
+                            <div>
+                                <label for="end_date" class="block text-gray-700 mb-2">End Date</label>
+                                <input type="month" name="end_date[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <label for="responsibilities" class="block text-gray-700 mb-2">Responsibilities</label>
+                            <textarea name="responsibilities[]" rows="4" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Describe your responsibilities and achievements..."></textarea>
+                        </div>
                     </div>
                 </div>
-                <div class="mt-4">
-                    <label for="responsibilities" class="block text-gray-700 mb-2">Responsibilities</label>
-                    <textarea id="responsibilities" name="responsibilities" rows="4" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Describe your responsibilities and achievements..."></textarea>
-                </div>
+                <button type="button" id="add-experience-btn" class="text-blue-600 hover:text-blue-700 font-semibold">+ Add Another Experience</button>
             </div>
 
             <!-- Education -->
             <div class="mb-6">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Education</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="school" class="block text-gray-700 mb-2">School/University</label>
-                        <input type="text" id="school" name="school" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="University of Example">
-                    </div>
-                    <div>
-                        <label for="degree" class="block text-gray-700 mb-2">Degree</label>
-                        <input type="text" id="degree" name="degree" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Bachelor of Science">
+                <div id="education-container">
+                    <div class="education-entry mb-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="school" class="block text-gray-700 mb-2">School/University</label>
+                                <input type="text" name="school[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="University of Example">
+                            </div>
+                            <div>
+                                <label for="degree" class="block text-gray-700 mb-2">Degree</label>
+                                <input type="text" name="degree[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Bachelor of Science">
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <button type="button" id="add-education-btn" class="text-blue-600 hover:text-blue-700 font-semibold">+ Add Another Education</button>
             </div>
 
             <!-- Skills -->
             <div class="mb-6">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Skills</h3>
-                <textarea id="skills" name="skills" rows="3" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="e.g., JavaScript, Python, Teamwork, Communication"></textarea>
+                <div id="skills-container">
+                    <div class="skill-category-entry mb-4">
+                        <div class="flex items-center gap-4">
+                            <input type="text" name="skill_category[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Skill Category (e.g., Programming Languages)">
+                            <button type="button" class="add-skill-btn text-blue-600 hover:text-blue-700 font-semibold whitespace-nowrap">+ Add Skill</button>
+                        </div>
+                        <div class="skills-list mt-2 ml-4">
+                            <!-- Individual skills will be added here -->
+                        </div>
+                    </div>
+                </div>
+                <button type="button" id="add-skill-category-btn" class="text-blue-600 hover:text-blue-700 font-semibold">+ Add Skill Category</button>
             </div>
+
 
             <div class="text-right">
                 <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Save</button>
@@ -220,6 +242,62 @@
                 }
             });
         }
+
+        // Dynamic Experience Section
+        const addExperienceBtn = document.getElementById('add-experience-btn');
+        const experienceContainer = document.getElementById('experience-container');
+        if (addExperienceBtn) {
+            addExperienceBtn.addEventListener('click', () => {
+                const newExperienceEntry = experienceContainer.querySelector('.experience-entry').cloneNode(true);
+                const inputs = newExperienceEntry.querySelectorAll('input, textarea');
+                inputs.forEach(input => input.value = '');
+                experienceContainer.appendChild(newExperienceEntry);
+            });
+        }
+
+        // Dynamic Education Section
+        const addEducationBtn = document.getElementById('add-education-btn');
+        const educationContainer = document.getElementById('education-container');
+        if (addEducationBtn) {
+            addEducationBtn.addEventListener('click', () => {
+                const newEducationEntry = educationContainer.querySelector('.education-entry').cloneNode(true);
+                const inputs = newEducationEntry.querySelectorAll('input, textarea');
+                inputs.forEach(input => input.value = '');
+                educationContainer.appendChild(newEducationEntry);
+            });
+        }
+
+        // Dynamic Skills Section
+        const skillsContainer = document.getElementById('skills-container');
+        const addSkillCategoryBtn = document.getElementById('add-skill-category-btn');
+
+        const createNewSkillInput = () => {
+            const skillInput = document.createElement('input');
+            skillInput.type = 'text';
+            skillInput.name = 'skills[][]';
+            skillInput.className = 'w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300 mt-2';
+            skillInput.placeholder = 'e.g., JavaScript';
+            return skillInput;
+        };
+
+        skillsContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('add-skill-btn')) {
+                const skillsList = e.target.closest('.skill-category-entry').querySelector('.skills-list');
+                skillsList.appendChild(createNewSkillInput());
+            }
+        });
+
+        if (addSkillCategoryBtn) {
+            addSkillCategoryBtn.addEventListener('click', () => {
+                const newSkillCategory = skillsContainer.querySelector('.skill-category-entry').cloneNode(true);
+                const inputs = newSkillCategory.querySelectorAll('input');
+                inputs.forEach(input => input.value = '');
+                const skillsList = newSkillCategory.querySelector('.skills-list');
+                skillsList.innerHTML = ''; // Clear cloned skills
+                skillsContainer.appendChild(newSkillCategory);
+            });
+        }
+
     });
 </script>
 
