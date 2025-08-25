@@ -28,7 +28,7 @@
     </div>
 
     <!-- Cards Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
       <!-- Card 1 -->
       <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
@@ -37,7 +37,7 @@
           <h3 class="text-xl font-semibold text-gray-800">Modern Elegance</h3>
           <p class="text-gray-600 mt-2 text-sm">Clean and stylish design for professionals.</p>
           <div class="mt-6 flex gap-3">
-            <a href="#" class="px-4 py-2 bg-pink-600 text-white rounded-lg text-sm font-semibold hover:bg-pink-700 transition">Live Preview</a>
+            <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Live Preview</a>
             <a href="#" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
           </div>
         </div>
@@ -50,7 +50,7 @@
           <h3 class="text-xl font-semibold text-gray-800">Dark Professional</h3>
           <p class="text-gray-600 mt-2 text-sm">Sophisticated dark theme with strong impact.</p>
           <div class="mt-6 flex gap-3">
-            <a href="#" class="px-4 py-2 bg-pink-600 text-white rounded-lg text-sm font-semibold hover:bg-pink-700 transition">Live Preview</a>
+            <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Live Preview</a>
             <a href="#" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
           </div>
         </div>
@@ -63,7 +63,20 @@
           <h3 class="text-xl font-semibold text-gray-800">Minimal White</h3>
           <p class="text-gray-600 mt-2 text-sm">Simple white design with subtle highlights.</p>
           <div class="mt-6 flex gap-3">
-            <a href="#" class="px-4 py-2 bg-pink-600 text-white rounded-lg text-sm font-semibold hover:bg-pink-700 transition">Live Preview</a>
+            <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Live Preview</a>
+            <a href="#" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+        <img src="https://via.placeholder.com/600x350" alt="Resume Template" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-gray-800">Classic Professional</h3>
+          <p class="text-gray-600 mt-2 text-sm">A timeless design for any industry.</p>
+          <div class="mt-6 flex gap-3">
+            <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Live Preview</a>
             <a href="#" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
           </div>
         </div>
