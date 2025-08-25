@@ -304,7 +304,8 @@
 
             // Handle validation errors
             @if($errors->any())
-                @if($errors->has('name') || $errors->has('password_confirmation'))
+                // If there is old input for the 'name' field, we can assume it was a registration attempt.
+                @if(old('name'))
                     openModal(true); // Open with register form
                 @else
                     openModal(); // Open with login form
