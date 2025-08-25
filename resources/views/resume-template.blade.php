@@ -188,12 +188,76 @@
                 <div id="skills-container">
                     <div class="skill-category-entry mb-4">
                         <input type="text" name="skill_category[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Skill Category (e.g., Programming Languages)">
-                        <div class="skills-list flex flex-wrap gap-2">
+                        <div class="skills-list flex flex-wrap gap-2 mt-2">
+                            <input type="text" name="skills[0][]" class="border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="e.g., JavaScript">
+                            <input type="text" name="skills[0][]" class="border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="e.g., Python">
                             <button type="button" class="add-skill-btn text-blue-600 hover:text-blue-700 font-semibold whitespace-nowrap">+ Add Skill</button>
                         </div>
                     </div>
                 </div>
                 <button type="button" id="add-skill-category-btn" class="text-blue-600 hover:text-blue-700 font-semibold">+ Add Skill Category</button>
+            </div>
+
+            <!-- Certifications -->
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Certifications</h3>
+                <div id="certifications-container">
+                    <div class="certification-entry mb-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 mb-2">Certification Name</label>
+                                <input type="text" name="certification_name[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="e.g., AWS Certified Solutions Architect">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Issuing Organization</label>
+                                <input type="text" name="issuing_organization[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="e.g., Amazon Web Services">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" id="add-certification-btn" class="text-blue-600 hover:text-blue-700 font-semibold">+ Add Another Certification</button>
+            </div>
+
+            <!-- Interested Areas -->
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Interested Areas</h3>
+                <textarea name="interested_areas" rows="3" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="e.g., Artificial Intelligence, Machine Learning, Web Development"></textarea>
+            </div>
+
+            <!-- Projects -->
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Projects</h3>
+                <div id="projects-container">
+                    <div class="project-entry mb-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="md:col-span-2">
+                                <label class="block text-gray-700 mb-2">Project Name</label>
+                                <input type="text" name="project_name[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="e.g., My Awesome Project">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Key Point 1</label>
+                                <input type="text" name="key_point_1[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Key Point 2</label>
+                                <input type="text" name="key_point_2[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Key Point 3</label>
+                                <input type="text" name="key_point_3[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Technologies</label>
+                                <input type="text" name="technologies[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="e.g., Laravel, Vue.js, MySQL">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Tools</label>
+                                <input type="text" name="tools[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="e.g., VS Code, Docker, Git">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" id="add-project-btn" class="text-blue-600 hover:text-blue-700 font-semibold">+ Add Another Project</button>
             </div>
 
 
@@ -209,6 +273,7 @@
         const addNewBtn = document.getElementById('add-new-btn');
         const addNewModal = document.getElementById('add-new-modal');
         const closeModalBtn = document.getElementById('close-modal-btn');
+        let skillCategoryIndex = 1;
 
         const openModal = () => {
             if (addNewModal) {
@@ -268,10 +333,10 @@
         const skillsContainer = document.getElementById('skills-container');
         const addSkillCategoryBtn = document.getElementById('add-skill-category-btn');
 
-        const createNewSkillInput = () => {
+        const createNewSkillInput = (index) => {
             const skillInput = document.createElement('input');
             skillInput.type = 'text';
-            skillInput.name = 'skills[][]';
+            skillInput.name = `skills[${index}][]`;
             skillInput.className = 'border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300';
             skillInput.placeholder = 'e.g., JavaScript';
             return skillInput;
@@ -279,7 +344,9 @@
 
         skillsContainer.addEventListener('click', (e) => {
             if (e.target.classList.contains('add-skill-btn')) {
-                const newSkillInput = createNewSkillInput();
+                const skillsList = e.target.closest('.skills-list');
+                const categoryIndex = skillsList.dataset.index;
+                const newSkillInput = createNewSkillInput(categoryIndex);
                 e.target.before(newSkillInput);
             }
         });
@@ -289,10 +356,52 @@
                 const newSkillCategory = skillsContainer.querySelector('.skill-category-entry').cloneNode(true);
                 const inputs = newSkillCategory.querySelectorAll('input');
                 inputs.forEach(input => input.value = '');
+
                 const skillsList = newSkillCategory.querySelector('.skills-list');
-                const skillInputs = skillsList.querySelectorAll('input');
-                skillInputs.forEach(input => input.remove());
+                skillsList.dataset.index = skillCategoryIndex;
+                const skillInputs = skillsList.querySelectorAll('input[type="text"]');
+                skillInputs.forEach(input => input.name = `skills[${skillCategoryIndex}][]`);
+
+                const addSkillBtn = skillsList.querySelector('.add-skill-btn');
+
+                // Clear existing skill inputs and add two new ones
+                const allSkillInputs = skillsList.querySelectorAll('input[type="text"]');
+                allSkillInputs.forEach(input => input.remove());
+
+                skillsList.prepend(createNewSkillInput(skillCategoryIndex));
+                skillsList.prepend(createNewSkillInput(skillCategoryIndex));
+
                 skillsContainer.appendChild(newSkillCategory);
+                skillCategoryIndex++;
+            });
+        }
+
+        const initialSkillsList = document.querySelector('.skills-list');
+        if(initialSkillsList) {
+            initialSkillsList.dataset.index = 0;
+        }
+
+        // Dynamic Certifications Section
+        const addCertificationBtn = document.getElementById('add-certification-btn');
+        const certificationsContainer = document.getElementById('certifications-container');
+        if (addCertificationBtn) {
+            addCertificationBtn.addEventListener('click', () => {
+                const newCertificationEntry = certificationsContainer.querySelector('.certification-entry').cloneNode(true);
+                const inputs = newCertificationEntry.querySelectorAll('input');
+                inputs.forEach(input => input.value = '');
+                certificationsContainer.appendChild(newCertificationEntry);
+            });
+        }
+
+        // Dynamic Projects Section
+        const addProjectBtn = document.getElementById('add-project-btn');
+        const projectsContainer = document.getElementById('projects-container');
+        if (addProjectBtn) {
+            addProjectBtn.addEventListener('click', () => {
+                const newProjectEntry = projectsContainer.querySelector('.project-entry').cloneNode(true);
+                const inputs = newProjectEntry.querySelectorAll('input, textarea');
+                inputs.forEach(input => input.value = '');
+                projectsContainer.appendChild(newProjectEntry);
             });
         }
 
