@@ -20,6 +20,15 @@ Route::get('/', function () {
 Route::get('/resume', function () {
     return view('resume');
 });
+Route::get('/services', function () {
+    return view('services');
+});
+Route::get('/coverletter', function () {
+    return view('coverletter');
+});
+Route::get('/portfolio', function () {
+    return view('portfolio');
+});
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');

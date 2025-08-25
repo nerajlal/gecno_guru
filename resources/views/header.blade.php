@@ -129,6 +129,37 @@
         .open .hamburger-bottom {
             transform: rotate(-45deg) translateY(6px) translateX(-6px);
         }
+
+        #navbar.scrolled {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        #navbar.scrolled a, #navbar.scrolled button {
+            color: #1f2937; /* text-gray-800 */
+        }
+        
+        #navbar.scrolled .hamburger-top,
+        #navbar.scrolled .hamburger-middle,
+        #navbar.scrolled .hamburger-bottom {
+            background: #1f2937;
+        }
+
+        #navbar.scrolled .glass-effect {
+            background: rgba(30, 64, 175, 0.1);
+            border-color: rgba(30, 64, 175, 0.5);
+        }
+
+        #navbar.scrolled .glass-effect:hover {
+            background: rgba(30, 64, 175, 0.2);
+        }
+        #navbar.scrolled .dropdown-item {
+            color: #1f2937;
+        }
+        #navbar.scrolled .dropdown-item:hover {
+            background: rgba(30, 64, 175, 0.05);
+        }
     </style>
 </head>
 <body class="bg-gray-50 overflow-x-hidden">
@@ -142,22 +173,16 @@
                     </div>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Home</a>
+                    <a href="/" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Home</a>
                     <div class="relative" id="services-dropdown">
                         <button class="text-white hover:text-blue-300 transition-colors duration-200 font-medium flex items-center" id="services-dropdown-button">
                             Services <i class="fas fa-chevron-down ml-2 text-xs"></i>
                         </button>
                         <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-white rounded-lg shadow-lg p-2 hidden" id="services-dropdown-menu">
-                            <a href="#services" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md">All Services</a>
-                            @guest
-                                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md login-trigger">Resume Builder</a>
-                                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md login-trigger">Portfolio Builder</a>
-                                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md login-trigger">Cover Letter Builder</a>
-                            @else
-                                <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md">Resume Builder</a>
-                                <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md">Portfolio Builder</a>
-                                <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md">Cover Letter Builder</a>
-                            @endguest
+                            <a href="/services" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md">All Services</a>
+                                <a href="/resume" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md">Resume Builder</a>
+                                <a href="/portfolio" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md">Portfolio Builder</a>
+                                <a href="/coverletter" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md">Cover Letter Builder</a>
                         </div>
                     </div>
                     <a href="#about" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">About</a>
@@ -190,22 +215,16 @@
         <!-- Mobile Menu -->
         <div id="menu" class="mobile-menu fixed top-16 right-0 bottom-0 w-64 gradient-bg glass-effect p-6 md:hidden">
             <div class="flex flex-col space-y-6">
-                <a href="#home" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Home</a>
+                <a href="/" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Home</a>
                 <div class="relative" id="mobile-services-dropdown">
                     <button class="text-white hover:text-blue-300 transition-colors duration-200 font-medium w-full text-left flex items-center justify-between" id="mobile-services-dropdown-button">
                         Services <i class="fas fa-chevron-down ml-2 text-xs"></i>
                     </button>
                     <div class="mt-2 space-y-2 hidden" id="mobile-services-dropdown-menu">
-                        <a href="#services" class="block pl-4 text-white hover:text-blue-300 transition-colors duration-200 font-medium">All Services</a>
-                        @guest
-                            <a href="#" class="block pl-4 text-white hover:text-blue-300 transition-colors duration-200 font-medium login-trigger">Resume Builder</a>
-                            <a href="#" class="block pl-4 text-white hover:text-blue-300 transition-colors duration-200 font-medium login-trigger">Portfolio Builder</a>
-                            <a href="#" class="block pl-4 text-white hover:text-blue-300 transition-colors duration-200 font-medium login-trigger">Cover Letter Builder</a>
-                        @else
-                            <a href="{{ route('dashboard') }}" class="block pl-4 text-white hover:text-blue-300 transition-colors duration-200 font-medium">Resume Builder</a>
-                            <a href="{{ route('dashboard') }}" class="block pl-4 text-white hover:text-blue-300 transition-colors duration-200 font-medium">Portfolio Builder</a>
-                            <a href="{{ route('dashboard') }}" class="block pl-4 text-white hover:text-blue-300 transition-colors duration-200 font-medium">Cover Letter Builder</a>
-                        @endguest
+                        <a href="/services" class="block pl-4 text-white hover:text-blue-300 transition-colors duration-200 font-medium">All Services</a>
+                            <a href="/resume" class="block pl-4 text-white hover:text-blue-300 transition-colors duration-200 font-medium">Resume Builder</a>
+                            <a href="/portfolio" class="block pl-4 text-white hover:text-blue-300 transition-colors duration-200 font-medium">Portfolio Builder</a>
+                            <a href="/coverletter" class="block pl-4 text-white hover:text-blue-300 transition-colors duration-200 font-medium">Cover Letter Builder</a>
                     </div>
                 </div>
                 <a href="#about" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">About</a>

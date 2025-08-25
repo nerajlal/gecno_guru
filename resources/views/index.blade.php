@@ -67,75 +67,69 @@
 
     <!-- Services Section -->
     <section id="services" class="py-16 sm:py-20 bg-white relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 sm:mb-16 fade-in">
-                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Premium Career Services</h2>
-                <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">Unlock your potential with our comprehensive suite of professional development tools</p>
-            </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 sm:mb-16 fade-in">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Premium Career Services</h2>
+            <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-8">Unlock your potential with our comprehensive suite of professional development tools</p>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                <!-- Resume Builder -->
-                <div class="group card-hover bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-gray-100 fade-in hover:border-blue-200">
-                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                        <i class="fa-solid fa-file-lines text-white text-2xl sm:text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">AI Resume Builder</h3>
-                    <p class="text-gray-700 mb-6 leading-relaxed">Create stunning, ATS-optimized resumes with our intelligent builder. Stand out from the crowd with professional templates.</p>
-                    @guest
-                        <button class="text-blue-600 font-bold hover:text-blue-700 transition-colors duration-200 flex items-center login-trigger">
-                            Build Resume
-                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
-                        </button>
-                    @else
-                        <a href="{{ route('dashboard') }}" class="text-blue-600 font-bold hover:text-blue-700 transition-colors duration-200 flex items-center">
-                            Build Resume
-                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
-                        </a>
-                    @endguest
-                </div>
-                
-                <!-- Cover Letter Builder -->
-                <div class="group card-hover bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-gray-100 fade-in hover:border-green-200" style="animation-delay: 0.2s;">
-                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-green-600 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                        <i class="fa-solid fa-envelope-open-text text-white text-2xl sm:text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Smart Cover Letters</h3>
-                    <p class="text-gray-700 mb-6 leading-relaxed">Generate personalized, compelling cover letters that capture attention and showcase your unique value proposition.</p>
-                    @guest
-                        <button class="text-green-600 font-bold hover:text-green-700 transition-colors duration-200 flex items-center login-trigger">
-                            Write Cover Letter
-                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
-                        </button>
-                    @else
-                        <a href="{{ route('dashboard') }}" class="text-green-600 font-bold hover:text-green-700 transition-colors duration-200 flex items-center">
-                            Write Cover Letter
-                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
-                        </a>
-                    @endguest
-                </div>
-                
-                <!-- Portfolio Website -->
-                <div class="group card-hover bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-gray-100 fade-in hover:border-purple-200" style="animation-delay: 0.4s;">
-                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                        <i class="fa-solid fa-globe text-white text-2xl sm:text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Portfolio Websites</h3>
-                    <p class="text-gray-700 mb-6 leading-relaxed">Build a stunning online presence with our portfolio builder. Showcase your work and attract opportunities.</p>
-                    @guest
-                        <button class="text-purple-600 font-bold hover:text-purple-700 transition-colors duration-200 flex items-center login-trigger">
-                            Build Portfolio
-                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
-                        </button>
-                    @else
-                        <a href="{{ route('dashboard') }}" class="text-purple-600 font-bold hover:text-purple-700 transition-colors duration-200 flex items-center">
-                            Build Portfolio
-                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
-                        </a>
-                    @endguest
-                </div>
+            <div class="inline-block">
+                <a href="/services" class="group inline-flex items-center">
+                    <button class="bg-blue-50 text-blue-600 px-6 py-3 rounded-full font-bold text-sm hover:bg-blue-100 transition-all duration-300 flex items-center border border-blue-200 hover:border-blue-300 shadow-sm hover:shadow-md">
+                        View All Services
+                        <i class="fa-solid fa-arrow-right ml-2 text-sm group-hover:translate-x-1 transition-transform duration-300"></i>
+                    </button>
+                </a>
             </div>
         </div>
-    </section>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <!-- Resume Builder -->
+            <div class="group card-hover bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-gray-100 fade-in hover:border-blue-200">
+                <div class="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                    <i class="fa-solid fa-file-lines text-white text-2xl sm:text-3xl"></i>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">AI Resume Builder</h3>
+                <p class="text-gray-700 mb-6 leading-relaxed">Create stunning, ATS-optimized resumes with our intelligent builder. Stand out from the crowd with professional templates.</p>
+                <a href="/resume" class="group">
+                    <button class="text-blue-600 font-bold hover:text-blue-700 transition-colors duration-200 flex items-center">
+                        Build Resume
+                        <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
+                    </button>
+                </a>
+            </div>
+            
+            <!-- Cover Letter Builder -->
+            <div class="group card-hover bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-gray-100 fade-in hover:border-green-200" style="animation-delay: 0.2s;">
+                <div class="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-green-600 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                    <i class="fa-solid fa-envelope-open-text text-white text-2xl sm:text-3xl"></i>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Smart Cover Letters</h3>
+                <p class="text-gray-700 mb-6 leading-relaxed">Generate personalized, compelling cover letters that capture attention and showcase your unique value proposition.</p>
+                <a href="/coverletter" class="group">
+                    <button class="text-green-600 font-bold hover:text-green-700 transition-colors duration-200 flex items-center">
+                        Write Cover Letter
+                        <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
+                    </button>
+                </a>
+            </div>
+            
+            <!-- Portfolio Website -->
+            <div class="group card-hover bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-gray-100 fade-in hover:border-purple-200" style="animation-delay: 0.4s;">
+                <div class="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                    <i class="fa-solid fa-globe text-white text-2xl sm:text-3xl"></i>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Portfolio Websites</h3>
+                <p class="text-gray-700 mb-6 leading-relaxed">Build a stunning online presence with our portfolio builder. Showcase your work and attract opportunities.</p>
+                <a href="/portfolio" class="group">
+                    <button class="text-purple-600 font-bold hover:text-purple-700 transition-colors duration-200 flex items-center">
+                        Build Portfolio
+                        <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- Why Choose Section -->
     <section id="about" class="py-16 sm:py-20 bg-gray-50">

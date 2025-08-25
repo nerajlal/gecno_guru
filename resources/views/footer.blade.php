@@ -26,9 +26,9 @@
                 <div>
                     <h4 class="text-lg font-semibold mb-4 text-white">Services</h4>
                     <ul class="space-y-2 text-gray-300">
-                        <li><a href="#" class="hover:text-blue-400 transition-colors duration-200">Resume Builder</a></li>
-                        <li><a href="#" class="hover:text-blue-400 transition-colors duration-200">Cover Letters</a></li>
-                        <li><a href="#" class="hover:text-blue-400 transition-colors duration-200">Portfolio Sites</a></li>
+                        <li><a href="/resume" class="hover:text-blue-400 transition-colors duration-200">Resume Builder</a></li>
+                        <li><a href="/coverletter" class="hover:text-blue-400 transition-colors duration-200">Cover Letters</a></li>
+                        <li><a href="/portfolio" class="hover:text-blue-400 transition-colors duration-200">Portfolio Sites</a></li>
                         <li><a href="#" class="hover:text-blue-400 transition-colors duration-200">Career Coaching</a></li>
                     </ul>
                 </div>
