@@ -187,12 +187,9 @@
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Skills</h3>
                 <div id="skills-container">
                     <div class="skill-category-entry mb-4">
-                        <div class="flex items-center gap-4">
-                            <input type="text" name="skill_category[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Skill Category (e.g., Programming Languages)">
+                        <input type="text" name="skill_category[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Skill Category (e.g., Programming Languages)">
+                        <div class="skills-list flex flex-wrap gap-2">
                             <button type="button" class="add-skill-btn text-blue-600 hover:text-blue-700 font-semibold whitespace-nowrap">+ Add Skill</button>
-                        </div>
-                        <div class="skills-list mt-2 ml-4">
-                            <!-- Individual skills will be added here -->
                         </div>
                     </div>
                 </div>
@@ -275,15 +272,15 @@
             const skillInput = document.createElement('input');
             skillInput.type = 'text';
             skillInput.name = 'skills[][]';
-            skillInput.className = 'w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300 mt-2';
+            skillInput.className = 'border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300';
             skillInput.placeholder = 'e.g., JavaScript';
             return skillInput;
         };
 
         skillsContainer.addEventListener('click', (e) => {
             if (e.target.classList.contains('add-skill-btn')) {
-                const skillsList = e.target.closest('.skill-category-entry').querySelector('.skills-list');
-                skillsList.appendChild(createNewSkillInput());
+                const newSkillInput = createNewSkillInput();
+                e.target.before(newSkillInput);
             }
         });
 
@@ -293,7 +290,8 @@
                 const inputs = newSkillCategory.querySelectorAll('input');
                 inputs.forEach(input => input.value = '');
                 const skillsList = newSkillCategory.querySelector('.skills-list');
-                skillsList.innerHTML = ''; // Clear cloned skills
+                const skillInputs = skillsList.querySelectorAll('input');
+                skillInputs.forEach(input => input.remove());
                 skillsContainer.appendChild(newSkillCategory);
             });
         }
