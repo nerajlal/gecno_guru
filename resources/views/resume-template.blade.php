@@ -221,7 +221,7 @@
             <!-- Interested Areas -->
             <div class="mb-6">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Interested Areas</h3>
-                <textarea name="interested_areas" rows="3" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="e.g., Artificial Intelligence, Machine Learning, Web Development"></textarea>
+                <textarea name="interested_areas" rows="3" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Enter each area of interest on a new line."></textarea>
             </div>
 
             <!-- Projects -->
@@ -234,17 +234,9 @@
                                 <label class="block text-gray-700 mb-2">Project Name</label>
                                 <input type="text" name="project_name[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="e.g., My Awesome Project">
                             </div>
-                            <div>
-                                <label class="block text-gray-700 mb-2">Key Point 1</label>
-                                <input type="text" name="key_point_1[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300">
-                            </div>
-                            <div>
-                                <label class="block text-gray-700 mb-2">Key Point 2</label>
-                                <input type="text" name="key_point_2[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300">
-                            </div>
-                            <div>
-                                <label class="block text-gray-700 mb-2">Key Point 3</label>
-                                <input type="text" name="key_point_3[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                            <div class="md:col-span-2">
+                                <label class="block text-gray-700 mb-2">Key Points</label>
+                                <textarea name="project_key_points[]" rows="3" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Enter each key point on a new line."></textarea>
                             </div>
                             <div>
                                 <label class="block text-gray-700 mb-2">Technologies</label>
