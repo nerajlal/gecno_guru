@@ -27,6 +27,13 @@
       <p class="text-lg text-gray-600">Select from our professional templates designed to impress recruiters.</p>
     </div>
 
+    <!-- Add New Button -->
+    <div class="text-right mb-8">
+        <button id="add-new-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700 transition">
+            Add New
+        </button>
+    </div>
+
     <!-- Cards Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
@@ -85,6 +92,136 @@
     </div>
   </div>
 </section>
+
+<!-- Add New Resume Modal -->
+<div id="add-new-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-3xl relative">
+        <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-600 hover:text-gray-900">
+            <i class="fa-solid fa-times text-2xl"></i>
+        </button>
+        <h2 class="text-2xl font-bold text-gray-900 text-center mb-6">Add Resume Data</h2>
+        <form>
+            <!-- Personal Information -->
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Personal Information</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="full_name" class="block text-gray-700 mb-2">Full Name</label>
+                        <input type="text" id="full_name" name="full_name" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="John Doe">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-gray-700 mb-2">Email</label>
+                        <input type="email" id="email" name="email" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="john.doe@example.com">
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-gray-700 mb-2">Phone</label>
+                        <input type="tel" id="phone" name="phone" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="+1 234 567 890">
+                    </div>
+                    <div>
+                        <label for="address" class="block text-gray-700 mb-2">Address</label>
+                        <input type="text" id="address" name="address" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="123 Main St, Anytown, USA">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Summary</h3>
+                <textarea id="summary" name="summary" rows="4" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="A brief summary of your professional background..."></textarea>
+            </div>
+
+            <!-- Experience -->
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Experience</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="job_title" class="block text-gray-700 mb-2">Job Title</label>
+                        <input type="text" id="job_title" name="job_title" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Software Engineer">
+                    </div>
+                    <div>
+                        <label for="company" class="block text-gray-700 mb-2">Company</label>
+                        <input type="text" id="company" name="company" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Tech Corp">
+                    </div>
+                    <div>
+                        <label for="start_date" class="block text-gray-700 mb-2">Start Date</label>
+                        <input type="month" id="start_date" name="start_date" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                    </div>
+                    <div>
+                        <label for="end_date" class="block text-gray-700 mb-2">End Date</label>
+                        <input type="month" id="end_date" name="end_date" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <label for="responsibilities" class="block text-gray-700 mb-2">Responsibilities</label>
+                    <textarea id="responsibilities" name="responsibilities" rows="4" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Describe your responsibilities and achievements..."></textarea>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Education</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="school" class="block text-gray-700 mb-2">School/University</label>
+                        <input type="text" id="school" name="school" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="University of Example">
+                    </div>
+                    <div>
+                        <label for="degree" class="block text-gray-700 mb-2">Degree</label>
+                        <input type="text" id="degree" name="degree" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Bachelor of Science">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Skills</h3>
+                <textarea id="skills" name="skills" rows="3" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="e.g., JavaScript, Python, Teamwork, Communication"></textarea>
+            </div>
+
+            <div class="text-right">
+                <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const addNewBtn = document.getElementById('add-new-btn');
+        const addNewModal = document.getElementById('add-new-modal');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+
+        const openModal = () => {
+            if (addNewModal) {
+                addNewModal.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            }
+        };
+
+        const closeModal = () => {
+            if (addNewModal) {
+                addNewModal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+        };
+
+        if (addNewBtn) {
+            addNewBtn.addEventListener('click', openModal);
+        }
+
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', closeModal);
+        }
+
+        if (addNewModal) {
+            addNewModal.addEventListener('click', (e) => {
+                if (e.target === addNewModal) {
+                    closeModal();
+                }
+            });
+        }
+    });
+</script>
 
     <!-- Final CTA Section -->
     <section class="py-16 gradient-bg relative overflow-hidden">
