@@ -255,14 +255,22 @@
         <!-- User Profile -->
         <div class="absolute bottom-0 w-full left-0 p-6">
             <div class="glass-effect rounded-xl p-4">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
-                        <span class="text-white font-semibold text-sm">AD</span>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
+                            <span class="text-white font-semibold text-sm">AD</span>
+                        </div>
+                        <div>
+                            <div class="text-white font-semibold text-sm">Admin User</div>
+                            <div class="text-blue-200 text-xs">Super Admin</div>
+                        </div>
                     </div>
-                    <div>
-                        <div class="text-white font-semibold text-sm">Admin User</div>
-                        <div class="text-blue-200 text-xs">Super Admin</div>
-                    </div>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="text-blue-200 hover:text-white transition-colors duration-200">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -320,14 +328,22 @@
                 <!-- User Profile -->
                 <div class="mt-auto">
                     <div class="glass-effect rounded-xl p-4">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
-                                <span class="text-white font-semibold text-sm">AD</span>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
+                                    <span class="text-white font-semibold text-sm">AD</span>
+                                </div>
+                                <div>
+                                    <div class="text-white font-semibold text-sm">Admin User</div>
+                                    <div class="text-blue-200 text-xs">Super Admin</div>
+                                </div>
                             </div>
-                            <div>
-                                <div class="text-white font-semibold text-sm">Admin User</div>
-                                <div class="text-blue-200 text-xs">Super Admin</div>
-                            </div>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="text-blue-200 hover:text-white transition-colors duration-200">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -350,6 +366,12 @@
                         <button class="glass-effect p-2 lg:p-3 rounded-xl hover:bg-white hover:bg-opacity-25 transition-all duration-200">
                             <i class="fas fa-comment text-gray-700 text-lg lg:text-xl"></i>
                         </button>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="glass-effect p-2 lg:p-3 rounded-xl hover:bg-white hover:bg-opacity-25 transition-all duration-200">
+                                <i class="fas fa-sign-out-alt text-gray-700 text-lg lg:text-xl"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
