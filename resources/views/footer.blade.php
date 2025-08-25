@@ -50,68 +50,99 @@
     </footer>
 
     <script>
-        // Mobile menu functionality
-        const menuBtn = document.getElementById('menu-btn');
-        const menu = document.getElementById('menu');
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile menu functionality
+            const menuBtn = document.getElementById('menu-btn');
+            const menu = document.getElementById('menu');
 
-        if(menuBtn) {
-            menuBtn.addEventListener('click', () => {
-                menuBtn.classList.toggle('open');
-                menu.classList.toggle('active');
-                document.body.classList.toggle('overflow-hidden');
+            if(menuBtn) {
+                menuBtn.addEventListener('click', () => {
+                    menuBtn.classList.toggle('open');
+                    menu.classList.toggle('active');
+                    document.body.classList.toggle('overflow-hidden');
+                });
+            }
+
+            // Close menu when clicking on links
+            document.querySelectorAll('#menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuBtn.classList.remove('open');
+                    menu.classList.remove('active');
+                    document.body.classList.remove('overflow-hidden');
+                });
             });
-        }
 
-        // Close menu when clicking on links
-        document.querySelectorAll('#menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                menuBtn.classList.remove('open');
-                menu.classList.remove('active');
-                document.body.classList.remove('overflow-hidden');
+
+            // Intersection Observer for fade-in animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all fade-in elements
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
             });
-        });
 
+            // Add some interactive hover effects
+            document.querySelectorAll('.card-hover').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
 
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+            // Services Dropdown
+            const servicesDropdown = document.getElementById('services-dropdown');
+            const servicesDropdownButton = document.getElementById('services-dropdown-button');
+            const servicesDropdownMenu = document.getElementById('services-dropdown-menu');
+
+            if (servicesDropdownButton) {
+                servicesDropdownButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    servicesDropdownMenu.classList.toggle('hidden');
+                });
+            }
+
+            document.addEventListener('click', (e) => {
+                if (servicesDropdown && !servicesDropdown.contains(e.target)) {
+                    servicesDropdownMenu.classList.add('hidden');
                 }
             });
-        }, observerOptions);
 
-        // Observe all fade-in elements
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+            // Mobile Services Dropdown
+            const mobileServicesDropdownButton = document.getElementById('mobile-services-dropdown-button');
+            const mobileServicesDropdownMenu = document.getElementById('mobile-services-dropdown-menu');
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add some interactive hover effects
-        document.querySelectorAll('.card-hover').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-8px) scale(1.02)';
-            });
-
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
+            if (mobileServicesDropdownButton) {
+                mobileServicesDropdownButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    mobileServicesDropdownMenu.classList.toggle('hidden');
+                });
+            }
         });
     </script>
     <!-- Auth Modal -->
