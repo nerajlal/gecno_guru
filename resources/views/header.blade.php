@@ -143,15 +143,9 @@
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#home" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Home</a>
-                    @guest
-                        <a href="#" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium login-trigger">Services</a>
-                        <a href="#" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium login-trigger">About</a>
-                        <a href="#" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium login-trigger">Contact</a>
-                    @else
-                        <a href="#services" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Services</a>
-                        <a href="#about" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">About</a>
-                        <a href="#contact" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Contact</a>
-                    @endguest
+                    <a href="#services" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Services</a>
+                    <a href="#about" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">About</a>
+                    <a href="#contact" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Contact</a>
                     @auth
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -181,15 +175,9 @@
         <div id="menu" class="mobile-menu fixed top-16 right-0 bottom-0 w-64 gradient-bg glass-effect p-6 md:hidden">
             <div class="flex flex-col space-y-6">
                 <a href="#home" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Home</a>
-                @guest
-                    <a href="#" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium login-trigger">Services</a>
-                    <a href="#" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium login-trigger">About</a>
-                    <a href="#" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium login-trigger">Contact</a>
-                @else
-                    <a href="#services" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Services</a>
-                    <a href="#about" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">About</a>
-                    <a href="#contact" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Contact</a>
-                @endguest
+                <a href="#services" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Services</a>
+                <a href="#about" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">About</a>
+                <a href="#contact" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">Contact</a>
                 @auth
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
