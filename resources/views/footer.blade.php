@@ -71,66 +71,6 @@
             });
         });
 
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            const heroSection = document.getElementById('home');
-            if(!navbar || !heroSection) return;
-            const heroHeight = heroSection.offsetHeight;
-
-            if (window.scrollY > heroHeight - 100) {
-                // When past hero section, make navbar solid with dark background
-                navbar.classList.add('glass-effect');
-                navbar.classList.add('bg-white', 'shadow-lg');
-                navbar.classList.remove('gradient-bg');
-
-                // Change text colors to dark
-                const navLinks = navbar.querySelectorAll('a, .text-white, .text-blue-300');
-                navLinks.forEach(link => {
-                    link.classList.remove('text-white', 'text-blue-300');
-                    link.classList.add('text-gray-900');
-                });
-
-                // Change logo colors
-                const logoSpan = navbar.querySelector('span');
-                if (logoSpan) {
-                    logoSpan.classList.remove('text-blue-300');
-                    logoSpan.classList.add('text-blue-600');
-                }
-
-                // Change button styles
-                const button = navbar.querySelector('button');
-                if (button) {
-                    button.classList.remove('glass-effect', 'text-white', 'border-white', 'border-opacity-30');
-                    button.classList.add('bg-blue-600', 'text-white', 'border-blue-600');
-                }
-            } else {
-                // When in hero section, keep original styling
-                navbar.classList.remove('glass-effect', 'bg-white', 'shadow-lg');
-                navbar.classList.add('gradient-bg');
-
-                // Reset text colors to white
-                const navLinks = navbar.querySelectorAll('a');
-                navLinks.forEach(link => {
-                    link.classList.remove('text-gray-900');
-                    link.classList.add('text-white');
-                });
-
-                // Reset logo colors
-                const logoSpan = navbar.querySelector('span');
-                if (logoSpan) {
-                    logoSpan.classList.remove('text-blue-600');
-                    logoSpan.classList.add('text-blue-300');
-                }
-
-                // Reset button styles
-                const button = navbar.querySelector('button');
-                if (button) {
-                    button.classList.add('glass-effect', 'text-white', 'border-white', 'border-opacity-30');
-                    button.classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
-                }
-            }
-        });
 
         // Intersection Observer for fade-in animations
         const observerOptions = {

@@ -130,36 +130,6 @@
             transform: rotate(-45deg) translateY(6px) translateX(-6px);
         }
 
-        #navbar.scrolled {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-        }
-
-        #navbar.scrolled a, #navbar.scrolled button {
-            color: #1f2937; /* text-gray-800 */
-        }
-        
-        #navbar.scrolled .hamburger-top,
-        #navbar.scrolled .hamburger-middle,
-        #navbar.scrolled .hamburger-bottom {
-            background: #1f2937;
-        }
-
-        #navbar.scrolled .glass-effect {
-            background: rgba(30, 64, 175, 0.1);
-            border-color: rgba(30, 64, 175, 0.5);
-        }
-
-        #navbar.scrolled .glass-effect:hover {
-            background: rgba(30, 64, 175, 0.2);
-        }
-        #navbar.scrolled .dropdown-item {
-            color: #1f2937;
-        }
-        #navbar.scrolled .dropdown-item:hover {
-            background: rgba(30, 64, 175, 0.05);
-        }
     </style>
 </head>
 <body class="bg-gray-50 overflow-x-hidden">
