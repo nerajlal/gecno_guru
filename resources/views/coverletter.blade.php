@@ -1,7 +1,7 @@
 @include('header')
 
     <!-- Features Section -->
-    <section class="py-16 bg-white">
+    <section class="py-16 bg-white pt-24">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Why Choose Our AI Cover Letter Builder?</h2>
