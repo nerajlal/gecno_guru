@@ -95,7 +95,7 @@
 
 <!-- Add New Resume Modal -->
 <div id="add-new-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-    <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-3xl relative">
+    <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-3xl relative overflow-y-auto max-h-[90vh]">
         <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-600 hover:text-gray-900">
             <i class="fa-solid fa-times text-2xl"></i>
         </button>
