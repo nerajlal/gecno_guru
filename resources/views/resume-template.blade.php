@@ -39,7 +39,7 @@
 
       <!-- Card 1 -->
       <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
-        <img src="https://via.placeholder.com/600x350" alt="Resume Template" class="w-full h-48 object-cover">
+        <img src="https://www.resumebuilder.com/wp-content/uploads/2023/12/Hybrid_Example-3.pdf.jpeg" alt="Modern Elegance Resume Template" class="w-full h-48 object-cover">
         <div class="p-6">
           <h3 class="text-xl font-semibold text-gray-800">Modern Elegance</h3>
           <p class="text-gray-600 mt-2 text-sm">Clean and stylish design for professionals.</p>
@@ -52,7 +52,7 @@
 
       <!-- Card 2 -->
       <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
-        <img src="https://via.placeholder.com/600x350" alt="Resume Template" class="w-full h-48 object-cover">
+        <img src="https://www.resumebuilder.com/wp-content/uploads/2022/12/Graphic-Design-Mid-Level.pdf.jpeg" alt="Dark Professional Resume Template" class="w-full h-48 object-cover">
         <div class="p-6">
           <h3 class="text-xl font-semibold text-gray-800">Dark Professional</h3>
           <p class="text-gray-600 mt-2 text-sm">Sophisticated dark theme with strong impact.</p>
@@ -65,7 +65,7 @@
 
       <!-- Card 3 -->
       <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
-        <img src="https://via.placeholder.com/600x350" alt="Resume Template" class="w-full h-48 object-cover">
+        <img src="https://www.resumebuilder.com/wp-content/uploads/2023/10/Basic-Mid-Level.pdf.jpeg" alt="Minimal White Resume Template" class="w-full h-48 object-cover">
         <div class="p-6">
           <h3 class="text-xl font-semibold text-gray-800">Minimal White</h3>
           <p class="text-gray-600 mt-2 text-sm">Simple white design with subtle highlights.</p>
@@ -78,7 +78,7 @@
 
       <!-- Card 4 -->
       <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
-        <img src="https://via.placeholder.com/600x350" alt="Resume Template" class="w-full h-48 object-cover">
+        <img src="https://www.resumebuilder.com/wp-content/uploads/2020/03/Sales-Senior-Level.pdf.jpeg" alt="Classic Professional Resume Template" class="w-full h-48 object-cover">
         <div class="p-6">
           <h3 class="text-xl font-semibold text-gray-800">Classic Professional</h3>
           <p class="text-gray-600 mt-2 text-sm">A timeless design for any industry.</p>

@@ -13,7 +13,7 @@
         .page {
             background: white;
             width: 210mm;
-            height: 297mm;
+            min-height: 297mm;
             display: block;
             margin: 2em auto;
             box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
