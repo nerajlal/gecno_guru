@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume Preview - Modern Professional</title>
+    <title>Resume Preview - Corporate Blue</title>
     <style>
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Lato', sans-serif;
             color: #333;
             background-color: #eee;
         }
@@ -16,7 +16,7 @@
             min-height: 297mm;
             display: block;
             margin: 2em auto;
-            padding: 2cm;
+            padding: 1.5cm;
             box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
             position: relative;
             box-sizing: border-box;
@@ -33,36 +33,30 @@
             z-index: 1;
             pointer-events: none;
         }
-        .header { text-align: center; margin-bottom: 30px; border-bottom: 1px solid #ddd; padding-bottom: 20px; position: relative; z-index: 2; }
-        .header h1 { margin: 0; font-size: 2.5em; color: #2563eb; }
-        .header p { margin: 5px 0; color: #555; }
+        .page-header {
+            background-color: #0d47a1;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin: -1.5cm -1.5cm 1.5cm -1.5cm;
+            position: relative; z-index: 2;
+        }
+        .page-header h1 { margin: 0; font-size: 2.8em; }
+        .page-header p { margin: 5px 0; }
         .section { margin-bottom: 20px; position: relative; z-index: 2; }
-        .section h2 { border-left: 4px solid #2563eb; padding-left: 10px; margin-bottom: 15px; font-size: 1.4em; }
-        .entry { margin-bottom: 15px; }
-        .entry h3 { margin: 0; font-size: 1.1em; color: #2563eb; }
-        .entry p { margin: 5px 0; }
-        .entry .date { float: right; font-style: italic; color: #777; }
+        .section h2 { color: #0d47a1; margin-bottom: 10px; font-size: 1.3em; }
 
         @media print {
-            body {
-                background: #fff;
-                margin: 0;
-            }
-            .page {
-                margin: 0;
-                box-shadow: none;
-                height: auto;
-            }
-            .page::after {
-                display: none;
-            }
+            body { background: white; margin: 0; }
+            .page { margin: 0; box-shadow: none; height: auto; }
+            .page::after { display: none; }
         }
     </style>
 </head>
 <body>
     <div class="page">
         @if($resume)
-            <div class="header">
+            <div class="page-header">
                 <h1>{{ $resume->full_name }}</h1>
                 <p>{{ $resume->address }} | {{ $resume->phone }} | {{ $resume->email }}</p>
             </div>
@@ -76,10 +70,8 @@
             <div class="section">
                 <h2>Experience</h2>
                 @foreach($resume->experiences as $exp)
-                <div class="entry">
-                    <span class="date">{{ $exp->start_date }} - {{ $exp->end_date }}</span>
-                    <h3>{{ $exp->job_title }}</h3>
-                    <p><strong>{{ $exp->company }}</strong></p>
+                <div>
+                    <h3><strong>{{ $exp->job_title }}</strong> at {{ $exp->company }} ({{ $exp->start_date }} - {{ $exp->end_date }})</h3>
                     <p>{{ $exp->responsibilities }}</p>
                 </div>
                 @endforeach
@@ -90,9 +82,8 @@
             <div class="section">
                 <h2>Education</h2>
                 @foreach($resume->educations as $edu)
-                <div class="entry">
-                    <h3>{{ $edu->degree }}</h3>
-                    <p>{{ $edu->school }}</p>
+                <div>
+                    <h3><strong>{{ $edu->degree }}</strong>, {{ $edu->school }} ({{$edu->year}})</h3>
                 </div>
                 @endforeach
             </div>
@@ -102,9 +93,8 @@
             <div class="section">
                 <h2>Skills</h2>
                 @foreach($resume->skills as $skill)
-                    <div class="entry">
-                        <h3>{{ $skill->skill_category }}</h3>
-                        <p>{{ $skill->skills }}</p>
+                    <div>
+                        <h3><strong>{{ $skill->skill_category }}:</strong> {{ $skill->skills }}</h3>
                     </div>
                 @endforeach
             </div>
@@ -114,10 +104,10 @@
             <div class="section">
                 <h2>Projects</h2>
                 @foreach($resume->projects as $project)
-                <div class="entry">
-                    <h3>{{ $project->project_name }}</h3>
-                    <p><strong>Technologies:</strong> {{ $project->technologies }} | <strong>Tools:</strong> {{ $project->tools }}</p>
+                <div>
+                    <h3><strong>{{ $project->project_name }}</strong></h3>
                     <p>{{ $project->project_key_points }}</p>
+                    <p><strong>Tech:</strong> {{ $project->technologies }} | <strong>Tools:</strong> {{ $project->tools }}</p>
                 </div>
                 @endforeach
             </div>

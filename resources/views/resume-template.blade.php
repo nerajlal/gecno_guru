@@ -52,10 +52,10 @@
 
       <!-- Card 2 -->
       <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
-        <img src="https://www.resumebuilder.com/wp-content/uploads/2022/12/Graphic-Design-Mid-Level.pdf.jpeg" alt="Dark Professional Resume Template" class="w-full h-48 object-cover">
+        <img src="https://www.resumebuilder.com/wp-content/uploads/2022/12/Graphic-Design-Mid-Level.pdf.jpeg" alt="Modern Professional Resume Template" class="w-full h-48 object-cover">
         <div class="p-6">
-          <h3 class="text-xl font-semibold text-gray-800">Dark Professional</h3>
-          <p class="text-gray-600 mt-2 text-sm">Sophisticated dark theme with strong impact.</p>
+          <h3 class="text-xl font-semibold text-gray-800">Modern Professional</h3>
+          <p class="text-gray-600 mt-2 text-sm">A professional design with a touch of modern style.</p>
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-2">Live Preview</button>
             <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
@@ -84,6 +84,58 @@
           <p class="text-gray-600 mt-2 text-sm">A timeless design for any industry.</p>
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-1">Live Preview</button>
+            <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+        <img src="https://www.resumebuilder.com/wp-content/uploads/2023/07/Business-Senior-Level.pdf.jpeg" alt="Corporate Blue Resume Template" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-gray-800">Corporate Blue</h3>
+          <p class="text-gray-600 mt-2 text-sm">A corporate design with a blue header.</p>
+          <div class="mt-6 flex gap-3">
+            <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-5">Live Preview</button>
+            <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+        <img src="https://www.resumebuilder.com/wp-content/uploads/2022/01/System-Administrator-Senior-Level.pdf.jpeg" alt="Timeline Style Resume Template" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-gray-800">Timeline Style</h3>
+          <p class="text-gray-600 mt-2 text-sm">Showcase your journey with a timeline.</p>
+          <div class="mt-6 flex gap-3">
+            <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-6">Live Preview</button>
+            <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+        <img src="https://www.resumebuilder.com/wp-content/uploads/2022/04/Filmmaker-Senior-Level.pdf.jpeg" alt="Modern Icons Resume Template" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-gray-800">Modern Icons</h3>
+          <p class="text-gray-600 mt-2 text-sm">A modern design using icons.</p>
+          <div class="mt-6 flex gap-3">
+            <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-7">Live Preview</button>
+            <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+        <img src="https://www.resumebuilder.com/wp-content/uploads/2023/07/Teacher-Senior-Level.pdf.jpeg" alt="Classic Sidebar Resume Template" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-gray-800">Classic Sidebar</h3>
+          <p class="text-gray-600 mt-2 text-sm">A classic design with a sidebar.</p>
+          <div class="mt-6 flex gap-3">
+            <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-8">Live Preview</button>
             <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
           </div>
         </div>
