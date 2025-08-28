@@ -45,7 +45,6 @@ class PaymentController extends Controller
                 ->merchantOrderId($merchantOrderId)
                 ->amount($amountInPaisa)
                 ->redirectUrl($redirectUrl)
-                ->callbackUrl($callbackUrl)
                 ->build();
 
             $payResponse = $client->pay($payRequest);
