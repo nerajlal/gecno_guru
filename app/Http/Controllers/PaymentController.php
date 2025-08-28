@@ -70,7 +70,7 @@ class PaymentController extends Controller
         } catch (\Exception $e) {
             $transaction->status = 'FAILED';
             $transaction->save();
-            Log::error('An unexpected error occurred during payment initiation: ' . $e->getMessage());
+            Log::error('An unexpected error occurred during payment initiation: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
             return redirect()->route('resume-build')->with('error', 'An unexpected error occurred. Please try again.');
         }
     }
