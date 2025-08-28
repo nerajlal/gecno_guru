@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/resume-template', [ResumeController::class, 'show'])->name('resume-template');
     Route::post('/resume-template', [ResumeController::class, 'store'])->name('resume-template.store');
     Route::get('/resume/preview/{template}', [ResumeController::class, 'preview'])->name('resume.preview');
+    Route::get('/resume/fullscreen-preview/{template}', [ResumeController::class, 'fullscreenPreview'])->name('resume.fullscreen.preview');
     Route::post('/payment/initiate', [PaymentController::class, 'initiatePayment'])->name('payment.initiate');
 });
 
