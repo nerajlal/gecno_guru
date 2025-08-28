@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PricingController;
+use App\Http\Controllers\CoverLetterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,9 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/cover-letter-template', [CoverLetterController::class, 'show'])->name('cover-letter.show');
+    Route::post('/cover-letter-template', [CoverLetterController::class, 'store'])->name('cover-letter.store');
+
     Route::get('/resume-build', [PricingController::class, 'show'])->name('resume-build');
     Route::get('/resume-template', [ResumeController::class, 'show'])->name('resume-template');
     Route::post('/resume-template', [ResumeController::class, 'store'])->name('resume-template.store');
