@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use App\Models\Transaction;
 
 // Require the PhonePe SDK autoloader
@@ -31,7 +32,7 @@ class PaymentController extends Controller
     public function initiatePayment(Request $request)
     {
         $request->validate([
-            'amount' => 'required|integer|min:100',
+            'amount' => ['required', 'integer', Rule::in([9900, 29900, 49900])],
         ]);
 
         $merchantOrderId = 'M' . Str::uuid()->toString();
@@ -83,19 +84,17 @@ class PaymentController extends Controller
             $transaction = Transaction::where('merchant_order_id', $merchantOrderId)->first();
 
             if ($transaction) {
-                // In a real application, implementing the checksum verification is crucial.
-                // The checksum is calculated based on the payload and salt key.
-                // $saltKey = env('PHONEPE_CLIENT_SECRET');
-                // $saltIndex = 1;
-                // $expectedChecksum = hash('sha256', $payload . '/pg/v1/status/' . $merchantOrderId . $saltKey) . '###' . $saltIndex;
-                // if (hash_equals($expectedChecksum, $request->header('X-VERIFY'))) {
+                // Verify amount from callback
+                if ($transaction->amount == $decodedPayload['data']['amount']) {
                     $transaction->status = 'SUCCESS';
                     $transaction->phonepe_transaction_id = $decodedPayload['data']['transactionId'];
                     $transaction->save();
                     return redirect()->route('resume-template')->with('success', 'Payment successful!');
-                // } else {
-                //     return redirect()->route('resume-template')->withErrors(['error' => 'Invalid checksum. Payment verification failed.']);
-                // }
+                } else {
+                    $transaction->status = 'FAILED';
+                    $transaction->save();
+                    return redirect()->route('resume-template')->withErrors(['error' => 'Payment amount mismatch.']);
+                }
             } else {
                 return redirect()->route('resume-template')->withErrors(['error' => 'Transaction not found.']);
             }

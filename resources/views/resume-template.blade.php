@@ -27,10 +27,15 @@
       <p class="text-lg text-gray-600">Select from our professional templates designed to impress recruiters.</p>
     </div>
 
-    <!-- Add New Button -->
-    <div class="text-right mb-8">
+    <!-- Action Buttons -->
+    <div class="text-right mb-8 flex justify-end gap-4">
+        @if($hasActivePlan)
+        <a href="{{ route('resume-build') }}" class="bg-green-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-700 transition">
+            Upgrade My Plan
+        </a>
+        @endif
         <button id="add-new-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700 transition">
-            Add New
+            Add My Data
         </button>
     </div>
 
