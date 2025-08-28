@@ -51,13 +51,21 @@ class PaymentController extends Controller
 
             $payResponse = $client->pay($payRequest);
 
-            // Assuming the response has a getRedirectUrl() method as per the new docs
-            return redirect()->away($payResponse->getRedirectUrl());
+            Log::info('PhonePe API Response: ', (array) $payResponse);
+
+            if ($payResponse && $payResponse->getRedirectUrl()) {
+                return redirect()->away($payResponse->getRedirectUrl());
+            } else {
+                Log::error('PhonePe Payment Initiation: No redirect URL received.', (array) $payResponse);
+                $transaction->status = 'FAILED';
+                $transaction->save();
+                return redirect()->route('resume-build')->with('error', 'Could not get payment URL from PhonePe. Please try again.');
+            }
 
         } catch (PhonePeException $e) {
             $transaction->status = 'FAILED';
             $transaction->save();
-            Log::error('PhonePe Payment Initiation Failed: ' . $e->getMessage());
+            Log::error('PhonePe Payment Initiation Failed: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
             return redirect()->route('resume-build')->with('error', 'Payment initiation failed. Please try again.');
         } catch (\Exception $e) {
             $transaction->status = 'FAILED';
