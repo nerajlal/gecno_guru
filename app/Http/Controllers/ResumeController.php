@@ -22,9 +22,7 @@ class ResumeController extends Controller
             ->where('user_id', $user->id)
             ->first();
 
-        $hasActivePlan = Transaction::where('user_id', $user->id)
-                                    ->where('status', 'SUCCESS')
-                                    ->exists();
+        $hasActivePlan = Transaction::where('user_id', $user->id)->exists();
 
         return view('resume-template', ['resume' => $resume, 'hasActivePlan' => $hasActivePlan]);
     }
