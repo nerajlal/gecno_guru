@@ -31,4 +31,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'phonepe' => [
+        'client_id' => env('PHONEPE_CLIENT_ID', 'TEST-M22WF3HX0D6GV_25042'),
+        'client_secret' => env('PHONEPE_CLIENT_SECRET', 'MjgxN2FiN2EtYjljNy00ZGRlLTljMzEtNjViOTM2N2ZhMGJh'),
+        'client_version' => env('PHONEPE_CLIENT_VERSION', 1),
+        'webhook_username' => env('PHONEPE_WEBHOOK_USERNAME'),
+        'webhook_password' => env('PHONEPE_WEBHOOK_PASSWORD'),
+    ],
+
 ];

@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/resume/preview/{template}', [ResumeController::class, 'preview'])->name('resume.preview');
     Route::get('/resume/fullscreen-preview/{template}', [ResumeController::class, 'fullscreenPreview'])->name('resume.fullscreen.preview');
     Route::post('/payment/initiate', [PaymentController::class, 'initiatePayment'])->name('payment.initiate');
+    Route::get('/payment/status/{merchantOrderId}', [PaymentController::class, 'paymentStatus'])->name('payment.status');
 });
 
 Route::post('/payment/callback', [PaymentController::class, 'handleCallback'])->name('payment.callback');
