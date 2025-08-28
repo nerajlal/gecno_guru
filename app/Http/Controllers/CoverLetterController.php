@@ -91,4 +91,12 @@ class CoverLetterController extends Controller
 
         return redirect()->back()->with('success', 'Cover letter saved successfully!');
     }
+
+    /**
+     * Show the cover letter templates page.
+     */
+    public function templates()
+    {
+        return view('cover-letter-templates');
+    }
 }
