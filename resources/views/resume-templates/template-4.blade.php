@@ -18,20 +18,19 @@
             margin: 2em auto;
             box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
             position: relative;
-            overflow: hidden;
             box-sizing: border-box;
         }
-        .watermark {
+        .page::after {
+            content: "";
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='20' fill-opacity='0.05' transform='rotate(-30, 150, 100)'%3Egecnoguru.com%3C/text%3E%3C/svg%3E");
+            background-repeat: repeat;
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 120px;
-            color: rgba(0, 0, 0, 0.05);
-            font-weight: bold;
-            pointer-events: none;
-            white-space: nowrap;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 1;
+            pointer-events: none;
         }
         .container {
             display: flex;
@@ -61,12 +60,14 @@
                 box-shadow: none;
                 height: auto;
             }
+            .page::after {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
     <div class="page">
-        <div class="watermark">gecnoguru.com</div>
         <div class="container">
             @if($resume)
                 <div class="left-column">

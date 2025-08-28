@@ -45,7 +45,7 @@
           <p class="text-gray-600 mt-2 text-sm">Clean and stylish design for professionals.</p>
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-4">Live Preview</button>
-            <a href="#" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@
           <p class="text-gray-600 mt-2 text-sm">Sophisticated dark theme with strong impact.</p>
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-2">Live Preview</button>
-            <a href="#" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
           </div>
         </div>
       </div>
@@ -71,7 +71,7 @@
           <p class="text-gray-600 mt-2 text-sm">Simple white design with subtle highlights.</p>
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-3">Live Preview</button>
-            <a href="#" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
           </div>
         </div>
       </div>
@@ -84,7 +84,7 @@
           <p class="text-gray-600 mt-2 text-sm">A timeless design for any industry.</p>
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-1">Live Preview</button>
-            <a href="#" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
           </div>
         </div>
       </div>
@@ -197,7 +197,7 @@
                 <div id="education-container">
                     @forelse ($resume->educations ?? [] as $education)
                     <div class="education-entry mb-4">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>
                                 <label for="school" class="block text-gray-700 mb-2">School/University</label>
                                 <input type="text" name="school[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="University of Example" value="{{ $education->school }}">
@@ -206,11 +206,15 @@
                                 <label for="degree" class="block text-gray-700 mb-2">Degree</label>
                                 <input type="text" name="degree[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Bachelor of Science" value="{{ $education->degree }}">
                             </div>
+                            <div>
+                                <label for="year" class="block text-gray-700 mb-2">Year</label>
+                                <input type="text" name="year[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="2024" value="{{ $education->year }}">
+                            </div>
                         </div>
                     </div>
                     @empty
                     <div class="education-entry mb-4">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>
                                 <label for="school" class="block text-gray-700 mb-2">School/University</label>
                                 <input type="text" name="school[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="University of Example">
@@ -218,6 +222,10 @@
                             <div>
                                 <label for="degree" class="block text-gray-700 mb-2">Degree</label>
                                 <input type="text" name="degree[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Bachelor of Science">
+                            </div>
+                            <div>
+                                <label for="year" class="block text-gray-700 mb-2">Year</label>
+                                <input type="text" name="year[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="2024">
                             </div>
                         </div>
                     </div>
