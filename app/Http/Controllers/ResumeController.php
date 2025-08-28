@@ -24,6 +24,22 @@ class ResumeController extends Controller
         return view('resume-template', ['resume' => $resume]);
     }
 
+    public function preview($template)
+    {
+        $user = Auth::user();
+        $resume = ResumeNamePersonal::with(['experiences', 'educations', 'skills', 'certifications', 'projects'])
+            ->where('user_id', $user->id)
+            ->first();
+
+        $viewName = 'resume-templates.' . $template;
+
+        if (!view()->exists($viewName)) {
+            abort(404);
+        }
+
+        return view($viewName, ['resume' => $resume]);
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([

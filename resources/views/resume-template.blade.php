@@ -44,7 +44,7 @@
           <h3 class="text-xl font-semibold text-gray-800">Modern Elegance</h3>
           <p class="text-gray-600 mt-2 text-sm">Clean and stylish design for professionals.</p>
           <div class="mt-6 flex gap-3">
-            <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Live Preview</a>
+            <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-4">Live Preview</button>
             <a href="#" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
           </div>
         </div>
@@ -57,7 +57,7 @@
           <h3 class="text-xl font-semibold text-gray-800">Dark Professional</h3>
           <p class="text-gray-600 mt-2 text-sm">Sophisticated dark theme with strong impact.</p>
           <div class="mt-6 flex gap-3">
-            <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Live Preview</a>
+            <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-2">Live Preview</button>
             <a href="#" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
           </div>
         </div>
@@ -70,7 +70,7 @@
           <h3 class="text-xl font-semibold text-gray-800">Minimal White</h3>
           <p class="text-gray-600 mt-2 text-sm">Simple white design with subtle highlights.</p>
           <div class="mt-6 flex gap-3">
-            <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Live Preview</a>
+            <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-3">Live Preview</button>
             <a href="#" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
           </div>
         </div>
@@ -83,7 +83,7 @@
           <h3 class="text-xl font-semibold text-gray-800">Classic Professional</h3>
           <p class="text-gray-600 mt-2 text-sm">A timeless design for any industry.</p>
           <div class="mt-6 flex gap-3">
-            <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Live Preview</a>
+            <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-1">Live Preview</button>
             <a href="#" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
           </div>
         </div>
@@ -345,6 +345,18 @@
     </div>
 </div>
 
+<!-- Live Preview Modal -->
+<div id="preview-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl h-[90vh] relative">
+        <button id="close-preview-modal-btn" class="absolute top-4 right-4 text-gray-800 hover:text-gray-900 z-10">
+            <i class="fa-solid fa-times text-2xl"></i>
+        </button>
+        <div id="preview-modal-content-wrapper" class="h-full overflow-y-auto">
+            <!-- Iframe will be loaded here -->
+        </div>
+    </div>
+</div>
+
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const addNewBtn = document.getElementById('add-new-btn');
@@ -388,7 +400,13 @@
             addExperienceBtn.addEventListener('click', () => {
                 const newExperienceEntry = experienceContainer.querySelector('.experience-entry').cloneNode(true);
                 const inputs = newExperienceEntry.querySelectorAll('input, textarea');
-                inputs.forEach(input => input.value = '');
+                inputs.forEach(input => {
+                    if (input.type === 'textarea') {
+                        input.innerHTML = '';
+                    } else {
+                        input.value = '';
+                    }
+                });
                 experienceContainer.appendChild(newExperienceEntry);
             });
         }
@@ -412,7 +430,13 @@
             addSkillCategoryBtn.addEventListener('click', () => {
                 const newSkillCategory = skillsContainer.querySelector('.skill-category-entry').cloneNode(true);
                 const inputs = newSkillCategory.querySelectorAll('input, textarea');
-                inputs.forEach(input => input.value = '');
+                inputs.forEach(input => {
+                    if (input.type === 'textarea') {
+                        input.innerHTML = '';
+                    } else {
+                        input.value = '';
+                    }
+                });
                 skillsContainer.appendChild(newSkillCategory);
             });
         }
@@ -436,10 +460,69 @@
             addProjectBtn.addEventListener('click', () => {
                 const newProjectEntry = projectsContainer.querySelector('.project-entry').cloneNode(true);
                 const inputs = newProjectEntry.querySelectorAll('input, textarea');
-                inputs.forEach(input => input.value = '');
+                inputs.forEach(input => {
+                    if (input.type === 'textarea') {
+                        input.innerHTML = '';
+                    } else {
+                        input.value = '';
+                    }
+                });
                 projectsContainer.appendChild(newProjectEntry);
             });
         }
+
+        // Live Preview Modal Logic
+        const previewModal = document.getElementById('preview-modal');
+        const closePreviewModalBtn = document.getElementById('close-preview-modal-btn');
+        const previewModalContentWrapper = document.getElementById('preview-modal-content-wrapper');
+        const previewButtons = document.querySelectorAll('.live-preview-btn');
+
+        const openPreviewModal = () => {
+            if (previewModal) {
+                previewModal.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            }
+        };
+
+        const closePreviewModal = () => {
+            if (previewModal) {
+                previewModal.classList.add('hidden');
+                previewModalContentWrapper.innerHTML = ''; // Clear the iframe
+                document.body.classList.remove('overflow-hidden');
+            }
+        };
+
+        if (closePreviewModalBtn) {
+            closePreviewModalBtn.addEventListener('click', closePreviewModal);
+        }
+
+        if (previewModal) {
+            previewModal.addEventListener('click', (e) => {
+                if (e.target === previewModal) {
+                    closePreviewModal();
+                }
+            });
+        }
+
+        previewButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const template = button.dataset.template;
+                if (!template) return;
+
+                const previewUrl = `/resume/preview/${template}`;
+
+                const iframe = document.createElement('iframe');
+                iframe.src = previewUrl;
+                iframe.style.width = '100%';
+                iframe.style.height = '100%';
+                iframe.style.border = 'none';
+
+                previewModalContentWrapper.innerHTML = ''; // Clear previous content
+                previewModalContentWrapper.appendChild(iframe);
+
+                openPreviewModal();
+            });
+        });
 
     });
 </script>
