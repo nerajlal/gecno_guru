@@ -39,8 +39,8 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/cover-letter-template', [CoverLetterController::class, 'show'])->name('cover-letter.show');
-    Route::post('/cover-letter-template', [CoverLetterController::class, 'store'])->name('cover-letter.store');
+    Route::get('/cover-letter-template', [CoverLetterController::class, 'show'])->name('cover-letter-template.show');
+    Route::post('/cover-letter-template', [CoverLetterController::class, 'store'])->name('cover-letter-template.store');
 
     Route::get('/resume-build', [PricingController::class, 'show'])->name('resume-build');
     Route::get('/resume-template', [ResumeController::class, 'show'])->name('resume-template');

@@ -212,7 +212,7 @@
     </section>
 
     <!-- Pricing Section -->
-    <section class="py-16 bg-white">
+    <!-- <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Simple, Transparent Pricing</h2>
@@ -321,7 +321,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Final CTA Section -->
     <section class="py-16 gradient-bg relative overflow-hidden">
@@ -335,12 +335,21 @@
             <p class="text-lg sm:text-xl text-blue-50 mb-10 max-w-2xl mx-auto drop-shadow-md">Join thousands of job seekers who have landed interviews with our AI-powered cover letters.</p>
             
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button class="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:scale-105 transition-all duration-200 glow shadow-lg">
+                @guest
+                <button class="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:scale-105 transition-all duration-200 glow shadow-lg login-trigger">
                     Start Writing Now
                 </button>
-                <button class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30">
+                <button class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30 login-trigger">
                     View Sample Letters
                 </button>
+                @else
+                <a href="{{ route('cover-letter-template') }}" class="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:scale-105 transition-all duration-200 glow shadow-lg">
+                    Start Building Now
+                </a>
+                <a href="{{ route('cover-letter-template') }}" class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30">
+                    View Live Demo
+                </a>
+                @endguest
             </div>
             
             <p class="text-blue-100 mt-8 text-sm">No credit card required. 7-day money-back guarantee.</p>

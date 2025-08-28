@@ -30,11 +30,11 @@
                                 Watch Demo
                             </button>
                         @else
-                            <a href="#" class="group relative bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg overflow-hidden hover:scale-105 transition-all duration-200 glow shadow-lg">
+                            <a href="https://wa.me/918547349691" target="_blank" class="group relative bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg overflow-hidden hover:scale-105 transition-all duration-200 glow shadow-lg">
                                 <span class="relative z-10">Start Your Journey</span>
                                 <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                             </a>
-                            <a href="#" class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30">
+                            <a href="https://wa.me/918547349691" target="_blank"  class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30">
                                 Watch Demo
                             </a>
                         @endguest
@@ -205,10 +205,10 @@
                         Start Free Trial
                     </button>
                 @else
-                    <a href="#" class="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:scale-105 transition-all duration-200 glow shadow-lg">
+                    <a href="/services" class="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:scale-105 transition-all duration-200 glow shadow-lg">
                         Get Started Now
                     </a>
-                    <a href="#" class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30">
+                    <a href="/services" class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30">
                         Start Free Trial
                     </a>
                 @endguest

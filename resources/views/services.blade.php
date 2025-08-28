@@ -180,13 +180,17 @@
                     Discover our comprehensive suite of career development tools designed to help you succeed in today's competitive job market.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/services">
                     <button class="group relative bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg overflow-hidden hover:scale-105 transition-all duration-200 glow shadow-lg">
                         <span class="relative z-10">Explore All Services</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                     </button>
+                    </a>
+                    <a href="https://wa.me/918547349691" target="_blank" >
                     <button class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30">
                         <i class="fa-solid fa-calendar mr-2"></i>Book a Consultation
                     </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -245,12 +249,16 @@
                             </li>
                         </ul>
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <button class="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
-                                Try Resume Builder
-                            </button>
-                            <button class="border border-blue-600 text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors duration-200">
-                                View Samples
-                            </button>
+                            <a href="/resume" target="_blank">
+                                <button class="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
+                                    Try Resume Builder
+                                </button>
+                            </a>
+                            <a href="/resume-template">
+                                <button class="border border-blue-600 text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors duration-200">
+                                    View Samples
+                                </button>
+                            </a>
                         </div>
                     </div>
                     <div class="relative">
@@ -288,12 +296,16 @@
                             </li>
                         </ul>
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <button class="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
-                                Create Cover Letter
-                            </button>
-                            <button class="border border-blue-600 text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors duration-200">
-                                View Templates
-                            </button>
+                            <a href="/coverletter">
+                                <button class="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
+                                    Create Cover Letter
+                                </button>
+                            </a>
+                            <a href="/cover-letter-template">
+                                <button class="border border-blue-600 text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors duration-200">
+                                    View Templates
+                                </button>
+                            </a>
                         </div>
                     </div>
                     <div class="lg:order-1 relative">
@@ -331,12 +343,16 @@
                             </li>
                         </ul>
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <button class="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
-                                Build Your Portfolio
-                            </button>
-                            <button class="border border-blue-600 text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors duration-200">
-                                View Examples
-                            </button>
+                            <a href="/portfolio">
+                                <button class="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
+                                    Build Your Portfolio
+                                </button>
+                            </a>
+                            <a href="/portfolio-template">
+                                <button class="border border-blue-600 text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors duration-200">
+                                    View Examples
+                                </button>
+                            </a>
                         </div>
                     </div>
                     <div class="relative">
