@@ -9,8 +9,18 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'resume_transactions';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'user_id',
         'merchant_order_id',
@@ -18,4 +28,12 @@ class Transaction extends Model
         'amount',
         'status',
     ];
+
+    /**
+     * Get the user that owns the transaction.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
