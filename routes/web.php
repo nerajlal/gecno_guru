@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ResumeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/resume-template', function () {
         return view('resume-template');
     })->name('resume-template');
+    Route::post('/resume-template', [ResumeController::class, 'store'])->name('resume-template.store');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {

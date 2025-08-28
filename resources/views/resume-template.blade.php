@@ -100,7 +100,8 @@
             <i class="fa-solid fa-times text-2xl"></i>
         </button>
         <h2 class="text-2xl font-bold text-gray-900 text-center mb-6">Add Resume Data</h2>
-        <form>
+        <form action="{{ route('resume-template.store') }}" method="POST">
+            @csrf
             <!-- Personal Information -->
             <div class="mb-6">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Personal Information</h3>
