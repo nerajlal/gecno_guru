@@ -8,7 +8,7 @@
         </div>
 
         <div class="bg-white p-8 rounded-xl shadow-lg">
-            <form action="{{ route('cover-letter.store') }}" method="POST">
+            <form action="{{ route('cover-letter-template.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="cover_letter_id" value="{{ $coverLetter->id ?? '' }}">
 
@@ -45,19 +45,19 @@
                         </div>
                         <div>
                             <label for="hiring_manager_name" class="block text-gray-700 mb-2">Hiring Manager Name</label>
-                            <input type="text" name="hiring_manager_name" class="w-full border border-gray-300 rounded-lg py-2 px-4" value="{{ old('hiring_manager_name', $coverLetter->recipientDetail->hiring_manager_name ?? '') }}" required>
+                            <input type="text" name="hiring_manager_name" class="w-full border border-gray-300 rounded-lg py-2 px-4" value="{{ old('hiring_manager_name', optional($coverLetter->recipientDetail)->hiring_manager_name ?? '') }}" required>
                         </div>
                         <div>
                             <label for="hiring_manager_title" class="block text-gray-700 mb-2">Hiring Manager Title (Optional)</label>
-                            <input type="text" name="hiring_manager_title" class="w-full border border-gray-300 rounded-lg py-2 px-4" value="{{ old('hiring_manager_title', $coverLetter->recipientDetail->hiring_manager_title ?? '') }}">
+                            <input type="text" name="hiring_manager_title" class="w-full border border-gray-300 rounded-lg py-2 px-4" value="{{ old('hiring_manager_title', optional($coverLetter->recipientDetail)->hiring_manager_title ?? '') }}">
                         </div>
                         <div>
                             <label for="company_name" class="block text-gray-700 mb-2">Company Name</label>
-                            <input type="text" name="company_name" class="w-full border border-gray-300 rounded-lg py-2 px-4" value="{{ old('company_name', $coverLetter->recipientDetail->company_name ?? '') }}" required>
+                            <input type="text" name="company_name" class="w-full border border-gray-300 rounded-lg py-2 px-4" value="{{ old('company_name', optional($coverLetter->recipientDetail)->company_name ?? '') }}" required>
                         </div>
                         <div class="md:col-span-2">
                             <label for="company_address" class="block text-gray-700 mb-2">Company Address</label>
-                            <input type="text" name="company_address" class="w-full border border-gray-300 rounded-lg py-2 px-4" value="{{ old('company_address', $coverLetter->recipientDetail->company_address ?? '') }}" required>
+                            <input type="text" name="company_address" class="w-full border border-gray-300 rounded-lg py-2 px-4" value="{{ old('company_address', optional($coverLetter->recipientDetail)->company_address ?? '') }}" required>
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                 <div class="mb-8">
                     <h3 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-4">Letter Body</h3>
                     <div id="letter-body-container">
-                        @forelse ($coverLetter->letterBodies ?? [] as $body)
+                        @forelse (optional($coverLetter)->letterBodies ?? [] as $body)
                             <div class="letter-paragraph mb-4">
                                 <textarea name="letter_body[]" rows="5" class="w-full border border-gray-300 rounded-lg py-2 px-4" placeholder="Enter a paragraph..." required>{{ $body->paragraph_text }}</textarea>
                             </div>

@@ -635,7 +635,7 @@
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 drop-shadow-lg">Ready to Create Your Winning Resume?</h2>
             <p class="text-lg sm:text-xl text-blue-50 mb-10 max-w-2xl mx-auto drop-shadow-md">Join thousands of professionals who have transformed their careers with our AI Resume Builder.</p>
 
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <!-- <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 @guest
                 <button class="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:scale-105 transition-all duration-200 glow shadow-lg login-trigger">
                     Start Building Now
@@ -651,7 +651,7 @@
                     View Live Demo
                 </a>
                 @endguest
-            </div>
+            </div> -->
 
             <p class="text-blue-100 mt-8 text-sm">No credit card required. 7-day money-back guarantee.</p>
         </div>
