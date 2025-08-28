@@ -115,9 +115,15 @@
             </div>
             
             <div class="text-center mt-12">
-                <button class="bg-blue-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-700 transition-all duration-200">
-                    Start Writing Now
+                @guest
+                <button class="bg-blue-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-700 transition-all duration-200 login-trigger">
+                    Start Building Now
                 </button>
+                @else
+                <a href="{{ route('cover-letter-template') }}" class="bg-blue-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-700 transition-all duration-200">
+                    Start Building Now
+                </a>
+                @endguest
             </div>
         </div>
     </section>
@@ -158,10 +164,17 @@
             </div>
             
             <div class="text-center mt-12">
-                <button class="text-blue-600 font-bold hover:text-blue-700 transition-colors duration-200 flex items-center justify-center">
+                @guest
+                <button class="text-blue-600 font-bold hover:text-blue-700 transition-colors duration-200 flex items-center justify-center login-trigger">
                     View All Templates 
                     <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
                 </button>
+                @else
+                <a href="{{ route('cover-letter-template') }}" class="text-blue-600 font-bold hover:text-blue-700 transition-colors duration-200 flex items-center justify-center">
+                    View All Templates
+                    <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
+                </a>
+                @endguest
             </div>
         </div>
     </section>
@@ -343,10 +356,10 @@
                     View Sample Letters
                 </button>
                 @else
-                <a href="{{ route('cover-letter-template') }}" class="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:scale-105 transition-all duration-200 glow shadow-lg">
+                <a href="{{ route('cover-letter-template.show') }}" class="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:scale-105 transition-all duration-200 glow shadow-lg">
                     Start Building Now
                 </a>
-                <a href="{{ route('cover-letter-template') }}" class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30">
+                <a href="{{ route('cover-letter-template.show') }}" class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30">
                     View Live Demo
                 </a>
                 @endguest
