@@ -41,6 +41,13 @@
         .contact-info span { margin: 0 10px; }
         .section h2 { text-align: center; font-size: 1.5em; font-weight: 300; margin-bottom: 15px; letter-spacing: 2px; }
         .entry { margin-bottom: 15px; }
+        .skills-list {
+            text-align: center;
+        }
+        .skills-list strong {
+            display: block;
+            margin-top: 10px;
+        }
 
         @media print {
             body { background: white; margin: 0; }
@@ -64,7 +71,7 @@
 
                 <div class="section">
                     <h2><i class="fas fa-user"></i> Summary</h2>
-                    <p>{{ $resume->summary }}</p>
+                    <p style="text-align: center;">{{ $resume->summary }}</p>
                 </div>
 
                 @if($resume->experiences->isNotEmpty())
@@ -72,11 +79,64 @@
                     <h2><i class="fas fa-briefcase"></i> Experience</h2>
                     @foreach($resume->experiences as $exp)
                     <div class="entry">
-                        <h4><strong>{{ $exp->job_title }}</strong> | {{ $exp->company }}</h4>
-                        <small>{{ $exp->start_date }} - {{ $exp->end_date }}</small>
+                        <h4 style="text-align: center;"><strong>{{ $exp->job_title }}</strong> | {{ $exp->company }} | <small>{{ $exp->start_date }} - {{ $exp->end_date }}</small></h4>
                         <p>{{ $exp->responsibilities }}</p>
                     </div>
                     @endforeach
+                </div>
+                @endif
+
+                @if($resume->educations->isNotEmpty())
+                <div class="section">
+                    <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+                    @foreach($resume->educations as $edu)
+                    <div class="entry" style="text-align: center;">
+                        <h4><strong>{{ $edu->degree }}</strong> ({{$edu->year}})</h4>
+                        <p>{{ $edu->school }}</p>
+                    </div>
+                    @endforeach
+                </div>
+                @endif
+
+                @if($resume->skills->isNotEmpty())
+                <div class="section">
+                    <h2><i class="fas fa-cogs"></i> Skills</h2>
+                    <div class="skills-list">
+                        @foreach($resume->skills as $skill)
+                            <span><strong>{{ $skill->skill_category }}:</strong> {{ $skill->skills }}</span>
+                        @endforeach
+                    </div>
+                </div>
+                @endif
+
+                @if($resume->projects->isNotEmpty())
+                <div class="section">
+                    <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+                    @foreach($resume->projects as $project)
+                    <div class="entry">
+                        <h4 style="text-align: center;"><strong>{{ $project->project_name }}</strong></h4>
+                        <p>{{ $project->project_key_points }}</p>
+                        <p style="text-align: center;"><em>Tech: {{ $project->technologies }} | Tools: {{ $project->tools }}</em></p>
+                    </div>
+                    @endforeach
+                </div>
+                @endif
+
+                @if($resume->certifications->isNotEmpty())
+                <div class="section">
+                    <h2><i class="fas fa-certificate"></i> Certifications</h2>
+                    <div style="text-align: center;">
+                    @foreach($resume->certifications as $cert)
+                        <p><strong>{{ $cert->certification_name }}</strong> - {{ $cert->issuing_organization }}</p>
+                    @endforeach
+                    </div>
+                </div>
+                @endif
+
+                @if($resume->interested_areas)
+                <div class="section">
+                    <h2><i class="fas fa-heart"></i> Interests</h2>
+                    <p style="text-align: center;">{{ $resume->interested_areas }}</p>
                 </div>
                 @endif
 
