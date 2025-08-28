@@ -24,7 +24,7 @@ class PhonePeServiceProvider extends ServiceProvider
                     $config['client_id'],
                     $config['client_version'],
                     $config['client_secret'],
-                    Env::PRODUCTION // As per docs, only PRODUCTION is supported
+                    Env::UAT // Use UAT for test credentials
                 );
             } catch (PhonePeException $e) {
                 // Log the exception or handle it as needed
