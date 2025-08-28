@@ -1,10 +1,10 @@
 <!-- Footer -->
     <footer id="contact" class="bg-gray-900 text-white py-12 sm:py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-8 mb-8 sm:mb-12">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-8 sm:mb-12">
                 
                 <!-- GecnoGuru -->
-                <div class="md:col-span-2">
+                <div class="col-span-2 md:col-span-3 lg:col-span-2">
                     <div class="text-2xl sm:text-3xl font-bold mb-4">
                         <span class="text-blue-400">Gecno</span>Guru
                     </div>
@@ -66,7 +66,7 @@
                 </div>  
 
                 <!-- Contact -->
-                <div>
+                <div class="col-span-2 md:col-span-1 lg:col-span-1">
                     <h4 class="text-lg font-semibold mb-4 text-white">Contact</h4>
                     <ul class="space-y-2 text-gray-300">
                         <li class="flex items-center">
