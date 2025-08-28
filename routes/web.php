@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     })->name('resume-build');
     Route::get('/resume-template', [ResumeController::class, 'show'])->name('resume-template');
     Route::post('/resume-template', [ResumeController::class, 'store'])->name('resume-template.store');
+    Route::get('/resume/preview/{template}', [ResumeController::class, 'preview'])->name('resume.preview');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
