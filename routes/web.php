@@ -33,6 +33,15 @@ Route::get('/coverletter', function () {
 Route::get('/portfolio', function () {
     return view('portfolio');
 });
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+});
+Route::get('/refund-policy', function () {
+    return view('refund-policy');
+});
+Route::get('/terms', function () {
+    return view('terms');
+});
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
