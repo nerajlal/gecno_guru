@@ -12,7 +12,7 @@
                 <div class="bg-gray-50 p-8 rounded-3xl border border-gray-200">
                     <h3 class="text-2xl font-bold text-gray-900 mb-4">Basic</h3>
                     <div class="mb-6">
-                        <span class="text-4xl font-bold text-gray-900">₹9</span>
+                        <span class="text-4xl font-bold text-gray-900">₹99</span>
                         <span class="text-gray-600">/one-time</span>
                     </div>
                     <ul class="space-y-4 mb-8">
@@ -37,20 +37,26 @@
                             <span>Cover Letter Builder</span>
                         </li>
                     </ul>
-                    <form action="{{ route('payment.initiate') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="amount" value="900">
-                        <button type="submit" class="w-full bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200">
-                            Get Started
+                    @if($hasActivePlan)
+                        <button type="button" class="w-full bg-gray-400 text-white py-3 rounded-full font-semibold cursor-not-allowed" disabled>
+                            Plan Active
                         </button>
-                    </form>
+                    @else
+                        <form action="{{ route('payment.initiate') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="amount" value="9900">
+                            <button type="submit" class="w-full bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200">
+                                Get Started
+                            </button>
+                        </form>
+                    @endif
                 </div>
 
                 <div class="bg-blue-50 p-8 rounded-3xl border border-blue-200 relative">
                     <span class="absolute top-0 right-0 bg-blue-600 text-white px-4 py-1 rounded-bl-lg rounded-tr-lg font-semibold">Most Popular</span>
                     <h3 class="text-2xl font-bold text-gray-900 mb-4">Professional</h3>
                     <div class="mb-6">
-                        <span class="text-4xl font-bold text-gray-900">₹19</span>
+                        <span class="text-4xl font-bold text-gray-900">₹299</span>
                         <span class="text-gray-600">/one-time</span>
                     </div>
                     <ul class="space-y-4 mb-8">
@@ -75,19 +81,25 @@
                             <span>Cover Letter Builder</span>
                         </li>
                     </ul>
-                    <form action="{{ route('payment.initiate') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="amount" value="1900">
-                        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
-                            Get Started
+                    @if($hasActivePlan)
+                        <button type="button" class="w-full bg-gray-400 text-white py-3 rounded-full font-semibold cursor-not-allowed" disabled>
+                            Plan Active
                         </button>
-                    </form>
+                    @else
+                        <form action="{{ route('payment.initiate') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="amount" value="29900">
+                            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
+                                Get Started
+                            </button>
+                        </form>
+                    @endif
                 </div>
 
                 <div class="bg-gray-50 p-8 rounded-3xl border border-gray-200">
                     <h3 class="text-2xl font-bold text-gray-900 mb-4">Premium</h3>
                     <div class="mb-6">
-                        <span class="text-4xl font-bold text-gray-900">₹39</span>
+                        <span class="text-4xl font-bold text-gray-900">₹499</span>
                         <span class="text-gray-600">/one-time</span>
                     </div>
                     <ul class="space-y-4 mb-8">
@@ -112,13 +124,19 @@
                             <span>Job Search Strategy Session</span>
                         </li>
                     </ul>
-                    <form action="{{ route('payment.initiate') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="amount" value="3900">
-                        <button type="submit" class="w-full bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200">
-                            Get Started
+                    @if($hasActivePlan)
+                        <button type="button" class="w-full bg-gray-400 text-white py-3 rounded-full font-semibold cursor-not-allowed" disabled>
+                            Plan Active
                         </button>
-                    </form>
+                    @else
+                        <form action="{{ route('payment.initiate') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="amount" value="49900">
+                            <button type="submit" class="w-full bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200">
+                                Get Started
+                            </button>
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>
