@@ -41,9 +41,11 @@ class PaymentController extends Controller
         $callbackUrl = route('payment.callback');
 
         try {
+            $message = 'Payment for resume plan.';
             $payRequest = StandardCheckoutPayRequestBuilder::builder()
                 ->merchantOrderId($merchantOrderId)
                 ->amount($amountInPaisa)
+                ->message($message)
                 ->redirectUrl($redirectUrl)
                 ->build();
 
