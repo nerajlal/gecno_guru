@@ -2,10 +2,14 @@
 
 <style>
     /* Scoped styles for this page */
+    body {
+        background-color: #f0f2f5; /* Ensure bg color consistency */
+    }
     .preview-page-container {
         padding-top: 40px;
         padding-bottom: 40px;
         background-color: #f0f2f5;
+        margin-top: 80px; /* Pushes content down from under the fixed navbar */
     }
     .preview-controls {
         max-width: 210mm; /* A4 width */
