@@ -51,7 +51,7 @@
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-4">Live Preview</button>
             @if($hasActivePlan)
-            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-4']) }}" target="_blank" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-4']) }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
             @else
             <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
             @endif
@@ -68,7 +68,7 @@
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-2">Live Preview</button>
             @if($hasActivePlan)
-            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-2']) }}" target="_blank" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-2']) }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
             @else
             <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
             @endif
@@ -85,7 +85,7 @@
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-3">Live Preview</button>
             @if($hasActivePlan)
-            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-3']) }}" target="_blank" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-3']) }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
             @else
             <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
             @endif
@@ -102,7 +102,7 @@
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-1">Live Preview</button>
             @if($hasActivePlan)
-            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-1']) }}" target="_blank" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-1']) }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
             @else
             <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
             @endif
@@ -119,7 +119,7 @@
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-5">Live Preview</button>
             @if($hasActivePlan)
-            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-5']) }}" target="_blank" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-5']) }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
             @else
             <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
             @endif
@@ -136,7 +136,7 @@
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-6">Live Preview</button>
             @if($hasActivePlan)
-            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-6']) }}" target="_blank" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-6']) }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
             @else
             <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
             @endif
@@ -153,7 +153,7 @@
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-7">Live Preview</button>
             @if($hasActivePlan)
-            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-7']) }}" target="_blank" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-7']) }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
             @else
             <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
             @endif
@@ -170,7 +170,7 @@
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-8">Live Preview</button>
             @if($hasActivePlan)
-            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-8']) }}" target="_blank" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-8']) }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
             @else
             <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
             @endif
