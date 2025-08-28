@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ResumeController;
 
@@ -19,6 +20,9 @@ Route::get('/', function () {
     return view('index');
 });
 Route::get('/resume', function () {
+    if (Auth::check()) {
+        return redirect()->route('resume-template');
+    }
     return view('resume');
 });
 Route::get('/services', function () {
