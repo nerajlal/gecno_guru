@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ResumeController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PricingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,13 +38,14 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/resume-build', function () {
-        return view('resume-build');
-    })->name('resume-build');
+    Route::get('/resume-build', [PricingController::class, 'show'])->name('resume-build');
     Route::get('/resume-template', [ResumeController::class, 'show'])->name('resume-template');
     Route::post('/resume-template', [ResumeController::class, 'store'])->name('resume-template.store');
     Route::get('/resume/preview/{template}', [ResumeController::class, 'preview'])->name('resume.preview');
+    Route::post('/payment/initiate', [PaymentController::class, 'initiatePayment'])->name('payment.initiate');
 });
+
+Route::post('/payment/callback', [PaymentController::class, 'handleCallback'])->name('payment.callback');
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', function () {

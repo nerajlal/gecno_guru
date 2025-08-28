@@ -92,7 +92,7 @@
                 @foreach($resume->educations as $edu)
                 <div class="entry">
                     <h3>{{ $edu->degree }}</h3>
-                    <p>{{ $edu->school }}</p>
+                    <p>{{ $edu->school }} ({{$edu->year}})</p>
                 </div>
                 @endforeach
             </div>

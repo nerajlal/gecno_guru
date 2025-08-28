@@ -11,6 +11,7 @@ use App\Models\ResumeNameEducation;
 use App\Models\ResumeNameSkill;
 use App\Models\ResumeNameCertification;
 use App\Models\ResumeNameProject;
+use App\Models\Transaction;
 
 class ResumeController extends Controller
 {
@@ -21,7 +22,11 @@ class ResumeController extends Controller
             ->where('user_id', $user->id)
             ->first();
 
-        return view('resume-template', ['resume' => $resume]);
+        $hasActivePlan = Transaction::where('user_id', $user->id)
+                                    ->where('status', 'SUCCESS')
+                                    ->exists();
+
+        return view('resume-template', ['resume' => $resume, 'hasActivePlan' => $hasActivePlan]);
     }
 
     public function preview($template)
