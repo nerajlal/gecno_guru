@@ -96,7 +96,38 @@
                 </div>
                 @endif
 
-                <!-- Other sections can be added here without timeline style -->
+                @if($resume->skills->isNotEmpty())
+                <h2>Skills</h2>
+                @foreach($resume->skills as $skill)
+                    <div>
+                        <h4><strong>{{ $skill->skill_category }}</strong></h4>
+                        <p>{{ $skill->skills }}</p>
+                    </div>
+                @endforeach
+                @endif
+
+                @if($resume->projects->isNotEmpty())
+                <h2>Projects</h2>
+                @foreach($resume->projects as $project)
+                <div>
+                    <h4><strong>{{ $project->project_name }}</strong></h4>
+                    <p>{{ $project->project_key_points }}</p>
+                    <p><em>Tech: {{ $project->technologies }} | Tools: {{ $project->tools }}</em></p>
+                </div>
+                @endforeach
+                @endif
+
+                @if($resume->certifications->isNotEmpty())
+                <h2>Certifications</h2>
+                @foreach($resume->certifications as $cert)
+                    <p><strong>{{ $cert->certification_name }}</strong> - {{ $cert->issuing_organization }}</p>
+                @endforeach
+                @endif
+
+                @if($resume->interested_areas)
+                <h2>Areas of Interest</h2>
+                <p>{{ $resume->interested_areas }}</p>
+                @endif
 
             @else
                 <div style="text-align: center; padding: 50px;">

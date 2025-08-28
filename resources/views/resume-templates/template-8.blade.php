@@ -68,6 +68,7 @@
                     <div>
                         <h3>{{ $project->project_name }}</h3>
                         <p>{{ $project->project_key_points }}</p>
+                        <p><em>Tech: {{ $project->technologies }} | Tools: {{ $project->tools }}</em></p>
                     </div>
                     @endforeach
                 </div>
@@ -92,6 +93,14 @@
                         <p>{{ $skill->skills }}</p>
                     </div>
                     @endforeach
+
+                    <h3>Certifications</h3>
+                    @foreach($resume->certifications as $cert)
+                        <p><strong>{{ $cert->certification_name }}</strong><br>{{ $cert->issuing_organization }}</p>
+                    @endforeach
+
+                    <h3>Interests</h3>
+                    <p>{{ $resume->interested_areas }}</p>
                 </div>
             @else
                 <div style="text-align: center; padding: 50px; width: 100%;">
