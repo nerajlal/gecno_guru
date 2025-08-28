@@ -15,5 +15,6 @@ class ResumeNameEducation extends Model
         'resume_name_personal_id',
         'school',
         'degree',
+        'year',
     ];
 }

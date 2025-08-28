@@ -56,6 +56,7 @@ class ResumeController extends Controller
             'responsibilities.*' => 'nullable|string',
             'school.*' => 'nullable|string|max:255',
             'degree.*' => 'nullable|string|max:255',
+            'year.*' => 'nullable|string|max:255',
             'skill_category.*' => 'nullable|string|max:255',
             'skills.*' => 'nullable|string',
             'certification_name.*' => 'nullable|string|max:255',
@@ -113,6 +114,7 @@ class ResumeController extends Controller
                         $personal->educations()->create([
                             'school' => $school,
                             'degree' => $validatedData['degree'][$key],
+                            'year' => $validatedData['year'][$key],
                         ]);
                     }
                 }
