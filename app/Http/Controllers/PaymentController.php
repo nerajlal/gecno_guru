@@ -32,11 +32,11 @@ class PaymentController extends Controller
     public function initiatePayment(Request $request)
     {
         $request->validate([
-            'amount' => ['required', 'integer', Rule::in([9900, 29900, 49900])],
+            'amount' => ['required', 'integer', Rule::in([99, 299, 499])],
         ]);
 
         $merchantOrderId = 'M' . Str::uuid()->toString();
-        $amount = (int) $request->input('amount');
+        $amount = (int) $request->input('amount') * 100; // Convert to paise
         $user = Auth::user();
 
         // Create a transaction record in the database

@@ -37,19 +37,13 @@
                             <span>Cover Letter Builder</span>
                         </li>
                     </ul>
-                    @if($hasActivePlan)
-                        <button type="button" class="w-full bg-gray-400 text-white py-3 rounded-full font-semibold cursor-not-allowed" disabled>
-                            Plan Active
+                    <form action="{{ route('payment.initiate') }}" method="POST" onsubmit="return checkPlanStatus(event, {{ $hasActivePlan ? 'true' : 'false' }})">
+                        @csrf
+                        <input type="hidden" name="amount" value="99">
+                        <button type="submit" class="w-full bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200">
+                            Get Started
                         </button>
-                    @else
-                        <form action="{{ route('payment.initiate') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="amount" value="9900">
-                            <button type="submit" class="w-full bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200">
-                                Get Started
-                            </button>
-                        </form>
-                    @endif
+                    </form>
                 </div>
 
                 <div class="bg-blue-50 p-8 rounded-3xl border border-blue-200 relative">
@@ -81,19 +75,13 @@
                             <span>Cover Letter Builder</span>
                         </li>
                     </ul>
-                    @if($hasActivePlan)
-                        <button type="button" class="w-full bg-gray-400 text-white py-3 rounded-full font-semibold cursor-not-allowed" disabled>
-                            Plan Active
+                    <form action="{{ route('payment.initiate') }}" method="POST" onsubmit="return checkPlanStatus(event, {{ $hasActivePlan ? 'true' : 'false' }})">
+                        @csrf
+                        <input type="hidden" name="amount" value="299">
+                        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
+                            Get Started
                         </button>
-                    @else
-                        <form action="{{ route('payment.initiate') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="amount" value="29900">
-                            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
-                                Get Started
-                            </button>
-                        </form>
-                    @endif
+                    </form>
                 </div>
 
                 <div class="bg-gray-50 p-8 rounded-3xl border border-gray-200">
@@ -124,22 +112,27 @@
                             <span>Job Search Strategy Session</span>
                         </li>
                     </ul>
-                    @if($hasActivePlan)
-                        <button type="button" class="w-full bg-gray-400 text-white py-3 rounded-full font-semibold cursor-not-allowed" disabled>
-                            Plan Active
+                    <form action="{{ route('payment.initiate') }}" method="POST" onsubmit="return checkPlanStatus(event, {{ $hasActivePlan ? 'true' : 'false' }})">
+                        @csrf
+                        <input type="hidden" name="amount" value="499">
+                        <button type="submit" class="w-full bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200">
+                            Get Started
                         </button>
-                    @else
-                        <form action="{{ route('payment.initiate') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="amount" value="49900">
-                            <button type="submit" class="w-full bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200">
-                                Get Started
-                            </button>
-                        </form>
-                    @endif
+                    </form>
                 </div>
             </div>
         </div>
     </section>
+
+    <script>
+        function checkPlanStatus(event, hasActivePlan) {
+            if (hasActivePlan) {
+                alert('You already have an active plan.');
+                event.preventDefault();
+                return false;
+            }
+            return true;
+        }
+    </script>
 
 @include('includes.footer')
