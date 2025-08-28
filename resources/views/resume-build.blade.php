@@ -37,9 +37,13 @@
                             <span>Cover Letter Builder</span>
                         </li>
                     </ul>
-                    <button class="w-full bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200">
-                        Get Started
-                    </button>
+                    <form action="{{ route('payment.initiate') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="amount" value="900">
+                        <button type="submit" class="w-full bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200">
+                            Get Started
+                        </button>
+                    </form>
                 </div>
 
                 <div class="bg-blue-50 p-8 rounded-3xl border border-blue-200 relative">
@@ -71,9 +75,13 @@
                             <span>Cover Letter Builder</span>
                         </li>
                     </ul>
-                    <button class="w-full bg-blue-600 text-white py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
-                        Get Started
-                    </button>
+                    <form action="{{ route('payment.initiate') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="amount" value="1900">
+                        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
+                            Get Started
+                        </button>
+                    </form>
                 </div>
 
                 <div class="bg-gray-50 p-8 rounded-3xl border border-gray-200">
@@ -104,9 +112,13 @@
                             <span>Job Search Strategy Session</span>
                         </li>
                     </ul>
-                    <button class="w-full bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200">
-                        Get Started
-                    </button>
+                    <form action="{{ route('payment.initiate') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="amount" value="3900">
+                        <button type="submit" class="w-full bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200">
+                            Get Started
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
