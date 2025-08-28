@@ -9,6 +9,8 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    protected $table = 'resume_transactions';
+
     protected $fillable = [
         'user_id',
         'merchant_order_id',

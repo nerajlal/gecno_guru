@@ -12,7 +12,7 @@
                 <div class="bg-gray-50 p-8 rounded-3xl border border-gray-200">
                     <h3 class="text-2xl font-bold text-gray-900 mb-4">Basic</h3>
                     <div class="mb-6">
-                        <span class="text-4xl font-bold text-gray-900">$9</span>
+                        <span class="text-4xl font-bold text-gray-900">₹9</span>
                         <span class="text-gray-600">/one-time</span>
                     </div>
                     <ul class="space-y-4 mb-8">
@@ -50,7 +50,7 @@
                     <span class="absolute top-0 right-0 bg-blue-600 text-white px-4 py-1 rounded-bl-lg rounded-tr-lg font-semibold">Most Popular</span>
                     <h3 class="text-2xl font-bold text-gray-900 mb-4">Professional</h3>
                     <div class="mb-6">
-                        <span class="text-4xl font-bold text-gray-900">$19</span>
+                        <span class="text-4xl font-bold text-gray-900">₹19</span>
                         <span class="text-gray-600">/one-time</span>
                     </div>
                     <ul class="space-y-4 mb-8">
@@ -87,7 +87,7 @@
                 <div class="bg-gray-50 p-8 rounded-3xl border border-gray-200">
                     <h3 class="text-2xl font-bold text-gray-900 mb-4">Premium</h3>
                     <div class="mb-6">
-                        <span class="text-4xl font-bold text-gray-900">$39</span>
+                        <span class="text-4xl font-bold text-gray-900">₹39</span>
                         <span class="text-gray-600">/one-time</span>
                     </div>
                     <ul class="space-y-4 mb-8">
