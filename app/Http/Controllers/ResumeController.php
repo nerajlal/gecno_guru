@@ -14,9 +14,20 @@ use App\Models\ResumeNameProject;
 
 class ResumeController extends Controller
 {
+    public function show()
+    {
+        $user = Auth::user();
+        $resume = ResumeNamePersonal::with(['experiences', 'educations', 'skills', 'certifications', 'projects'])
+            ->where('user_id', $user->id)
+            ->first();
+
+        return view('resume-template', ['resume' => $resume]);
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'resume_id' => 'nullable|exists:resume_name_personals,id',
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:255',
@@ -41,7 +52,7 @@ class ResumeController extends Controller
         ]);
 
         DB::transaction(function () use ($validatedData, $request) {
-            $personal = ResumeNamePersonal::create([
+            $personalData = [
                 'user_id' => Auth::id(),
                 'full_name' => $validatedData['full_name'],
                 'email' => $validatedData['email'],
@@ -49,13 +60,27 @@ class ResumeController extends Controller
                 'address' => $validatedData['address'],
                 'summary' => $validatedData['summary'],
                 'interested_areas' => $validatedData['interested_areas'] ?? null,
-            ]);
+            ];
+
+            if ($request->filled('resume_id')) {
+                $personal = ResumeNamePersonal::where('id', $request->resume_id)
+                                              ->where('user_id', Auth::id())
+                                              ->firstOrFail();
+                $personal->update($personalData);
+
+                $personal->experiences()->delete();
+                $personal->educations()->delete();
+                $personal->skills()->delete();
+                $personal->certifications()->delete();
+                $personal->projects()->delete();
+            } else {
+                $personal = ResumeNamePersonal::create($personalData);
+            }
 
             if (isset($validatedData['job_title'])) {
                 foreach ($validatedData['job_title'] as $key => $jobTitle) {
                     if($jobTitle) {
-                        ResumeNameExperience::create([
-                            'resume_name_personal_id' => $personal->id,
+                        $personal->experiences()->create([
                             'job_title' => $jobTitle,
                             'company' => $validatedData['company'][$key],
                             'start_date' => $validatedData['start_date'][$key],
@@ -69,8 +94,7 @@ class ResumeController extends Controller
             if (isset($validatedData['school'])) {
                 foreach ($validatedData['school'] as $key => $school) {
                     if($school) {
-                        ResumeNameEducation::create([
-                            'resume_name_personal_id' => $personal->id,
+                        $personal->educations()->create([
                             'school' => $school,
                             'degree' => $validatedData['degree'][$key],
                         ]);
@@ -81,8 +105,7 @@ class ResumeController extends Controller
             if (isset($validatedData['skill_category'])) {
                 foreach ($validatedData['skill_category'] as $key => $skillCategory) {
                     if($skillCategory) {
-                        ResumeNameSkill::create([
-                            'resume_name_personal_id' => $personal->id,
+                        $personal->skills()->create([
                             'skill_category' => $skillCategory,
                             'skills' => $validatedData['skills'][$key],
                         ]);
@@ -93,8 +116,7 @@ class ResumeController extends Controller
             if (isset($validatedData['certification_name'])) {
                 foreach ($validatedData['certification_name'] as $key => $certificationName) {
                     if($certificationName) {
-                        ResumeNameCertification::create([
-                            'resume_name_personal_id' => $personal->id,
+                        $personal->certifications()->create([
                             'certification_name' => $certificationName,
                             'issuing_organization' => $validatedData['issuing_organization'][$key],
                         ]);
@@ -105,8 +127,7 @@ class ResumeController extends Controller
             if (isset($validatedData['project_name'])) {
                 foreach ($validatedData['project_name'] as $key => $projectName) {
                     if($projectName) {
-                        ResumeNameProject::create([
-                            'resume_name_personal_id' => $personal->id,
+                        $personal->projects()->create([
                             'project_name' => $projectName,
                             'project_key_points' => $validatedData['project_key_points'][$key],
                             'technologies' => $validatedData['technologies'][$key],

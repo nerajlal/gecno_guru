@@ -20,4 +20,29 @@ class ResumeNamePersonal extends Model
         'summary',
         'interested_areas',
     ];
+
+    public function experiences()
+    {
+        return $this->hasMany(ResumeNameExperience::class, 'resume_name_personal_id');
+    }
+
+    public function educations()
+    {
+        return $this->hasMany(ResumeNameEducation::class, 'resume_name_personal_id');
+    }
+
+    public function skills()
+    {
+        return $this->hasMany(ResumeNameSkill::class, 'resume_name_personal_id');
+    }
+
+    public function certifications()
+    {
+        return $this->hasMany(ResumeNameCertification::class, 'resume_name_personal_id');
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(ResumeNameProject::class, 'resume_name_personal_id');
+    }
 }

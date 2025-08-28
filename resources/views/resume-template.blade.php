@@ -102,25 +102,26 @@
         <h2 class="text-2xl font-bold text-gray-900 text-center mb-6">Add Resume Data</h2>
         <form action="{{ route('resume-template.store') }}" method="POST">
             @csrf
+            <input type="hidden" name="resume_id" value="{{ $resume->id ?? '' }}">
             <!-- Personal Information -->
             <div class="mb-6">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Personal Information</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label for="full_name" class="block text-gray-700 mb-2">Full Name</label>
-                        <input type="text" id="full_name" name="full_name" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="John Doe">
+                        <input type="text" id="full_name" name="full_name" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="John Doe" value="{{ old('full_name', $resume->full_name ?? '') }}">
                     </div>
                     <div>
                         <label for="email" class="block text-gray-700 mb-2">Email</label>
-                        <input type="email" id="email" name="email" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="john.doe@example.com">
+                        <input type="email" id="email" name="email" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="john.doe@example.com" value="{{ old('email', $resume->email ?? '') }}">
                     </div>
                     <div>
                         <label for="phone" class="block text-gray-700 mb-2">Phone</label>
-                        <input type="tel" id="phone" name="phone" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="+1 234 567 890">
+                        <input type="tel" id="phone" name="phone" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="+1 234 567 890" value="{{ old('phone', $resume->phone ?? '') }}">
                     </div>
                     <div>
                         <label for="address" class="block text-gray-700 mb-2">Address</label>
-                        <input type="text" id="address" name="address" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="123 Main St, Anytown, USA">
+                        <input type="text" id="address" name="address" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="123 Main St, Anytown, USA" value="{{ old('address', $resume->address ?? '') }}">
                     </div>
                 </div>
             </div>
@@ -128,13 +129,39 @@
             <!-- Summary -->
             <div class="mb-6">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Summary</h3>
-                <textarea id="summary" name="summary" rows="4" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="A brief summary of your professional background..."></textarea>
+                <textarea id="summary" name="summary" rows="4" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="A brief summary of your professional background...">{{ old('summary', $resume->summary ?? '') }}</textarea>
             </div>
 
             <!-- Experience -->
             <div class="mb-6">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Experience</h3>
                 <div id="experience-container">
+                    @forelse ($resume->experiences ?? [] as $experience)
+                    <div class="experience-entry mb-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="job_title" class="block text-gray-700 mb-2">Job Title</label>
+                                <input type="text" name="job_title[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Software Engineer" value="{{ $experience->job_title }}">
+                            </div>
+                            <div>
+                                <label for="company" class="block text-gray-700 mb-2">Company</label>
+                                <input type="text" name="company[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Tech Corp" value="{{ $experience->company }}">
+                            </div>
+                            <div>
+                                <label for="start_date" class="block text-gray-700 mb-2">Start Date</label>
+                                <input type="month" name="start_date[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" value="{{ $experience->start_date }}">
+                            </div>
+                            <div>
+                                <label for="end_date" class="block text-gray-700 mb-2">End Date</label>
+                                <input type="month" name="end_date[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" value="{{ $experience->end_date }}">
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <label for="responsibilities" class="block text-gray-700 mb-2">Responsibilities</label>
+                            <textarea name="responsibilities[]" rows="4" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Describe your responsibilities and achievements...">{{ $experience->responsibilities }}</textarea>
+                        </div>
+                    </div>
+                    @empty
                     <div class="experience-entry mb-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
@@ -159,6 +186,7 @@
                             <textarea name="responsibilities[]" rows="4" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Describe your responsibilities and achievements..."></textarea>
                         </div>
                     </div>
+                    @endforelse
                 </div>
                 <button type="button" id="add-experience-btn" class="text-blue-600 hover:text-blue-700 font-semibold">+ Add Another Experience</button>
             </div>
@@ -167,6 +195,20 @@
             <div class="mb-6">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Education</h3>
                 <div id="education-container">
+                    @forelse ($resume->educations ?? [] as $education)
+                    <div class="education-entry mb-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="school" class="block text-gray-700 mb-2">School/University</label>
+                                <input type="text" name="school[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="University of Example" value="{{ $education->school }}">
+                            </div>
+                            <div>
+                                <label for="degree" class="block text-gray-700 mb-2">Degree</label>
+                                <input type="text" name="degree[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Bachelor of Science" value="{{ $education->degree }}">
+                            </div>
+                        </div>
+                    </div>
+                    @empty
                     <div class="education-entry mb-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
@@ -179,6 +221,7 @@
                             </div>
                         </div>
                     </div>
+                    @endforelse
                 </div>
                 <button type="button" id="add-education-btn" class="text-blue-600 hover:text-blue-700 font-semibold">+ Add Another Education</button>
             </div>
@@ -187,10 +230,17 @@
             <div class="mb-6">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Skills</h3>
                 <div id="skills-container">
+                    @forelse ($resume->skills ?? [] as $skill)
+                    <div class="skill-category-entry mb-4">
+                        <input type="text" name="skill_category[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Skill Category (e.g., Programming Languages)" value="{{ $skill->skill_category }}">
+                        <textarea name="skills[]" rows="3" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Enter each skill on a new line.">{{ $skill->skills }}</textarea>
+                    </div>
+                    @empty
                     <div class="skill-category-entry mb-4">
                         <input type="text" name="skill_category[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Skill Category (e.g., Programming Languages)">
                         <textarea name="skills[]" rows="3" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Enter each skill on a new line."></textarea>
                     </div>
+                    @endforelse
                 </div>
                 <button type="button" id="add-skill-category-btn" class="text-blue-600 hover:text-blue-700 font-semibold">+ Add Skill Category</button>
             </div>
@@ -199,6 +249,20 @@
             <div class="mb-6">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Certifications</h3>
                 <div id="certifications-container">
+                    @forelse ($resume->certifications ?? [] as $certification)
+                    <div class="certification-entry mb-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 mb-2">Certification Name</label>
+                                <input type="text" name="certification_name[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="e.g., AWS Certified Solutions Architect" value="{{ $certification->certification_name }}">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Issuing Organization</label>
+                                <input type="text" name="issuing_organization[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="e.g., Amazon Web Services" value="{{ $certification->issuing_organization }}">
+                            </div>
+                        </div>
+                    </div>
+                    @empty
                     <div class="certification-entry mb-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
@@ -211,6 +275,7 @@
                             </div>
                         </div>
                     </div>
+                    @endforelse
                 </div>
                 <button type="button" id="add-certification-btn" class="text-blue-600 hover:text-blue-700 font-semibold">+ Add Another Certification</button>
             </div>
@@ -218,13 +283,35 @@
             <!-- Interested Areas -->
             <div class="mb-6">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Interested Areas</h3>
-                <textarea name="interested_areas" rows="3" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Enter each area of interest on a new line."></textarea>
+                <textarea name="interested_areas" rows="3" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Enter each area of interest on a new line.">{{ old('interested_areas', $resume->interested_areas ?? '') }}</textarea>
             </div>
 
             <!-- Projects -->
             <div class="mb-6">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Projects</h3>
                 <div id="projects-container">
+                    @forelse ($resume->projects ?? [] as $project)
+                    <div class="project-entry mb-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="md:col-span-2">
+                                <label class="block text-gray-700 mb-2">Project Name</label>
+                                <input type="text" name="project_name[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="e.g., My Awesome Project" value="{{ $project->project_name }}">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-gray-700 mb-2">Key Points</label>
+                                <textarea name="project_key_points[]" rows="3" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Enter each key point on a new line.">{{ $project->project_key_points }}</textarea>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Technologies</label>
+                                <input type="text" name="technologies[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="e.g., Laravel, Vue.js, MySQL" value="{{ $project->technologies }}">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Tools</label>
+                                <input type="text" name="tools[]" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="e.g., VS Code, Docker, Git" value="{{ $project->tools }}">
+                            </div>
+                        </div>
+                    </div>
+                    @empty
                     <div class="project-entry mb-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="md:col-span-2">
@@ -245,6 +332,7 @@
                             </div>
                         </div>
                     </div>
+                    @endforelse
                 </div>
                 <button type="button" id="add-project-btn" class="text-blue-600 hover:text-blue-700 font-semibold">+ Add Another Project</button>
             </div>
