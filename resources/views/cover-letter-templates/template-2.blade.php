@@ -7,11 +7,30 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Helvetica&display=swap');
-        body { font-family: 'Helvetica', sans-serif; }
+        body { font-family: 'Helvetica', sans-serif; background-color: #e5e7eb; }
+        .a4-sheet {
+            width: 210mm;
+            height: 297mm;
+            margin: 2rem auto;
+            box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+            background: white;
+        }
+        .download-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        @media print {
+            body { background-color: white; margin: 0; padding: 0; }
+            .a4-sheet { margin: 0; box-shadow: none; border: none; }
+            .download-btn { display: none; }
+        }
     </style>
 </head>
-<body class="bg-gray-100 p-8">
-    <div class="max-w-4xl mx-auto bg-white p-12 shadow-lg border-t-8 border-blue-600">
+<body>
+    <button onclick="window.print()" class="download-btn bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700 transition">Download as PDF</button>
+    <div class="a4-sheet p-12 border-t-8 border-blue-600">
         @if($coverLetter)
             <div class="flex justify-between items-start mb-12">
                 <div>
