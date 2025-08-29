@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\CoverPersonal;
 use App\Models\ResumeNamePersonal;
+use App\Models\CoverDetail;
 
 class CoverLetterController extends Controller
 {
@@ -124,5 +125,24 @@ class CoverLetterController extends Controller
         }
 
         return response()->json(['success' => false, 'message' => 'Profile not found.'], 404);
+    }
+
+    /**
+     * Store the cover letter details.
+     */
+    public function storeCoverDetails(Request $request)
+    {
+        $validatedData = $request->validate([
+            'company_name' => 'required|string|max:255',
+            'job_role' => 'required|string|max:255',
+            'interview_date' => 'nullable|date',
+        ]);
+
+        $user = Auth::user();
+        $validatedData['user_id'] = $user->id;
+
+        CoverDetail::create($validatedData);
+
+        return response()->json(['success' => true]);
     }
 }

@@ -119,10 +119,36 @@
         </div>
     </div>
 
+    <!-- Job Description Modal -->
+    <div id="job-desc-modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-2xl p-8 w-full max-w-lg">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Job Description Details</h2>
+            <form id="job-desc-form">
+                <div class="mb-4">
+                    <label for="company_name" class="block text-gray-700 font-semibold mb-2">Company Name</label>
+                    <input type="text" id="company_name" name="company_name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div class="mb-4">
+                    <label for="job_role" class="block text-gray-700 font-semibold mb-2">Job Role</label>
+                    <input type="text" id="job_role" name="job_role" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div class="mb-6">
+                    <label for="interview_date" class="block text-gray-700 font-semibold mb-2">Available Date for Interview</label>
+                    <input type="date" id="interview_date" name="interview_date" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="text-right flex gap-4">
+                    <button type="button" id="close-job-modal-btn" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition">Close</button>
+                    <button type="submit" id="save-job-desc-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 @include('includes.footer')
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Profile Modal Elements and Logic
     const addProfileBtn = document.getElementById('add-profile-btn');
     const profileModal = document.getElementById('profile-modal');
     const closeModalBtn = document.getElementById('close-modal-btn');
@@ -162,10 +188,8 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             if (data.success) {
                 profileModal.classList.add('hidden');
-                // Optionally, show a success message to the user
                 alert('Profile updated successfully!');
             } else {
-                // Handle errors, e.g., show validation messages
                 alert('Error updating profile: ' + (data.message || 'Unknown error'));
             }
         })
@@ -179,10 +203,66 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Close modal if clicking outside of it
     window.addEventListener('click', function(event) {
         if (event.target === profileModal) {
             profileModal.classList.add('hidden');
+        }
+    });
+
+    // Job Description Modal Elements and Logic
+    const fetchJobDescBtn = document.getElementById('fetch-job-desc-btn');
+    const jobDescModal = document.getElementById('job-desc-modal');
+    const closeJobModalBtn = document.getElementById('close-job-modal-btn');
+    const jobDescForm = document.getElementById('job-desc-form');
+    const saveJobDescBtn = document.getElementById('save-job-desc-btn');
+
+    fetchJobDescBtn.addEventListener('click', function() {
+        jobDescModal.classList.remove('hidden');
+    });
+
+    closeJobModalBtn.addEventListener('click', function() {
+        jobDescModal.classList.add('hidden');
+    });
+
+    jobDescForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        saveJobDescBtn.disabled = true;
+        saveJobDescBtn.textContent = 'Saving...';
+
+        const formData = new FormData(jobDescForm);
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        fetch('/cover-details/store', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken,
+                'Accept': 'application/json',
+            },
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                jobDescModal.classList.add('hidden');
+                jobDescForm.reset();
+                alert('Job details saved successfully!');
+            } else {
+                alert('Error saving job details: ' + (data.message || 'Unknown error'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An unexpected error occurred.');
+        })
+        .finally(() => {
+            saveJobDescBtn.disabled = false;
+            saveJobDescBtn.textContent = 'Save';
+        });
+    });
+
+    window.addEventListener('click', function(event) {
+        if (event.target === jobDescModal) {
+            jobDescModal.classList.add('hidden');
         }
     });
 });
