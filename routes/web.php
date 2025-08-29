@@ -52,6 +52,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/cover-letter-template', [CoverLetterController::class, 'store'])->name('cover-letter-template.store');
     Route::post('/profile/update', [CoverLetterController::class, 'updateProfile'])->name('profile.update');
     Route::post('/cover-details/store', [CoverLetterController::class, 'storeCoverDetails'])->name('cover-details.store');
+    Route::get('/cover-letter/preview/{template}', [CoverLetterController::class, 'preview'])->name('cover-letter.preview');
+    Route::get('/cover-letter/build/{template}', [CoverLetterController::class, 'build'])->name('cover-letter.build');
 
     Route::get('/resume-build', [PricingController::class, 'show'])->name('resume-build');
     Route::get('/resume-template', [ResumeController::class, 'show'])->name('resume-template');

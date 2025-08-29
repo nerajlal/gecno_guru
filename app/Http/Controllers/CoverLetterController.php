@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\CoverPersonal;
 use App\Models\ResumeNamePersonal;
 use App\Models\CoverDetail;
+use App\Models\Transaction;
 
 class CoverLetterController extends Controller
 {
@@ -22,11 +23,13 @@ class CoverLetterController extends Controller
             ->first();
         $resumePersonal = ResumeNamePersonal::where('user_id', $user->id)->first();
         $coverDetail = CoverDetail::where('user_id', $user->id)->latest()->first();
+        $hasActivePlan = Transaction::where('user_id', $user->id)->exists();
 
         return view('cover-letter-template', [
             'coverLetter' => $coverLetter,
             'resumePersonal' => $resumePersonal,
             'coverDetail' => $coverDetail,
+            'hasActivePlan' => $hasActivePlan,
         ]);
     }
 
@@ -155,5 +158,40 @@ class CoverLetterController extends Controller
         );
 
         return response()->json(['success' => true]);
+    }
+
+    /**
+     * Display a preview of the cover letter with a specific template.
+     */
+    public function preview($template)
+    {
+        $user = Auth::user();
+        $coverLetter = CoverPersonal::with(['recipientDetail', 'letterBodies'])
+            ->where('user_id', $user->id)
+            ->first();
+
+        $viewName = 'cover-letter-templates.' . $template;
+
+        if (!view()->exists($viewName)) {
+            abort(404);
+        }
+
+        return view($viewName, ['coverLetter' => $coverLetter]);
+    }
+
+    /**
+     * Show the cover letter builder page.
+     */
+    public function build($template)
+    {
+        $user = Auth::user();
+        $coverLetter = CoverPersonal::with(['recipientDetail', 'letterBodies'])
+            ->where('user_id', $user->id)
+            ->first();
+
+        return view('cover-letter-build', [
+            'template' => $template,
+            'coverLetter' => $coverLetter,
+        ]);
     }
 }

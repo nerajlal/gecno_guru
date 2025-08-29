@@ -45,8 +45,12 @@
                         <h3 class="text-xl font-semibold text-gray-800">Classic Professional</h3>
                         <p class="text-gray-600 mt-2 text-sm">A timeless design for any industrial profesionals.</p>
                         <div class="mt-6 flex gap-3">
-                            <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Live Preview</a>
-                            <a href="{{ route('cover-letter-template.show') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Use Template</a>
+                            <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-1">Live Preview</button>
+                            @if($hasActivePlan)
+                            <a href="{{ route('cover-letter.build', ['template' => 'template-1']) }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+                            @else
+                            <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -58,8 +62,12 @@
                         <h3 class="text-xl font-semibold text-gray-800">Modern Professional</h3>
                         <p class="text-gray-600 mt-2 text-sm">A professional design with a modern style.</p>
                         <div class="mt-6 flex gap-3">
-                            <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Live Preview</a>
-                            <a href="{{ route('cover-letter-template.show') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Use Template</a>
+                            <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-2">Live Preview</button>
+                            @if($hasActivePlan)
+                            <a href="{{ route('cover-letter.build', ['template' => 'template-2']) }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+                            @else
+                            <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -71,8 +79,12 @@
                         <h3 class="text-xl font-semibold text-gray-800">Creative</h3>
                         <p class="text-gray-600 mt-2 text-sm">A bold design for creative industries.</p>
                         <div class="mt-6 flex gap-3">
-                            <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Live Preview</a>
-                            <a href="{{ route('cover-letter-template.show') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Use Template</a>
+                            <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-3">Live Preview</button>
+                            @if($hasActivePlan)
+                            <a href="{{ route('cover-letter.build', ['template' => 'template-3']) }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+                            @else
+                            <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -84,8 +96,12 @@
                         <h3 class="text-xl font-semibold text-gray-800">Simple & Clean</h3>
                         <p class="text-gray-600 mt-2 text-sm">A minimal design focused on content.</p>
                         <div class="mt-6 flex gap-3">
-                            <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Live Preview</a>
-                            <a href="{{ route('cover-letter-template.show') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Use Template</a>
+                            <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-4">Live Preview</button>
+                            @if($hasActivePlan)
+                            <a href="{{ route('cover-letter.build', ['template' => 'template-4']) }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+                            @else
+                            <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -145,135 +161,153 @@
         </div>
     </div>
 
+    <!-- Live Preview Modal -->
+    <div id="preview-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl h-[90vh] relative">
+            <button id="close-preview-modal-btn" class="absolute top-4 right-4 text-gray-800 hover:text-gray-900 z-10">
+                <i class="fa-solid fa-times text-2xl"></i>
+            </button>
+            <div id="preview-modal-content-wrapper" class="h-full overflow-y-auto">
+                <!-- Iframe will be loaded here -->
+            </div>
+        </div>
+    </div>
+
 @include('includes.footer')
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Profile Modal Elements and Logic
+    // Profile Modal
     const addProfileBtn = document.getElementById('add-profile-btn');
     const profileModal = document.getElementById('profile-modal');
     const closeModalBtn = document.getElementById('close-modal-btn');
     const profileForm = document.getElementById('profile-form');
-    const saveProfileBtn = document.getElementById('save-profile-btn');
-
-    addProfileBtn.addEventListener('click', function() {
-        @if ($resumePersonal)
-            profileForm.elements.full_name.value = '{{ $resumePersonal->full_name }}';
-            profileForm.elements.email.value = '{{ $resumePersonal->email }}';
-            profileForm.elements.phone.value = '{{ $resumePersonal->phone }}';
-        @endif
-        profileModal.classList.remove('hidden');
-    });
-
-    closeModalBtn.addEventListener('click', function() {
-        profileModal.classList.add('hidden');
-    });
-
-    profileForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        saveProfileBtn.disabled = true;
-        saveProfileBtn.textContent = 'Saving...';
-
-        const formData = new FormData(profileForm);
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-        fetch('/profile/update', {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': csrfToken,
-                'Accept': 'application/json',
-            },
-            body: formData,
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                profileModal.classList.add('hidden');
-                alert('Profile updated successfully!');
-            } else {
-                alert('Error updating profile: ' + (data.message || 'Unknown error'));
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An unexpected error occurred.');
-        })
-        .finally(() => {
-            saveProfileBtn.disabled = false;
-            saveProfileBtn.textContent = 'Save';
+    if (addProfileBtn) {
+        addProfileBtn.addEventListener('click', () => {
+            @if ($resumePersonal)
+                profileForm.elements.full_name.value = '{{ $resumePersonal->full_name }}';
+                profileForm.elements.email.value = '{{ $resumePersonal->email }}';
+                profileForm.elements.phone.value = '{{ $resumePersonal->phone }}';
+            @endif
+            profileModal.classList.remove('hidden');
         });
-    });
+    }
+    if (closeModalBtn) closeModalBtn.addEventListener('click', () => profileModal.classList.add('hidden'));
+    if (profileForm) {
+        profileForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const saveProfileBtn = document.getElementById('save-profile-btn');
+            saveProfileBtn.disabled = true;
+            saveProfileBtn.textContent = 'Saving...';
+            const formData = new FormData(profileForm);
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            fetch('/profile/update', {
+                method: 'POST',
+                headers: { 'X-CSRF-TOKEN': csrfToken, 'Accept': 'application/json' },
+                body: formData,
+            }).then(response => response.json()).then(data => {
+                if (data.success) {
+                    profileModal.classList.add('hidden');
+                    alert('Profile updated successfully!');
+                } else {
+                    alert('Error updating profile: ' + (data.message || 'Unknown error'));
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                alert('An unexpected error occurred.');
+            }).finally(() => {
+                saveProfileBtn.disabled = false;
+                saveProfileBtn.textContent = 'Save';
+            });
+        });
+    }
 
-    window.addEventListener('click', function(event) {
-        if (event.target === profileModal) {
-            profileModal.classList.add('hidden');
-        }
-    });
-
-    // Job Description Modal Elements and Logic
+    // Job Description Modal
     const fetchJobDescBtn = document.getElementById('fetch-job-desc-btn');
     const jobDescModal = document.getElementById('job-desc-modal');
     const closeJobModalBtn = document.getElementById('close-job-modal-btn');
     const jobDescForm = document.getElementById('job-desc-form');
-    const saveJobDescBtn = document.getElementById('save-job-desc-btn');
-
-    fetchJobDescBtn.addEventListener('click', function() {
-        @if ($coverDetail)
-            jobDescForm.elements.cover_detail_id.value = '{{ $coverDetail->id }}';
-            jobDescForm.elements.company_name.value = '{{ $coverDetail->company_name }}';
-            jobDescForm.elements.job_role.value = '{{ $coverDetail->job_role }}';
-            jobDescForm.elements.interview_date.value = '{{ $coverDetail->interview_date }}';
-        @else
-            jobDescForm.reset();
-            jobDescForm.elements.cover_detail_id.value = '';
-        @endif
-        jobDescModal.classList.remove('hidden');
-    });
-
-    closeJobModalBtn.addEventListener('click', function() {
-        jobDescModal.classList.add('hidden');
-    });
-
-    jobDescForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        saveJobDescBtn.disabled = true;
-        saveJobDescBtn.textContent = 'Saving...';
-
-        const formData = new FormData(jobDescForm);
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-        fetch('/cover-details/store', {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': csrfToken,
-                'Accept': 'application/json',
-            },
-            body: formData,
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                jobDescModal.classList.add('hidden');
+    if (fetchJobDescBtn) {
+        fetchJobDescBtn.addEventListener('click', () => {
+            @if ($coverDetail)
+                jobDescForm.elements.cover_detail_id.value = '{{ $coverDetail->id }}';
+                jobDescForm.elements.company_name.value = '{{ $coverDetail->company_name }}';
+                jobDescForm.elements.job_role.value = '{{ $coverDetail->job_role }}';
+                jobDescForm.elements.interview_date.value = '{{ $coverDetail->interview_date }}';
+            @else
                 jobDescForm.reset();
-                alert('Job details saved successfully!');
-            } else {
-                alert('Error saving job details: ' + (data.message || 'Unknown error'));
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An unexpected error occurred.');
-        })
-        .finally(() => {
-            saveJobDescBtn.disabled = false;
-            saveJobDescBtn.textContent = 'Save';
+                jobDescForm.elements.cover_detail_id.value = '';
+            @endif
+            jobDescModal.classList.remove('hidden');
+        });
+    }
+    if (closeJobModalBtn) closeJobModalBtn.addEventListener('click', () => jobDescModal.classList.add('hidden'));
+    if (jobDescForm) {
+        jobDescForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const saveJobDescBtn = document.getElementById('save-job-desc-btn');
+            saveJobDescBtn.disabled = true;
+            saveJobDescBtn.textContent = 'Saving...';
+            const formData = new FormData(jobDescForm);
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            fetch('/cover-details/store', {
+                method: 'POST',
+                headers: { 'X-CSRF-TOKEN': csrfToken, 'Accept': 'application/json' },
+                body: formData,
+            }).then(response => response.json()).then(data => {
+                if (data.success) {
+                    jobDescModal.classList.add('hidden');
+                    // No need to reset the form, so the user can see their saved data next time.
+                    alert('Job details saved successfully!');
+                } else {
+                    alert('Error saving job details: ' + (data.message || 'Unknown error'));
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                alert('An unexpected error occurred.');
+            }).finally(() => {
+                saveJobDescBtn.disabled = false;
+                saveJobDescBtn.textContent = 'Save';
+            });
+        });
+    }
+
+    // Live Preview Modal
+    const previewModal = document.getElementById('preview-modal');
+    const closePreviewModalBtn = document.getElementById('close-preview-modal-btn');
+    const previewModalContentWrapper = document.getElementById('preview-modal-content-wrapper');
+    const previewButtons = document.querySelectorAll('.live-preview-btn');
+    const openPreviewModal = () => {
+        if (previewModal) previewModal.classList.remove('hidden');
+    };
+    const closePreviewModal = () => {
+        if (previewModal) {
+            previewModal.classList.add('hidden');
+            previewModalContentWrapper.innerHTML = '';
+        }
+    };
+    if (closePreviewModalBtn) closePreviewModalBtn.addEventListener('click', closePreviewModal);
+    previewButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const template = button.dataset.template;
+            if (!template) return;
+            const previewUrl = `/cover-letter/preview/${template}`;
+            const iframe = document.createElement('iframe');
+            iframe.src = previewUrl;
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.border = 'none';
+            previewModalContentWrapper.innerHTML = '';
+            previewModalContentWrapper.appendChild(iframe);
+            openPreviewModal();
         });
     });
 
+    // Generic modal close on outside click
     window.addEventListener('click', function(event) {
-        if (event.target === jobDescModal) {
-            jobDescModal.classList.add('hidden');
-        }
+        if (event.target === profileModal) profileModal.classList.add('hidden');
+        if (event.target === jobDescModal) jobDescModal.classList.add('hidden');
+        if (event.target === previewModal) closePreviewModal();
     });
 });
 </script>
