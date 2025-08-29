@@ -3,42 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cover Letter Preview</title>
+    <title>Cover Letter Preview - Modern</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Helvetica&display=swap');
+        body { font-family: 'Helvetica', sans-serif; }
+    </style>
 </head>
 <body class="bg-gray-100 p-8">
-    <div class="max-w-4xl mx-auto bg-white p-12 shadow-lg">
+    <div class="max-w-4xl mx-auto bg-white p-12 shadow-lg border-t-8 border-blue-600">
         @if($coverLetter)
-            <div class="flex justify-between items-start">
+            <div class="flex justify-between items-start mb-12">
                 <div>
-                    <h1 class="text-3xl font-bold">{{ $coverLetter->full_name }}</h1>
+                    <h1 class="text-3xl font-bold text-blue-600">{{ $coverLetter->full_name }}</h1>
                     <p class="text-gray-600">{{ $coverLetter->address }}</p>
-                    <p class="text-gray-600">{{ $coverLetter->email }}</p>
-                    <p class="text-gray-600">{{ $coverLetter->phone }}</p>
+                    <p class="text-gray-600">{{ $coverLetter->email }} | {{ $coverLetter->phone }}</p>
                 </div>
-                <p class="text-gray-600">{{ \Carbon\Carbon::parse($coverLetter->letter_date)->format('F j, Y') }}</p>
+                <p class="text-gray-600">{{ \Carbon\Carbon::parse($coverLetter->letter_date)->format('Y-m-d') }}</p>
             </div>
 
-            <div class="mt-12">
-                <p class="font-semibold">{{ $coverLetter->recipientDetail->hiring_manager_name }}</p>
-                <p class="text-gray-600">{{ $coverLetter->recipientDetail->hiring_manager_title }}</p>
+            <div class="mb-8">
+                <p class="font-bold">{{ $coverLetter->recipientDetail->hiring_manager_name }}</p>
+                @if($coverLetter->recipientDetail->hiring_manager_title)
+                    <p class="text-gray-600">{{ $coverLetter->recipientDetail->hiring_manager_title }}</p>
+                @endif
                 <p class="text-gray-600">{{ $coverLetter->recipientDetail->company_name }}</p>
-                <p class="text-gray-600">{{ $coverLetter->recipientDetail->company_address }}</p>
+                @if($coverLetter->recipientDetail->company_address)
+                    <p class="text-gray-600">{{ $coverLetter->recipientDetail->company_address }}</p>
+                @endif
             </div>
 
-            <div class="mt-8">
-                <p class="font-semibold">Dear {{ $coverLetter->recipientDetail->hiring_manager_name }},</p>
+            <div class="mb-8">
+                <p class="font-bold">Dear {{ $coverLetter->recipientDetail->hiring_manager_name }},</p>
             </div>
 
-            <div class="mt-4 space-y-4 text-gray-700">
+            <div class="space-y-4 text-gray-800 leading-relaxed">
                 @foreach($coverLetter->letterBodies as $body)
                     <p>{{ $body->paragraph_text }}</p>
                 @endforeach
             </div>
 
-            <div class="mt-8">
-                <p class="text-gray-700">{{ $coverLetter->closing_phrase }},</p>
-                <p class="mt-4 font-bold">{{ $coverLetter->full_name }}</p>
+            <div class="mt-12">
+                <p class="text-gray-800">{{ $coverLetter->closing_phrase }},</p>
+                <p class="mt-4 font-bold text-gray-800">{{ $coverLetter->full_name }}</p>
             </div>
         @else
             <p class="text-center text-gray-500">No cover letter data available to display.</p>

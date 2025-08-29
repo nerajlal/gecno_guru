@@ -186,9 +186,9 @@ class CoverLetterController extends Controller
 
             $recipientDetail = new CoverRecipientDetail([
                 'hiring_manager_name' => 'Hiring Manager',
-                'hiring_manager_title' => 'Hiring Title',
+                'hiring_manager_title' => '',
                 'company_name' => optional($coverDetail)->company_name ?? 'Target Company Inc.',
-                'company_address' => '123 Corporate Blvd, Business City',
+                'company_address' => '',
             ]);
             $previewData->setRelation('recipientDetail', $recipientDetail);
 
