@@ -28,10 +28,10 @@
             <!-- Action Buttons -->
             <div class="text-right mb-8 flex justify-end gap-4">
                 <button id="add-profile-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700 transition">
-                    Add Profile
+                    My Profile Data
                 </button>
                 <button id="fetch-job-desc-btn" class="bg-green-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-700 transition">
-                    Fetch Job Description
+                    Job Description
                 </button>
             </div>
 
@@ -43,8 +43,9 @@
                     <img src="https://images.unsplash.com/photo-1554774853-719586f82d77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Classic Cover Letter" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold text-gray-800">Classic Professional</h3>
-                        <p class="text-gray-600 mt-2 text-sm">A timeless design for any industry.</p>
+                        <p class="text-gray-600 mt-2 text-sm">A timeless design for any industrial profesionals.</p>
                         <div class="mt-6 flex gap-3">
+                            <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Live Preview</a>
                             <a href="{{ route('cover-letter-template.show') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Use Template</a>
                         </div>
                     </div>
@@ -57,6 +58,7 @@
                         <h3 class="text-xl font-semibold text-gray-800">Modern Professional</h3>
                         <p class="text-gray-600 mt-2 text-sm">A professional design with a modern style.</p>
                         <div class="mt-6 flex gap-3">
+                            <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Live Preview</a>
                             <a href="{{ route('cover-letter-template.show') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Use Template</a>
                         </div>
                     </div>
@@ -69,6 +71,7 @@
                         <h3 class="text-xl font-semibold text-gray-800">Creative</h3>
                         <p class="text-gray-600 mt-2 text-sm">A bold design for creative industries.</p>
                         <div class="mt-6 flex gap-3">
+                            <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Live Preview</a>
                             <a href="{{ route('cover-letter-template.show') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Use Template</a>
                         </div>
                     </div>
@@ -81,6 +84,7 @@
                         <h3 class="text-xl font-semibold text-gray-800">Simple & Clean</h3>
                         <p class="text-gray-600 mt-2 text-sm">A minimal design focused on content.</p>
                         <div class="mt-6 flex gap-3">
+                            <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Live Preview</a>
                             <a href="{{ route('cover-letter-template.show') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Use Template</a>
                         </div>
                     </div>
