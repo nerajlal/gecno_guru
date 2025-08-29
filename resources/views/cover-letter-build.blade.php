@@ -38,23 +38,23 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                     <div>
                         <label for="letter_date" class="block text-gray-700 mb-2">Date</label>
-                        <input type="date" name="letter_date" class="w-full border-gray-300 rounded-lg p-2" value="{{ old('letter_date', $coverLetter ? $coverLetter->letter_date->format('Y-m-d') : now()->format('Y-m-d')) }}" required>
+                        <input type="date" name="letter_date" class="w-full border-gray-300 rounded-lg p-2" value="{{ old('letter_date', optional(optional($coverLetter)->letter_date)->format('Y-m-d') ?? now()->format('Y-m-d')) }}" required>
                     </div>
                     <div>
                         <label for="hiring_manager_name" class="block text-gray-700 mb-2">Hiring Manager's Name</label>
-                        <input type="text" name="hiring_manager_name" class="w-full border-gray-300 rounded-lg p-2" value="{{ old('hiring_manager_name', $coverLetter->recipientDetail->hiring_manager_name ?? '') }}" required>
+                        <input type="text" name="hiring_manager_name" class="w-full border-gray-300 rounded-lg p-2" value="{{ old('hiring_manager_name', optional($coverLetter->recipientDetail)->hiring_manager_name ?? '') }}" required>
                     </div>
                     <div>
                         <label for="hiring_manager_title" class="block text-gray-700 mb-2">Hiring Manager's Title</label>
-                        <input type="text" name="hiring_manager_title" class="w-full border-gray-300 rounded-lg p-2" value="{{ old('hiring_manager_title', $coverLetter->recipientDetail->hiring_manager_title ?? '') }}">
+                        <input type="text" name="hiring_manager_title" class="w-full border-gray-300 rounded-lg p-2" value="{{ old('hiring_manager_title', optional($coverLetter->recipientDetail)->hiring_manager_title ?? '') }}">
                     </div>
                     <div>
                         <label for="company_name" class="block text-gray-700 mb-2">Company Name</label>
-                        <input type="text" name="company_name" class="w-full border-gray-300 rounded-lg p-2" value="{{ old('company_name', $coverLetter->recipientDetail->company_name ?? '') }}" required>
+                        <input type="text" name="company_name" class="w-full border-gray-300 rounded-lg p-2" value="{{ old('company_name', optional($coverLetter->recipientDetail)->company_name ?? '') }}" required>
                     </div>
                     <div class="md:col-span-2">
                         <label for="company_address" class="block text-gray-700 mb-2">Company Address</label>
-                        <input type="text" name="company_address" class="w-full border-gray-300 rounded-lg p-2" value="{{ old('company_address', $coverLetter->recipientDetail->company_address ?? '') }}" required>
+                        <input type="text" name="company_address" class="w-full border-gray-300 rounded-lg p-2" value="{{ old('company_address', optional($coverLetter->recipientDetail)->company_address ?? '') }}" required>
                     </div>
                 </div>
             </fieldset>
@@ -62,16 +62,9 @@
             <!-- Letter Body -->
             <fieldset class="mb-8 border p-4 rounded-lg">
                 <legend class="text-xl font-semibold px-2">Letter Content</legend>
-                <div id="letter-body-container" class="mt-4 space-y-4">
-                    @forelse ($coverLetter->letterBodies ?? [] as $index => $body)
-                        <textarea name="letter_body[]" rows="5" class="w-full border-gray-300 rounded-lg p-2" placeholder="Paragraph {{ $index + 1 }}">{{ $body->paragraph_text }}</textarea>
-                    @empty
-                        <textarea name="letter_body[]" rows="5" class="w-full border-gray-300 rounded-lg p-2" placeholder="Introduction paragraph..."></textarea>
-                        <textarea name="letter_body[]" rows="5" class="w-full border-gray-300 rounded-lg p-2" placeholder="Body paragraph..."></textarea>
-                        <textarea name="letter_body[]" rows="5" class="w-full border-gray-300 rounded-lg p-2" placeholder="Conclusion paragraph..."></textarea>
-                    @endforelse
+                <div class="mt-4">
+                    <textarea name="letter_body" rows="15" class="w-full border-gray-300 rounded-lg p-2" placeholder="Write your cover letter here...">{{ old('letter_body', $letterBody ?? '') }}</textarea>
                 </div>
-                <button type="button" id="add-paragraph-btn" class="mt-4 text-blue-600 hover:text-blue-700 font-semibold">+ Add Paragraph</button>
             </fieldset>
 
             <!-- Closing -->
@@ -89,23 +82,5 @@
         </form>
     </div>
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const addParagraphBtn = document.getElementById('add-paragraph-btn');
-    const letterBodyContainer = document.getElementById('letter-body-container');
-
-    if (addParagraphBtn) {
-        addParagraphBtn.addEventListener('click', () => {
-            const newParagraph = document.createElement('textarea');
-            newParagraph.name = 'letter_body[]';
-            newParagraph.rows = 5;
-            newParagraph.className = 'w-full border-gray-300 rounded-lg p-2';
-            newParagraph.placeholder = 'New paragraph...';
-            letterBodyContainer.appendChild(newParagraph);
-        });
-    }
-});
-</script>
 
 @include('includes.footer')

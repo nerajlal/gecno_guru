@@ -49,7 +49,7 @@ class CoverLetterController extends Controller
             'hiring_manager_title' => 'nullable|string|max:255',
             'company_name' => 'required|string|max:255',
             'company_address' => 'required|string',
-            'letter_body.*' => 'required|string',
+            'letter_body' => 'required|string',
             'closing_phrase' => 'required|string|max:255',
         ]);
 
@@ -64,37 +64,32 @@ class CoverLetterController extends Controller
                 'closing_phrase' => $validatedData['closing_phrase'],
             ];
 
-            // Create or update the main cover letter record
-            if ($request->filled('cover_letter_id')) {
-                $coverPersonal = CoverPersonal::where('id', $request->cover_letter_id)
-                                              ->where('user_id', Auth::id())
-                                              ->firstOrFail();
-                $coverPersonal->update($personalData);
+            // Use updateOrCreate for personal details
+            $coverPersonal = CoverPersonal::updateOrCreate(
+                ['id' => $request->cover_letter_id, 'user_id' => Auth::id()],
+                $personalData
+            );
 
-                // Clear out old related data
-                $coverPersonal->recipientDetail()->delete();
-                $coverPersonal->letterBodies()->delete();
-            } else {
-                $coverPersonal = CoverPersonal::create($personalData);
-            }
+            // Update or create recipient details
+            $coverPersonal->recipientDetail()->updateOrCreate(
+                ['cover_personal_id' => $coverPersonal->id],
+                [
+                    'hiring_manager_name' => $validatedData['hiring_manager_name'],
+                    'hiring_manager_title' => $validatedData['hiring_manager_title'],
+                    'company_name' => $validatedData['company_name'],
+                    'company_address' => $validatedData['company_address'],
+                ]
+            );
 
-            // Create the recipient detail record
-            $coverPersonal->recipientDetail()->create([
-                'hiring_manager_name' => $validatedData['hiring_manager_name'],
-                'hiring_manager_title' => $validatedData['hiring_manager_title'],
-                'company_name' => $validatedData['company_name'],
-                'company_address' => $validatedData['company_address'],
-            ]);
-
-            // Create the letter body paragraphs
-            if (isset($validatedData['letter_body'])) {
-                foreach ($validatedData['letter_body'] as $index => $paragraph) {
-                    if ($paragraph) {
-                        $coverPersonal->letterBodies()->create([
-                            'paragraph_text' => $paragraph,
-                            'paragraph_order' => $index + 1,
-                        ]);
-                    }
+            // Delete old letter bodies and create new ones
+            $coverPersonal->letterBodies()->delete();
+            $paragraphs = preg_split("/\r\n|\n|\r/", $validatedData['letter_body']);
+            foreach ($paragraphs as $index => $paragraph) {
+                if (trim($paragraph)) {
+                    $coverPersonal->letterBodies()->create([
+                        'paragraph_text' => $paragraph,
+                        'paragraph_order' => $index + 1,
+                    ]);
                 }
             }
         });
@@ -188,10 +183,36 @@ class CoverLetterController extends Controller
         $coverLetter = CoverPersonal::with(['recipientDetail', 'letterBodies'])
             ->where('user_id', $user->id)
             ->first();
+        $coverDetail = CoverDetail::where('user_id', $user->id)->latest()->first();
+        $resumePersonal = ResumeNamePersonal::where('user_id', $user->id)->first();
+
+        $letterBody = '';
+        if ($coverLetter && $coverLetter->letterBodies->isNotEmpty()) {
+            $letterBody = $coverLetter->letterBodies->pluck('paragraph_text')->implode("\n\n");
+        } else {
+            // Generate hardcoded content if no body exists
+            $placeholders = [
+                '[Hiring Manager Name]',
+                '[Company Name]',
+                '[Job Role]',
+                '[Your Name]',
+            ];
+            $values = [
+                'Hiring Manager', // This will be filled by the user on the build page
+                optional($coverDetail)->company_name ?? '[Company Name]',
+                optional($coverDetail)->job_role ?? '[Job Role]',
+                optional($resumePersonal)->full_name ?? '[Your Name]',
+            ];
+
+            $generatedText = "Dear [Hiring Manager Name],\n\nI am writing to express my interest in the [Job Role] position at [Company Name], which I saw advertised. With my skills and experience, I am confident I would be a great fit for this role.\n\nThank you for your time and consideration. I look forward to hearing from you soon.\n\nSincerely,\n[Your Name]";
+
+            $letterBody = str_replace($placeholders, $values, $generatedText);
+        }
 
         return view('cover-letter-build', [
             'template' => $template,
             'coverLetter' => $coverLetter,
+            'letterBody' => $letterBody,
         ]);
     }
 }
