@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\CoverPersonal;
+use App\Models\ResumeNamePersonal;
 
 class CoverLetterController extends Controller
 {
@@ -18,9 +19,12 @@ class CoverLetterController extends Controller
         $coverLetter = CoverPersonal::with(['recipientDetail', 'letterBodies'])
             ->where('user_id', $user->id)
             ->first();
+        $resumePersonal = ResumeNamePersonal::where('user_id', $user->id)->first();
 
-        // This view will be created in the next step
-        return view('cover-letter-template', ['coverLetter' => $coverLetter]);
+        return view('cover-letter-template', [
+            'coverLetter' => $coverLetter,
+            'resumePersonal' => $resumePersonal,
+        ]);
     }
 
     /**
@@ -98,5 +102,27 @@ class CoverLetterController extends Controller
     public function templates()
     {
         return view('cover-letter-templates');
+    }
+
+    /**
+     * Update the user's profile data.
+     */
+    public function updateProfile(Request $request)
+    {
+        $validatedData = $request->validate([
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:20',
+        ]);
+
+        $user = Auth::user();
+        $resumePersonal = ResumeNamePersonal::where('user_id', $user->id)->first();
+
+        if ($resumePersonal) {
+            $resumePersonal->update($validatedData);
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Profile not found.'], 404);
     }
 }

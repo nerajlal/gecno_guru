@@ -94,4 +94,96 @@
         </div>
     </section>
 
+    <!-- Profile Data Modal -->
+    <div id="profile-modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-2xl p-8 w-full max-w-lg">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">My Profile Data</h2>
+            <form id="profile-form">
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700 font-semibold mb-2">Name</label>
+                    <input type="text" id="name" name="full_name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
+                    <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-6">
+                    <label for="phone" class="block text-gray-700 font-semibold mb-2">Mobile Number</label>
+                    <input type="text" id="phone" name="phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="text-right flex gap-4">
+                    <button type="button" id="close-modal-btn" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition">Close</button>
+                    <button type="submit" id="save-profile-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 @include('includes.footer')
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const addProfileBtn = document.getElementById('add-profile-btn');
+    const profileModal = document.getElementById('profile-modal');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const profileForm = document.getElementById('profile-form');
+    const saveProfileBtn = document.getElementById('save-profile-btn');
+
+    addProfileBtn.addEventListener('click', function() {
+        @if ($resumePersonal)
+            profileForm.elements.full_name.value = '{{ $resumePersonal->full_name }}';
+            profileForm.elements.email.value = '{{ $resumePersonal->email }}';
+            profileForm.elements.phone.value = '{{ $resumePersonal->phone }}';
+        @endif
+        profileModal.classList.remove('hidden');
+    });
+
+    closeModalBtn.addEventListener('click', function() {
+        profileModal.classList.add('hidden');
+    });
+
+    profileForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        saveProfileBtn.disabled = true;
+        saveProfileBtn.textContent = 'Saving...';
+
+        const formData = new FormData(profileForm);
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        fetch('/profile/update', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken,
+                'Accept': 'application/json',
+            },
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                profileModal.classList.add('hidden');
+                // Optionally, show a success message to the user
+                alert('Profile updated successfully!');
+            } else {
+                // Handle errors, e.g., show validation messages
+                alert('Error updating profile: ' + (data.message || 'Unknown error'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An unexpected error occurred.');
+        })
+        .finally(() => {
+            saveProfileBtn.disabled = false;
+            saveProfileBtn.textContent = 'Save';
+        });
+    });
+
+    // Close modal if clicking outside of it
+    window.addEventListener('click', function(event) {
+        if (event.target === profileModal) {
+            profileModal.classList.add('hidden');
+        }
+    });
+});
+</script>
