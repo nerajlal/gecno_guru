@@ -124,6 +124,7 @@
         <div class="bg-white rounded-lg shadow-2xl p-8 w-full max-w-lg">
             <h2 class="text-2xl font-bold text-gray-900 mb-6">Job Description Details</h2>
             <form id="job-desc-form">
+                <input type="hidden" name="cover_detail_id" id="cover_detail_id">
                 <div class="mb-4">
                     <label for="company_name" class="block text-gray-700 font-semibold mb-2">Company Name</label>
                     <input type="text" id="company_name" name="company_name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
@@ -217,6 +218,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const saveJobDescBtn = document.getElementById('save-job-desc-btn');
 
     fetchJobDescBtn.addEventListener('click', function() {
+        @if ($coverDetail)
+            jobDescForm.elements.cover_detail_id.value = '{{ $coverDetail->id }}';
+            jobDescForm.elements.company_name.value = '{{ $coverDetail->company_name }}';
+            jobDescForm.elements.job_role.value = '{{ $coverDetail->job_role }}';
+            jobDescForm.elements.interview_date.value = '{{ $coverDetail->interview_date }}';
+        @else
+            jobDescForm.reset();
+            jobDescForm.elements.cover_detail_id.value = '';
+        @endif
         jobDescModal.classList.remove('hidden');
     });
 

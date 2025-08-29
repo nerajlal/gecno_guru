@@ -21,10 +21,12 @@ class CoverLetterController extends Controller
             ->where('user_id', $user->id)
             ->first();
         $resumePersonal = ResumeNamePersonal::where('user_id', $user->id)->first();
+        $coverDetail = CoverDetail::where('user_id', $user->id)->latest()->first();
 
         return view('cover-letter-template', [
             'coverLetter' => $coverLetter,
             'resumePersonal' => $resumePersonal,
+            'coverDetail' => $coverDetail,
         ]);
     }
 
@@ -128,20 +130,29 @@ class CoverLetterController extends Controller
     }
 
     /**
-     * Store the cover letter details.
+     * Store or update the cover letter details.
      */
     public function storeCoverDetails(Request $request)
     {
         $validatedData = $request->validate([
+            'cover_detail_id' => 'nullable|exists:cover_details,id',
             'company_name' => 'required|string|max:255',
             'job_role' => 'required|string|max:255',
             'interview_date' => 'nullable|date',
         ]);
 
         $user = Auth::user();
-        $validatedData['user_id'] = $user->id;
+        $data = [
+            'user_id' => $user->id,
+            'company_name' => $validatedData['company_name'],
+            'job_role' => $validatedData['job_role'],
+            'interview_date' => $validatedData['interview_date'],
+        ];
 
-        CoverDetail::create($validatedData);
+        CoverDetail::updateOrCreate(
+            ['id' => $request->cover_detail_id, 'user_id' => $user->id],
+            $data
+        );
 
         return response()->json(['success' => true]);
     }
