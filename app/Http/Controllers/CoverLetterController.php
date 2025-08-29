@@ -9,6 +9,8 @@ use App\Models\CoverPersonal;
 use App\Models\ResumeNamePersonal;
 use App\Models\CoverDetail;
 use App\Models\Transaction;
+use App\Models\CoverRecipientDetail;
+use App\Models\CoverLetterBody;
 
 class CoverLetterController extends Controller
 {
@@ -165,13 +167,49 @@ class CoverLetterController extends Controller
             ->where('user_id', $user->id)
             ->first();
 
-        $viewName = 'cover-letter-templates.' . $template;
+        // If a full cover letter exists, use it.
+        if ($coverLetter) {
+            $previewData = $coverLetter;
+        } else {
+            // Otherwise, create a temporary object for previewing.
+            $resumePersonal = ResumeNamePersonal::where('user_id', $user->id)->first();
+            $coverDetail = CoverDetail::where('user_id', $user->id)->latest()->first();
 
+            $previewData = new CoverPersonal([
+                'full_name' => optional($resumePersonal)->full_name ?? 'Your Name',
+                'address' => optional($resumePersonal)->address ?? '123 Main St, Anytown, USA',
+                'email' => optional($resumePersonal)->email ?? 'your.email@example.com',
+                'phone' => optional($resumePersonal)->phone ?? '555-123-4567',
+                'letter_date' => now(),
+                'closing_phrase' => 'Sincerely',
+            ]);
+
+            $recipientDetail = new CoverRecipientDetail([
+                'hiring_manager_name' => 'Hiring Manager',
+                'hiring_manager_title' => 'Hiring Title',
+                'company_name' => optional($coverDetail)->company_name ?? 'Target Company Inc.',
+                'company_address' => '123 Corporate Blvd, Business City',
+            ]);
+            $previewData->setRelation('recipientDetail', $recipientDetail);
+
+            $generatedText = "Dear Hiring Manager,\n\nI am writing to express my strong interest in the " . (optional($coverDetail)->job_role ?? 'position') . " at " . (optional($coverDetail)->company_name ?? 'your esteemed company') . ". Having followed your company's progress and innovations, I am confident that my skills and experience align perfectly with your requirements.\n\nThank you for considering my application. I have attached my resume for your review and look forward to discussing how I can contribute to your team.\n\n";
+            $paragraphs = preg_split("/\r\n|\n|\r/", $generatedText);
+            $letterBodies = new \Illuminate\Database\Eloquent\Collection();
+            foreach ($paragraphs as $index => $paragraph) {
+                if (trim($paragraph)) {
+                    $body = new CoverLetterBody(['paragraph_text' => $paragraph]);
+                    $letterBodies->add($body);
+                }
+            }
+            $previewData->setRelation('letterBodies', $letterBodies);
+        }
+
+        $viewName = 'cover-letter-templates.' . $template;
         if (!view()->exists($viewName)) {
             abort(404);
         }
 
-        return view($viewName, ['coverLetter' => $coverLetter]);
+        return view($viewName, ['coverLetter' => $previewData]);
     }
 
     /**
