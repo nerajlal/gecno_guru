@@ -48,6 +48,12 @@ Route::get('/terms', function () {
 Route::get('/faq', function () {
     return view('faq');
 });
+Route::get('/about', function () {
+    return view('about');
+});
+Route::get('/contact', function () {
+    return view('contact');
+});
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
