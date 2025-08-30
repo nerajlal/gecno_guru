@@ -45,6 +45,9 @@ Route::get('/refund-policy', function () {
 Route::get('/terms', function () {
     return view('terms');
 });
+Route::get('/faq', function () {
+    return view('faq');
+});
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');

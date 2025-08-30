@@ -66,6 +66,10 @@
                             <i class="fa fa-gavel mr-2 text-blue-400"></i>
                             <a href="/terms" class="hover:text-blue-400 transition-colors duration-200">Terms & Conditions</a>
                         </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-question-circle mr-2 text-blue-400"></i>
+                            <a href="/faq" class="hover:text-blue-400 transition-colors duration-200">FAQ</a>
+                        </li>
                     </ul>
                 </div>  
 
