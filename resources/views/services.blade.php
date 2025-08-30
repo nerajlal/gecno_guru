@@ -209,12 +209,13 @@
                 <button class="nav-tab px-4 py-2 font-medium text-gray-700 whitespace-nowrap" data-tab="portfolio">
                     <i class="fa-solid fa-globe mr-2"></i>Portfolio Websites
                 </button>
-                <button class="nav-tab px-4 py-2 font-medium text-gray-700 whitespace-nowrap" data-tab="coaching">
-                    <i class="fa-solid fa-graduation-cap mr-2"></i>Career Coaching
-                </button>
                 <button class="nav-tab px-4 py-2 font-medium text-gray-700 whitespace-nowrap" data-tab="interview">
                     <i class="fa-solid fa-comments mr-2"></i>Interview Prep
                 </button>
+                <button class="nav-tab px-4 py-2 font-medium text-gray-700 whitespace-nowrap" data-tab="coaching">
+                    <i class="fa-solid fa-graduation-cap mr-2"></i>Career Coaching
+                </button>
+                
             </div>
         </div>
     </section>
@@ -507,7 +508,7 @@
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-4">Career Coaching</h3>
                     <p class="text-gray-700 mb-6">Get personalized guidance from industry experts to accelerate your career growth.</p>
-                    <a href="#" class="text-yellow-600 font-semibold hover:text-yellow-700 transition-colors duration-200 flex items-center">
+                    <a href="/career" class="text-yellow-600 font-semibold hover:text-yellow-700 transition-colors duration-200 flex items-center">
                         Learn More <i class="fa-solid fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -518,7 +519,7 @@
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-4">Interview Preparation</h3>
                     <p class="text-gray-700 mb-6">Master the art of interviewing with mock sessions and personalized feedback.</p>
-                    <a href="#" class="text-red-600 font-semibold hover:text-red-700 transition-colors duration-200 flex items-center">
+                    <a href="/career" class="text-red-600 font-semibold hover:text-red-700 transition-colors duration-200 flex items-center">
                         Learn More <i class="fa-solid fa-arrow-right ml-2"></i>
                     </a>
                 </div>
