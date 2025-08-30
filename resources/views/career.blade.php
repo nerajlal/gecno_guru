@@ -1,0 +1,95 @@
+@include('includes.header')
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 gradient-bg overflow-hidden">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-20 left-10 w-20 h-20 bg-white bg-opacity-10 rounded-full floating"></div>
+            <div class="absolute top-40 right-20 w-16 h-16 bg-white bg-opacity-10 rounded-full floating" style="animation-delay: -2s;"></div>
+            <div class="absolute bottom-40 left-1/4 w-12 h-12 bg-white bg-opacity-10 rounded-full floating" style="animation-delay: -4s;"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center text-white">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">Career Coaching</h1>
+                <p class="text-xl text-blue-50 mb-8 max-w-3xl mx-auto leading-relaxed">
+                    Unlock your potential and land your dream job with our expert career coaching.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Our Career Coaching Services</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">We provide comprehensive support to help you succeed in your job search.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-3xl card-hover">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-chalkboard-teacher text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Online Interview Preparation</h3>
+                    <p class="text-gray-700">Ace your interviews with our personalized online coaching sessions and expert tips.</p>
+                </div>
+
+                <div class="bg-gray-50 p-8 rounded-3xl card-hover">
+                    <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-book-open text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Study Materials</h3>
+                    <p class="text-gray-700">Access our comprehensive library of study materials to prepare for technical and behavioral assessments.</p>
+                </div>
+
+                <div class="bg-gray-50 p-8 rounded-3xl card-hover">
+                    <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-file-alt text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Mock Tests</h3>
+                    <p class="text-gray-700">Simulate real interview scenarios with our mock tests and receive detailed feedback.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">How It Works</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Get started with our career coaching in a few simple steps.</p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8">
+
+                <div class="step-card bg-white p-6 rounded-2xl">
+                    <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg mb-4">1</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Choose Your Service</h3>
+                    <p class="text-gray-700">Select the coaching service that best fits your needs.</p>
+                </div>
+
+                <div class="step-card bg-white p-6 rounded-2xl">
+                    <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg mb-4">2</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Schedule a Session</h3>
+                    <p class="text-gray-700">Book a session with one of our expert career coaches.</p>
+                </div>
+
+                <div class="step-card bg-white p-6 rounded-2xl">
+                    <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg mb-4">3</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Get Personalized Coaching</h3>
+                    <p class="text-gray-700">Receive one-on-one guidance and support to achieve your career goals.</p>
+                </div>
+
+                <div class="step-card bg-white p-6 rounded-2xl">
+                    <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg mb-4">4</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Land Your Dream Job</h3>
+                    <p class="text-gray-700">Apply for jobs with confidence and get the offer you deserve.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+@include('includes.footer')

@@ -33,6 +33,9 @@ Route::get('/coverletter', function () {
 Route::get('/portfolio', function () {
     return view('portfolio');
 });
+Route::get('/career', function () {
+    return view('career');
+});
 Route::get('/privacy-policy', function () {
     return view('privacy-policy');
 });

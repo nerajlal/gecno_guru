@@ -43,6 +43,10 @@
                             <i class="fa fa-globe mr-2 text-blue-400"></i>
                             <a href="/portfolio" class="hover:text-blue-400 transition-colors duration-200">Portfolio Sites</a>
                         </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-user-tie mr-2 text-blue-400"></i>
+                            <a href="/career" class="hover:text-blue-400 transition-colors duration-200">Career Coaching</a>
+                        </li>
                     </ul>
                 </div>
 
