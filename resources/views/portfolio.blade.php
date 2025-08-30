@@ -116,7 +116,7 @@
             
             <div class="text-center mt-12">
                 @auth
-                    <a href="/resume-template" class="bg-blue-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-700 transition-all duration-200">
+                    <a href="/portfolio-template" class="bg-blue-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-700 transition-all duration-200">
                         Start Building Now
                     </a>
                 @else
@@ -165,7 +165,7 @@
             
             <div class="text-center mt-12">
                 @auth
-                    <a href="/resume-template" class="text-blue-600 font-bold hover:text-blue-700 transition-colors duration-200 flex items-center justify-center">
+                    <a href="/portfolio-template" class="text-blue-600 font-bold hover:text-blue-700 transition-colors duration-200 flex items-center justify-center">
                         View All Templates
                         <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
                     </a>
@@ -349,10 +349,10 @@
             
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 @auth
-                    <a href="/resume-template" class="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:scale-105 transition-all duration-200 glow shadow-lg">
+                    <a href="/portfolio-template" class="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:scale-105 transition-all duration-200 glow shadow-lg">
                         Start Building Now
                     </a>
-                    <a href="/resume-template" class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30">
+                    <a href="/portfolio-template" class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30">
                         View Live Examples
                     </a>
                 @else
