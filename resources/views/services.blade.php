@@ -390,12 +390,16 @@
                             </li>
                         </ul>
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <button class="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
-                                Find a Coach
-                            </button>
-                            <button class="border border-blue-600 text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors duration-200">
-                                View Coach Profiles
-                            </button>
+                            <a href="/career">
+                                <button class="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
+                                    Step to Career
+                                </button>
+                            </a>
+                            <a href="/career-template">
+                                <button class="border border-blue-600 text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors duration-200">
+                                    View Details
+                                </button>
+                            </a>
                         </div>
                     </div>
                     <div class="relative">
@@ -433,12 +437,16 @@
                             </li>
                         </ul>
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <button class="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
-                                Prepare for Interviews
-                            </button>
-                            <button class="border border-blue-600 text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors duration-200">
-                                Common Questions
-                            </button>
+                            <a href="/career">
+                                <button class="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
+                                    Prepare for Interviews
+                                </button>
+                            </a>
+                            <a href="/career-template">
+                                <button class="border border-blue-600 text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors duration-200">
+                                    Common Questions
+                                </button>
+                            </a>
                         </div>
                     </div>
                     <div class="lg:order-1 relative">
