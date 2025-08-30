@@ -89,6 +89,17 @@
                     <p class="text-gray-700">Apply for jobs with confidence and get the offer you deserve.</p>
                 </div>
             </div>
+            <div class="text-center mt-12">
+                @guest
+                <button class="bg-blue-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-700 transition-all duration-200 login-trigger">
+                    Start Building Now
+                </button>
+                @else
+                <a href="{{ route('career-template') }}" class="bg-blue-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-700 transition-all duration-200">
+                    Start Building Now
+                </a>
+                @endguest
+            </div>
         </div>
     </section>
 

@@ -60,6 +60,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/portfolio-template', function () {
         return view('portfolio-template');
     })->name('portfolio-template');
+    Route::get('/career-template', function () {
+        return view('career-template');
+    })->name('career-template');
     Route::post('/resume-template', [ResumeController::class, 'store'])->name('resume-template.store');
     Route::get('/resume/preview/{template}', [ResumeController::class, 'preview'])->name('resume.preview');
     Route::get('/resume/fullscreen-preview/{template}', [ResumeController::class, 'fullscreenPreview'])->name('resume.fullscreen.preview');
