@@ -40,25 +40,25 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
                 <div class="section-reveal stagger-1">
-                    <div class="text-3xl font-bold text-gradient mb-2">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">
                         <i class="fas fa-clock mr-2"></i>24/7
                     </div>
                     <div class="text-gray-600">Support Available</div>
                 </div>
                 <div class="section-reveal stagger-2">
-                    <div class="text-3xl font-bold text-gradient mb-2">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">
                         <i class="fas fa-reply mr-2"></i>2-4hrs
                     </div>
                     <div class="text-gray-600">Response Time</div>
                 </div>
                 <div class="section-reveal stagger-3">
-                    <div class="text-3xl font-bold text-gradient mb-2">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">
                         <i class="fas fa-users mr-2"></i>5K+
                     </div>
                     <div class="text-gray-600">Happy Clients</div>
                 </div>
                 <div class="section-reveal stagger-4">
-                    <div class="text-3xl font-bold text-gradient mb-2">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">
                         <i class="fas fa-star mr-2"></i>4.9/5
                     </div>
                     <div class="text-gray-600">Satisfaction Rate</div>
@@ -236,34 +236,11 @@
             </div>
         </div>
 
-        <!-- Map Section -->
-        <div class="section-reveal mt-20">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-gray-800 mb-4">
-                    <i class="fas fa-map text-blue-600 mr-3"></i>
-                    Find Us Here
-                </h2>
-                <p class="text-xl text-gray-600">Located in the heart of Tech City, India</p>
-            </div>
-            
-            <div class="map-container">
-                <div class="map-placeholder h-96 rounded-2xl shadow-2xl">
-                    <div class="map-overlay">
-                        <div class="text-center">
-                            <i class="fas fa-map-marker-alt text-4xl mb-4"></i>
-                            <div class="text-2xl mb-2">GecnoGuru Office</div>
-                            <div class="text-lg opacity-90">123 GecnoGuru Street, Tech City, India</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- FAQ Section -->
         <div class="section-reveal mt-20">
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-bold text-gray-800 mb-4">
-                    <i class="fas fa-question-circle text-purple-600 mr-3"></i>
+                    <i class="fas fa-question-circle text-blue-600 mr-3"></i>
                     Frequently Asked Questions
                 </h2>
                 <p class="text-xl text-gray-600">Quick answers to common questions</p>
@@ -280,7 +257,7 @@
                 
                 <div class="bg-white p-8 rounded-2xl shadow-lg card-hover">
                     <h3 class="text-xl font-bold text-gray-800 mb-3">
-                        <i class="fas fa-handshake text-green-600 mr-2"></i>
+                        <i class="fas fa-handshake text-blue-600 mr-2"></i>
                         Do you offer consultations?
                     </h3>
                     <p class="text-gray-600">Yes! We offer free 30-minute consultations to discuss your career goals and how we can help you achieve them.</p>
@@ -288,7 +265,7 @@
                 
                 <div class="bg-white p-8 rounded-2xl shadow-lg card-hover">
                     <h3 class="text-xl font-bold text-gray-800 mb-3">
-                        <i class="fas fa-globe text-purple-600 mr-2"></i>
+                        <i class="fas fa-globe text-blue-600 mr-2"></i>
                         Do you work with international clients?
                     </h3>
                     <p class="text-gray-600">Absolutely! We work with clients worldwide and accommodate different time zones for meetings and support.</p>
@@ -296,7 +273,7 @@
                 
                 <div class="bg-white p-8 rounded-2xl shadow-lg card-hover">
                     <h3 class="text-xl font-bold text-gray-800 mb-3">
-                        <i class="fas fa-shield-alt text-indigo-600 mr-2"></i>
+                        <i class="fas fa-shield-alt text-blue-600 mr-2"></i>
                         Is my information secure?
                     </h3>
                     <p class="text-gray-600">Yes, we take data security seriously. All communications and personal information are encrypted and kept confidential.</p>
