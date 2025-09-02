@@ -47,6 +47,7 @@ class PaymentController extends Controller
                 ->amount($amountInPaisa)
                 ->message($message)
                 ->redirectUrl($redirectUrl)
+                ->callbackUrl($callbackUrl)
                 ->build();
 
             $payResponse = $client->pay($payRequest);
