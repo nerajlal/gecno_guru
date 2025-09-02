@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use App\Models\Transaction;
 use PhonePe\payments\v2\standardCheckout\StandardCheckoutClient;
-use PhonePe\payments\v2\models\request\builders\StandardCheckoutPayRequestBuilder;
+use PhonePe\payments\v2\models\request\StandardCheckoutPayRequest;
+use PhonePe\payments\v2\standardCheckout\StandardCheckoutConstants;
 use PhonePe\common\exceptions\PhonePeException;
 
 class PaymentController extends Controller
@@ -42,13 +43,22 @@ class PaymentController extends Controller
 
         try {
             $message = 'Payment for resume plan.';
-            $payRequest = StandardCheckoutPayRequestBuilder::builder()
-                ->merchantOrderId($merchantOrderId)
-                ->amount($amountInPaisa)
-                ->message($message)
-                ->redirectUrl($redirectUrl)
-                ->callbackUrl($callbackUrl)
-                ->build();
+
+            $paymentFlow = [
+                "type" => StandardCheckoutConstants::STANDARD_CHECKOUT_PAYMENT_FLOW_TYPE,
+                "message" => $message,
+                "merchantUrls" => [
+                    "redirectUrl" => $redirectUrl,
+                    "callbackUrl" => $callbackUrl
+                ]
+            ];
+
+            $payRequest = new StandardCheckoutPayRequest(
+                $merchantOrderId,
+                $amountInPaisa,
+                null,
+                $paymentFlow
+            );
 
             $payResponse = $client->pay($payRequest);
 
