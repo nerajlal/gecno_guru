@@ -199,7 +199,7 @@
                             </div>
                         </div>
                         
-                        <div class="flex items-start group">
+                        <!-- <div class="flex items-start group">
                             <div class="contact-icon w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
                                 <i class="fas fa-map-marker-alt text-white text-xl"></i>
                             </div>
@@ -209,7 +209,7 @@
                                 <p class="text-lg text-purple-600 font-medium">Tech City, India</p>
                                 <p class="text-sm text-gray-500 mt-1">Open by appointment</p>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     
                     <div class="mt-12">
