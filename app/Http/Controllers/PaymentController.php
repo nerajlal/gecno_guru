@@ -119,14 +119,17 @@ class PaymentController extends Controller
         $transaction = Transaction::where('merchant_order_id', $merchantOrderId)->first();
 
         if ($transaction) {
-            if (isset($decodedPayload['success']) && $decodedPayload['success'] === true) {
+            $state = $decodedPayload['data']['state'] ?? null;
+            if ($state === 'COMPLETED') {
                 $transaction->status = 'COMPLETED';
                 $transaction->phonepe_transaction_id = $decodedPayload['data']['transactionId'];
-            } else {
+            } else if ($state === 'FAILED') {
                 $transaction->status = 'FAILED';
             }
+            // For other states like PENDING, we can let the status remain as it is.
+
             $transaction->save();
-            Log::info('PhonePe Callback: Transaction status updated for ' . $merchantOrderId);
+            Log::info('PhonePe Callback: Transaction status updated to ' . $transaction->status . ' for ' . $merchantOrderId);
             return response()->json(['status' => 'success']);
         } else {
             Log::warning('PhonePe Callback: Transaction not found for merchantOrderId: ' . $merchantOrderId);

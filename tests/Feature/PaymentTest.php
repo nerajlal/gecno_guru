@@ -59,10 +59,10 @@ class PaymentTest extends TestCase
         ]);
 
         $callbackPayload = [
-            'success' => true,
             'data' => [
                 'merchantOrderId' => $transaction->merchant_order_id,
                 'transactionId' => 'T123456789',
+                'state' => 'COMPLETED',
             ],
         ];
 
@@ -76,6 +76,39 @@ class PaymentTest extends TestCase
             'merchant_order_id' => $transaction->merchant_order_id,
             'status' => 'COMPLETED',
             'phonepe_transaction_id' => 'T123456789',
+        ]);
+    }
+
+    /**
+     * Test that the application can handle a failed PhonePe callback.
+     *
+     * @return void
+     */
+    public function test_it_handles_a_failed_phonepe_callback()
+    {
+        $user = User::factory()->create();
+        $transaction = Transaction::factory()->create([
+            'user_id' => $user->id,
+            'status' => 'PENDING',
+        ]);
+
+        $callbackPayload = [
+            'data' => [
+                'merchantOrderId' => $transaction->merchant_order_id,
+                'transactionId' => 'T123456789',
+                'state' => 'FAILED',
+            ],
+        ];
+
+        $encodedPayload = base64_encode(json_encode($callbackPayload));
+
+        $response = $this->call('POST', route('payment.callback'), [], [], [], [], $encodedPayload);
+
+        $response->assertStatus(200);
+
+        $this->assertDatabaseHas('resume_transactions', [
+            'merchant_order_id' => $transaction->merchant_order_id,
+            'status' => 'FAILED',
         ]);
     }
 }
