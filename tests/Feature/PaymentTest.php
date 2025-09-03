@@ -68,7 +68,7 @@ class PaymentTest extends TestCase
 
         $encodedPayload = base64_encode(json_encode($callbackPayload));
 
-        $response = $this->call('POST', route('payment.callback'), [], [], [], [], $encodedPayload);
+        $response = $this->postJson(route('payment.callback'), ['response' => $encodedPayload]);
 
         $response->assertStatus(200);
 
@@ -102,13 +102,14 @@ class PaymentTest extends TestCase
 
         $encodedPayload = base64_encode(json_encode($callbackPayload));
 
-        $response = $this->call('POST', route('payment.callback'), [], [], [], [], $encodedPayload);
+        $response = $this->postJson(route('payment.callback'), ['response' => $encodedPayload]);
 
         $response->assertStatus(200);
 
         $this->assertDatabaseHas('resume_transactions', [
             'merchant_order_id' => $transaction->merchant_order_id,
             'status' => 'FAILED',
+            'phonepe_transaction_id' => 'T123456789',
         ]);
     }
 }

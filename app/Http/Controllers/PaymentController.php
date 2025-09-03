@@ -91,8 +91,10 @@ class PaymentController extends Controller
      */
     public function handleCallback(Request $request)
     {
-        $payload = $request->getContent();
+        $payload = $request->input('response');
+        Log::info('PhonePe Callback Raw Payload: ' . $payload);
         $decodedPayload = json_decode(base64_decode($payload), true);
+        Log::info('PhonePe Callback Decoded Payload: ', (array) $decodedPayload);
 
         if (!$decodedPayload) {
             Log::error('PhonePe Callback: Invalid payload received.');
@@ -119,10 +121,13 @@ class PaymentController extends Controller
         $transaction = Transaction::where('merchant_order_id', $merchantOrderId)->first();
 
         if ($transaction) {
+            if (isset($decodedPayload['data']['transactionId'])) {
+                $transaction->phonepe_transaction_id = $decodedPayload['data']['transactionId'];
+            }
+
             $state = $decodedPayload['data']['state'] ?? null;
             if ($state === 'COMPLETED') {
                 $transaction->status = 'COMPLETED';
-                $transaction->phonepe_transaction_id = $decodedPayload['data']['transactionId'];
             } else if ($state === 'FAILED') {
                 $transaction->status = 'FAILED';
             }
