@@ -6,6 +6,7 @@ use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PricingController;
 use App\Http\Controllers\CoverLetterController;
+use App\Http\Controllers\PhonePeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,11 +48,20 @@ Route::middleware('auth')->group(function () {
     Route::post('/resume-template', [ResumeController::class, 'store'])->name('resume-template.store');
     Route::get('/resume/preview/{template}', [ResumeController::class, 'preview'])->name('resume.preview');
     Route::get('/resume/fullscreen-preview/{template}', [ResumeController::class, 'fullscreenPreview'])->name('resume.fullscreen.preview');
-    Route::post('/payment/initiate', [PaymentController::class, 'initiatePayment'])->name('payment.initiate');
-    Route::get('/payment/status/{merchantOrderId}', [PaymentController::class, 'paymentStatus'])->name('payment.status');
+    // Route::post('/payment/initiate', [PaymentController::class, 'initiatePayment'])->name('payment.initiate');
+    // Route::get('/payment/status/{merchantOrderId}', [PaymentController::class, 'paymentStatus'])->name('payment.status');
 });
 
 Route::post('/payment/callback', [PaymentController::class, 'handleCallback'])->name('payment.callback');
+
+// Route to show the payment button/form
+Route::get('/pay', [PhonePeController::class, 'showPaymentForm'])->name('payment.form');
+
+// Route to initiate the payment
+Route::post('/pay', [PhonePeController::class, 'initiatePayment'])->name('payment.initiate');
+
+// Route for the callback from PhonePe
+Route::post('/payment/callback', [PhonePeController::class, 'handleCallback'])->name('payment.callback');
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', function () {
