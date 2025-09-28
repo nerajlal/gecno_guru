@@ -22,6 +22,16 @@ use App\Http\Controllers\PhonePeController;
 Route::get('/', function () {
     return view('index');
 });
+
+// PhonePe payment routes (kept public so unauthenticated users can pay and PhonePe can hit the callback)
+// Route to show the payment button/form
+Route::get('/pay', [PhonePeController::class, 'showPaymentForm'])->name('payment.form');
+
+// Route to initiate the payment
+Route::post('/pay', [PhonePeController::class, 'initiatePayment'])->name('payment.initiate');
+
+// Route for the callback from PhonePe (must be accessible publicly)
+Route::post('/payment/callback', [PhonePeController::class, 'handleCallback'])->name('payment.callback');
 Route::get('/resume', function () {
     return view('resume');
 });
@@ -34,6 +44,11 @@ Route::get('/coverletter', function () {
 Route::get('/portfolio', function () {
     return view('portfolio');
 });
+
+Route::get('/phpinfo', function () {
+    phpinfo();
+});
+
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
@@ -50,18 +65,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/resume/fullscreen-preview/{template}', [ResumeController::class, 'fullscreenPreview'])->name('resume.fullscreen.preview');
     // Route::post('/payment/initiate', [PaymentController::class, 'initiatePayment'])->name('payment.initiate');
     // Route::get('/payment/status/{merchantOrderId}', [PaymentController::class, 'paymentStatus'])->name('payment.status');
+    // Route::post('/payment/callback', [PaymentController::class, 'handleCallback'])->name('payment.callback');
+
+
 });
 
-Route::post('/payment/callback', [PaymentController::class, 'handleCallback'])->name('payment.callback');
-
-// Route to show the payment button/form
-Route::get('/pay', [PhonePeController::class, 'showPaymentForm'])->name('payment.form');
-
-// Route to initiate the payment
-Route::post('/pay', [PhonePeController::class, 'initiatePayment'])->name('payment.initiate');
-
-// Route for the callback from PhonePe
-Route::post('/payment/callback', [PhonePeController::class, 'handleCallback'])->name('payment.callback');
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', function () {

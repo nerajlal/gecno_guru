@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class PhonePeController extends Controller
 {
@@ -27,13 +29,27 @@ class PhonePeController extends Controller
 
     public function initiatePayment(Request $request)
     {
+        // Preflight validation for required config
+        if (empty($this->merchantId) || empty($this->saltKey) || $this->saltIndex === null || $this->saltIndex === '') {
+            Log::error('PhonePe initiatePayment: Missing configuration', [
+                'merchantId_present' => !empty($this->merchantId),
+                'saltKey_present' => !empty($this->saltKey),
+                'saltIndex_present' => !($this->saltIndex === null || $this->saltIndex === ''),
+                'env' => $this->env,
+            ]);
+            return redirect()->route('payment.form')
+                ->withErrors(['error' => 'PhonePe configuration is missing. Please set PHONEPE_CLIENT_ID, PHONEPE_CLIENT_SECRET, PHONEPE_CLIENT_VERSION, and PHONEPE_ENV in .env and clear config cache.']);
+        }
+
         $merchantTransactionId = 'M' . time(); // Must be a unique ID
         $amount = 10000; // Amount in paise (100.00 INR)
+
+        $merchantUserId = 'MUID' . (auth()->id() ?? Str::random(10));
 
         $payload = [
             'merchantId' => $this->merchantId,
             'merchantTransactionId' => $merchantTransactionId,
-            'merchantUserId' => 'MUID' . auth()->id(), // Unique ID for the user
+            'merchantUserId' => $merchantUserId, // Unique ID for the user (handles guest users)
             'amount' => $amount,
             'redirectUrl' => route('payment.callback'),
             'redirectMode' => 'POST',
@@ -58,19 +74,26 @@ class PhonePeController extends Controller
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
             'X-VERIFY' => $xVerify,
+            'X-MERCHANT-ID' => $this->merchantId,
         ])->post($url, [
             'request' => $base64Payload,
         ]);
 
         $responseData = $response->json();
+        Log::info('PhonePe initiatePayment response', [
+            'status' => $response->status(),
+            'body' => $responseData,
+        ]);
         
         // Check if the request was successful
-        if ($responseData['success']) {
+        if ($response->ok() && isset($responseData['success']) && $responseData['success'] === true &&
+            isset($responseData['data']['instrumentResponse']['redirectInfo']['url'])) {
             // Redirect the user to the PhonePe payment page
             return redirect()->away($responseData['data']['instrumentResponse']['redirectInfo']['url']);
         } else {
             // Handle the error
-            return back()->withErrors(['error' => $responseData['message']]);
+            $message = $responseData['message'] ?? 'Payment initiation failed. Please try again.';
+            return redirect()->route('payment.form')->withErrors(['error' => $message]);
         }
     }
     
