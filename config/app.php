@@ -159,6 +159,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Gemini\Laravel\ServiceProvider::class,
 
         /*
          * Application Service Providers...
