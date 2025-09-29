@@ -7,6 +7,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PricingController;
 use App\Http\Controllers\CoverLetterController;
 use App\Http\Controllers\GeminiTestController;
+use App\Http\Controllers\ImportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +79,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/resume/fullscreen-preview/{template}', [ResumeController::class, 'fullscreenPreview'])->name('resume.fullscreen.preview');
     Route::post('/payment/initiate', [PaymentController::class, 'initiatePayment'])->name('payment.initiate');
     Route::get('/payment/status/{merchantOrderId}', [PaymentController::class, 'paymentStatus'])->name('payment.status');
+
+    // Import Routes
+    Route::get('/import/linkedin', [ImportController::class, 'redirectToLinkedin'])->name('import.linkedin');
+    Route::get('/import/linkedin/callback', [ImportController::class, 'handleLinkedinCallback']);
+    Route::get('/import/github', [ImportController::class, 'redirectToGithub'])->name('import.github');
+    Route::get('/import/github/callback', [ImportController::class, 'handleGithubCallback']);
 });
 
 Route::post('/payment/callback', [PaymentController::class, 'handleCallback'])->name('payment.callback');

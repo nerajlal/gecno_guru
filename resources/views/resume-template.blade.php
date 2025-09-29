@@ -34,6 +34,12 @@
             Upgrade My Plan
         </a>
         @endif
+        <a href="{{ route('import.linkedin') }}" id="import-linkedin-btn" class="bg-blue-800 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-900 transition flex items-center gap-2">
+            <i class="fa-brands fa-linkedin"></i> Import from LinkedIn
+        </a>
+        <a href="{{ route('import.github') }}" id="import-github-btn" class="bg-gray-800 text-white px-4 py-2 rounded-lg shadow-md hover:bg-gray-900 transition flex items-center gap-2">
+            <i class="fa-brands fa-github"></i> Import from GitHub
+        </a>
         <button id="add-new-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700 transition">
             Add My Data
         </button>
@@ -621,6 +627,66 @@
             });
         });
 
+        @if(session('imported_data'))
+        const importedData = @json(session('imported_data'));
+
+        function populateFormWithImportedData() {
+            if (importedData.full_name) {
+                document.getElementById('full_name').value = importedData.full_name;
+            }
+            if (importedData.email) {
+                document.getElementById('email').value = importedData.email;
+            }
+            if (importedData.summary) {
+                document.getElementById('summary').value = importedData.summary;
+            }
+
+            if (importedData.projects && importedData.projects.length > 0) {
+                const projectsContainer = document.getElementById('projects-container');
+                const projectEntries = projectsContainer.querySelectorAll('.project-entry');
+                const firstProjectEntry = projectEntries[0];
+                const isFirstEntryEmpty = Array.from(firstProjectEntry.querySelectorAll('input, textarea')).every(input => input.value.trim() === '');
+
+                if (projectEntries.length === 1 && isFirstEntryEmpty) {
+                    // Use the first empty entry for the first imported project
+                    const firstProject = importedData.projects[0];
+                    firstProjectEntry.querySelector('input[name="project_name[]"]').value = firstProject.project_name || '';
+                    firstProjectEntry.querySelector('textarea[name="project_key_points[]"]').value = firstProject.project_key_points || '';
+                    firstProjectEntry.querySelector('input[name="technologies[]"]').value = firstProject.technologies || '';
+                    firstProjectEntry.querySelector('input[name="tools[]"]').value = firstProject.tools || '';
+
+                    // Add the rest of the projects
+                    const remainingProjects = importedData.projects.slice(1);
+                    remainingProjects.forEach(project => {
+                        const newProjectEntry = firstProjectEntry.cloneNode(true);
+                        newProjectEntry.querySelector('input[name="project_name[]"]').value = project.project_name || '';
+                        newProjectEntry.querySelector('textarea[name="project_key_points[]"]').value = project.project_key_points || '';
+                        newProjectEntry.querySelector('input[name="technologies[]"]').value = project.technologies || '';
+                        newProjectEntry.querySelector('input[name="tools[]"]').value = project.tools || '';
+                        projectsContainer.appendChild(newProjectEntry);
+                    });
+                } else {
+                    // Append all imported projects
+                    importedData.projects.forEach(project => {
+                        const newProjectEntry = firstProjectEntry.cloneNode(true);
+                        // Clear the cloned inputs before populating
+                        newProjectEntry.querySelectorAll('input, textarea').forEach(i => i.value = '');
+                        newProjectEntry.querySelector('input[name="project_name[]"]').value = project.project_name || '';
+                        newProjectEntry.querySelector('textarea[name="project_key_points[]"]').value = project.project_key_points || '';
+                        newProjectEntry.querySelector('input[name="technologies[]"]').value = project.technologies || '';
+                        newProjectEntry.querySelector('input[name="tools[]"]').value = project.tools || '';
+                        projectsContainer.appendChild(newProjectEntry);
+                    });
+                }
+            }
+            openModal();
+        }
+
+        // Check if we should open the modal on page load
+        if (Object.keys(importedData).length > 0) {
+            populateFormWithImportedData();
+        }
+        @endif
     });
 </script>
 
