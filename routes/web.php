@@ -6,6 +6,7 @@ use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PricingController;
 use App\Http\Controllers\CoverLetterController;
+use App\Http\Controllers\GeminiTestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,3 +87,5 @@ Route::middleware(['auth', 'admin'])->group(function () {
         return view('admin.dashboard');
     })->name('dashboard');
 });
+
+Route::get('/gemini-test', [GeminiTestController::class, 'test']);
