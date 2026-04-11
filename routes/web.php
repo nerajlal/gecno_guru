@@ -7,6 +7,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PricingController;
 use App\Http\Controllers\CoverLetterController;
 use App\Http\Controllers\PhonePeController;
+use App\Http\Controllers\SessionBookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,7 +67,11 @@ Route::middleware('auth')->group(function () {
     // Route::post('/payment/initiate', [PaymentController::class, 'initiatePayment'])->name('payment.initiate');
     // Route::get('/payment/status/{merchantOrderId}', [PaymentController::class, 'paymentStatus'])->name('payment.status');
     // Route::post('/payment/callback', [PaymentController::class, 'handleCallback'])->name('payment.callback');
-
+    // 1-on-1 Session Routes
+    Route::get('/sessions', [SessionBookingController::class, 'index'])->name('session-booking.index');
+    Route::get('/book-session/{sessionType}', [SessionBookingController::class, 'create'])->name('session-booking.create');
+    Route::post('/book-session', [SessionBookingController::class, 'store'])->name('session-booking.store');
+    Route::get('/book-session/payment/{booking}', [SessionBookingController::class, 'payment'])->name('session-booking.payment');
 
 });
 

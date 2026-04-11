@@ -1,8 +1,7 @@
 <?php
 return [
-    'merchant_id' => env('PHONEPE_CLIENT_ID'),
-    'salt_key' => env('PHONEPE_CLIENT_SECRET'),
-    'salt_index' => env('PHONEPE_CLIENT_VERSION'),
+    'client_id' => env('PHONEPE_CLIENT_ID'),
+    'client_secret' => env('PHONEPE_CLIENT_SECRET'),
+    'client_version' => env('PHONEPE_CLIENT_VERSION', 1),
     'env' => env('PHONEPE_ENV', 'UAT'), // Default to UAT
 ];
-

@@ -153,6 +153,7 @@
                                 <a href="/resume" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md">Resume Builder</a>
                                 <a href="/portfolio" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md">Portfolio Builder</a>
                                 <a href="/coverletter" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md">Cover Letter Builder</a>
+                                <a href="{{ route('session-booking.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md">1-on-1 Sessions</a>
                         </div>
                     </div>
                     <a href="#about" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">About</a>
@@ -195,6 +196,7 @@
                             <a href="/resume" class="block pl-4 text-white hover:text-blue-300 transition-colors duration-200 font-medium">Resume Builder</a>
                             <a href="/portfolio" class="block pl-4 text-white hover:text-blue-300 transition-colors duration-200 font-medium">Portfolio Builder</a>
                             <a href="/coverletter" class="block pl-4 text-white hover:text-blue-300 transition-colors duration-200 font-medium">Cover Letter Builder</a>
+                            <a href="{{ route('session-booking.index') }}" class="block pl-4 text-white hover:text-blue-300 transition-colors duration-200 font-medium">1-on-1 Sessions</a>
                     </div>
                 </div>
                 <a href="#about" class="text-white hover:text-blue-300 transition-colors duration-200 font-medium">About</a>
