@@ -1,115 +1,189 @@
 @include('includes.header')
 
-<section class="py-16 bg-gray-50 pt-24">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Cover Letter Builder</h1>
-            <p class="text-lg text-gray-600">Craft a professional cover letter that stands out.</p>
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 gradient-bg overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-20 left-10 w-20 h-20 bg-white bg-opacity-10 rounded-full floating"></div>
+            <div class="absolute top-40 right-20 w-16 h-16 bg-white bg-opacity-10 rounded-full floating" style="animation-delay: -2s;"></div>
+            <div class="absolute bottom-40 left-1/4 w-12 h-12 bg-white bg-opacity-10 rounded-full floating" style="animation-delay: -4s;"></div>
         </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center text-white">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">Cover Letter Templates</h1>
+                <p class="text-xl text-blue-50 mb-8 max-w-3xl mx-auto leading-relaxed">
+                    Choose a professionally designed template to match your style.
+                </p>
+            </div>
+        </div>
+    </section>
 
-        <div class="bg-white p-8 rounded-xl shadow-lg">
-            <form action="{{ route('cover-letter.store') }}" method="POST">
-                @csrf
-                <input type="hidden" name="cover_letter_id" value="{{ $coverLetter->id ?? '' }}">
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Heading -->
+            <div class="text-center mb-12">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Choose Your Cover Letter Style</h2>
+                <p class="text-lg text-gray-600">Select from our professional templates designed to impress employers.</p>
+            </div>
 
-                <!-- Your Information -->
-                <div class="mb-8">
-                    <h3 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-4">Your Information</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="full_name" class="block text-gray-700 mb-2">Full Name</label>
-                            <input type="text" name="full_name" class="w-full border border-gray-300 rounded-lg py-2 px-4" value="{{ old('full_name', $coverLetter->full_name ?? '') }}" required>
-                        </div>
-                        <div>
-                            <label for="email" class="block text-gray-700 mb-2">Email</label>
-                            <input type="email" name="email" class="w-full border border-gray-300 rounded-lg py-2 px-4" value="{{ old('email', $coverLetter->email ?? '') }}" required>
-                        </div>
-                        <div>
-                            <label for="phone" class="block text-gray-700 mb-2">Phone</label>
-                            <input type="tel" name="phone" class="w-full border border-gray-300 rounded-lg py-2 px-4" value="{{ old('phone', $coverLetter->phone ?? '') }}" required>
-                        </div>
-                        <div>
-                            <label for="address" class="block text-gray-700 mb-2">Address</label>
-                            <input type="text" name="address" class="w-full border border-gray-300 rounded-lg py-2 px-4" value="{{ old('address', $coverLetter->address ?? '') }}" required>
+            <!-- Action Buttons -->
+            <div class="text-right mb-8 flex justify-end gap-4">
+                <button id="add-profile-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700 transition">
+                    My Profile Data
+                </button>
+                <button id="fetch-job-desc-btn" class="bg-green-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-700 transition">
+                    Job Description
+                </button>
+            </div>
+
+            <!-- Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                <!-- Card 1 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                    <img src="https://images.unsplash.com/photo-1554774853-719586f82d77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Classic Cover Letter" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800">Classic Professional</h3>
+                        <p class="text-gray-600 mt-2 text-sm">A timeless design for any industrial profesionals.</p>
+                        <div class="mt-6 flex gap-3">
+                            <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Live Preview</a>
+                            <a href="{{ route('cover-letter-template.show') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Use Template</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Recipient Information -->
-                <div class="mb-8">
-                    <h3 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-4">Recipient Information</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="letter_date" class="block text-gray-700 mb-2">Date</label>
-                            <input type="date" name="letter_date" class="w-full border border-gray-300 rounded-lg py-2 px-4" value="{{ old('letter_date', $coverLetter->letter_date ?? date('Y-m-d')) }}" required>
-                        </div>
-                        <div>
-                            <label for="hiring_manager_name" class="block text-gray-700 mb-2">Hiring Manager Name</label>
-                            <input type="text" name="hiring_manager_name" class="w-full border border-gray-300 rounded-lg py-2 px-4" value="{{ old('hiring_manager_name', $coverLetter->recipientDetail->hiring_manager_name ?? '') }}" required>
-                        </div>
-                        <div>
-                            <label for="hiring_manager_title" class="block text-gray-700 mb-2">Hiring Manager Title (Optional)</label>
-                            <input type="text" name="hiring_manager_title" class="w-full border border-gray-300 rounded-lg py-2 px-4" value="{{ old('hiring_manager_title', $coverLetter->recipientDetail->hiring_manager_title ?? '') }}">
-                        </div>
-                        <div>
-                            <label for="company_name" class="block text-gray-700 mb-2">Company Name</label>
-                            <input type="text" name="company_name" class="w-full border border-gray-300 rounded-lg py-2 px-4" value="{{ old('company_name', $coverLetter->recipientDetail->company_name ?? '') }}" required>
-                        </div>
-                        <div class="md:col-span-2">
-                            <label for="company_address" class="block text-gray-700 mb-2">Company Address</label>
-                            <input type="text" name="company_address" class="w-full border border-gray-300 rounded-lg py-2 px-4" value="{{ old('company_address', $coverLetter->recipientDetail->company_address ?? '') }}" required>
+                <!-- Card 2 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Modern Professional" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800">Modern Professional</h3>
+                        <p class="text-gray-600 mt-2 text-sm">A professional design with a modern style.</p>
+                        <div class="mt-6 flex gap-3">
+                            <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Live Preview</a>
+                            <a href="{{ route('cover-letter-template.show') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Use Template</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Letter Body -->
-                <div class="mb-8">
-                    <h3 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-4">Letter Body</h3>
-                    <div id="letter-body-container">
-                        @forelse ($coverLetter->letterBodies ?? [] as $body)
-                            <div class="letter-paragraph mb-4">
-                                <textarea name="letter_body[]" rows="5" class="w-full border border-gray-300 rounded-lg py-2 px-4" placeholder="Enter a paragraph..." required>{{ $body->paragraph_text }}</textarea>
-                            </div>
-                        @empty
-                            <div class="letter-paragraph mb-4">
-                                <textarea name="letter_body[]" rows="5" class="w-full border border-gray-300 rounded-lg py-2 px-4" placeholder="Enter a paragraph..." required></textarea>
-                            </div>
-                        @endforelse
-                    </div>
-                    <button type="button" id="add-paragraph-btn" class="text-blue-600 hover:text-blue-700 font-semibold mt-2">+ Add Paragraph</button>
-                </div>
-
-                <!-- Closing -->
-                <div class="mb-8">
-                    <h3 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-4">Closing</h3>
-                    <div>
-                        <label for="closing_phrase" class="block text-gray-700 mb-2">Closing Phrase</label>
-                        <input type="text" name="closing_phrase" class="w-full border border-gray-300 rounded-lg py-2 px-4" value="{{ old('closing_phrase', $coverLetter->closing_phrase ?? 'Sincerely') }}" required>
+                <!-- Card 3 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Creative" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800">Creative</h3>
+                        <p class="text-gray-600 mt-2 text-sm">A bold design for creative industries.</p>
+                        <div class="mt-6 flex gap-3">
+                            <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Live Preview</a>
+                            <a href="{{ route('cover-letter-template.show') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Use Template</a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="text-right">
-                    <button type="submit" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Save Cover Letter</button>
+                <!-- Card 4 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Simple & Clean" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800">Simple & Clean</h3>
+                        <p class="text-gray-600 mt-2 text-sm">A minimal design focused on content.</p>
+                        <div class="mt-6 flex gap-3">
+                            <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Live Preview</a>
+                            <a href="{{ route('cover-letter-template.show') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Use Template</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Data Modal -->
+    <div id="profile-modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-2xl p-8 w-full max-w-lg">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">My Profile Data</h2>
+            <form id="profile-form">
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700 font-semibold mb-2">Name</label>
+                    <input type="text" id="name" name="full_name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
+                    <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-6">
+                    <label for="phone" class="block text-gray-700 font-semibold mb-2">Mobile Number</label>
+                    <input type="text" id="phone" name="phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="text-right flex gap-4">
+                    <button type="button" id="close-modal-btn" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition">Close</button>
+                    <button type="submit" id="save-profile-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Save</button>
                 </div>
             </form>
         </div>
     </div>
-</section>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const addParagraphBtn = document.getElementById('add-paragraph-btn');
-    const letterBodyContainer = document.getElementById('letter-body-container');
-
-    if (addParagraphBtn) {
-        addParagraphBtn.addEventListener('click', () => {
-            const newParagraph = document.createElement('div');
-            newParagraph.classList.add('letter-paragraph', 'mb-4');
-            newParagraph.innerHTML = `<textarea name="letter_body[]" rows="5" class="w-full border border-gray-300 rounded-lg py-2 px-4" placeholder="Enter a paragraph..." required></textarea>`;
-            letterBodyContainer.appendChild(newParagraph);
-        });
-    }
-});
-</script>
 
 @include('includes.footer')
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const addProfileBtn = document.getElementById('add-profile-btn');
+    const profileModal = document.getElementById('profile-modal');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const profileForm = document.getElementById('profile-form');
+    const saveProfileBtn = document.getElementById('save-profile-btn');
+
+    addProfileBtn.addEventListener('click', function() {
+        @if ($resumePersonal)
+            profileForm.elements.full_name.value = '{{ $resumePersonal->full_name }}';
+            profileForm.elements.email.value = '{{ $resumePersonal->email }}';
+            profileForm.elements.phone.value = '{{ $resumePersonal->phone }}';
+        @endif
+        profileModal.classList.remove('hidden');
+    });
+
+    closeModalBtn.addEventListener('click', function() {
+        profileModal.classList.add('hidden');
+    });
+
+    profileForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        saveProfileBtn.disabled = true;
+        saveProfileBtn.textContent = 'Saving...';
+
+        const formData = new FormData(profileForm);
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        fetch('/profile/update', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken,
+                'Accept': 'application/json',
+            },
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                profileModal.classList.add('hidden');
+                // Optionally, show a success message to the user
+                alert('Profile updated successfully!');
+            } else {
+                // Handle errors, e.g., show validation messages
+                alert('Error updating profile: ' + (data.message || 'Unknown error'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An unexpected error occurred.');
+        })
+        .finally(() => {
+            saveProfileBtn.disabled = false;
+            saveProfileBtn.textContent = 'Save';
+        });
+    });
+
+    // Close modal if clicking outside of it
+    window.addEventListener('click', function(event) {
+        if (event.target === profileModal) {
+            profileModal.classList.add('hidden');
+        }
+    });
+});
+</script>

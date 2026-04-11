@@ -45,6 +45,27 @@ Route::get('/coverletter', function () {
 Route::get('/portfolio', function () {
     return view('portfolio');
 });
+Route::get('/career', function () {
+    return view('career');
+});
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+});
+Route::get('/refund-policy', function () {
+    return view('refund-policy');
+});
+Route::get('/terms', function () {
+    return view('terms');
+});
+Route::get('/faq', function () {
+    return view('faq');
+});
+Route::get('/about', function () {
+    return view('about');
+});
+Route::get('/contact', function () {
+    return view('contact');
+});
 
 Route::get('/phpinfo', function () {
     phpinfo();
@@ -56,11 +77,18 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/cover-letter-template', [CoverLetterController::class, 'show'])->name('cover-letter.show');
-    Route::post('/cover-letter-template', [CoverLetterController::class, 'store'])->name('cover-letter.store');
+    Route::get('/cover-letter-template', [CoverLetterController::class, 'show'])->name('cover-letter-template.show');
+    Route::post('/cover-letter-template', [CoverLetterController::class, 'store'])->name('cover-letter-template.store');
+    Route::post('/profile/update', [CoverLetterController::class, 'updateProfile'])->name('profile.update');
 
     Route::get('/resume-build', [PricingController::class, 'show'])->name('resume-build');
     Route::get('/resume-template', [ResumeController::class, 'show'])->name('resume-template');
+    Route::get('/portfolio-template', function () {
+        return view('portfolio-template');
+    })->name('portfolio-template');
+    Route::get('/career-template', function () {
+        return view('career-template');
+    })->name('career-template');
     Route::post('/resume-template', [ResumeController::class, 'store'])->name('resume-template.store');
     Route::get('/resume/preview/{template}', [ResumeController::class, 'preview'])->name('resume.preview');
     Route::get('/resume/fullscreen-preview/{template}', [ResumeController::class, 'fullscreenPreview'])->name('resume.fullscreen.preview');
@@ -81,3 +109,5 @@ Route::middleware(['auth', 'admin'])->group(function () {
         return view('admin.dashboard');
     })->name('dashboard');
 });
+
+Route::get('/gemini-test', [GeminiTestController::class, 'test']);
