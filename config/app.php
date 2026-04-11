@@ -157,9 +157,7 @@ return [
 
     'providers' => ServiceProvider::defaultProviders()->merge([
         /*
-         * Package Service Providers...
          */
-        Gemini\Laravel\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -169,7 +167,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\PhonePeServiceProvider::class,
     ])->toArray(),
 
     /*
