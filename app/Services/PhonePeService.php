@@ -1,135 +1,115 @@
-<?php
+﻿<?php
 
 namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Str;
 
 class PhonePeService
 {
     private $clientId;
     private $clientSecret;
-    private $clientVersion;
     private $env;
 
     public function __construct()
     {
         $this->clientId = config('phonepe.client_id');
         $this->clientSecret = config('phonepe.client_secret');
-        $this->clientVersion = config('phonepe.client_version', 1);
         $this->env = config('phonepe.env', 'UAT');
     }
 
-    /**
-     * Get OAuth2 Access Token with caching
-     */
     public function getAccessToken()
     {
-        $cacheKey = 'phonepe_access_token_' . $this->clientId;
-        
-        if (Cache::has($cacheKey)) {
-            return Cache::get($cacheKey);
-        }
+        $cacheKey = "phonepe_access_token_" . $this->clientId;
+        if (Cache::has($cacheKey)) { return Cache::get($cacheKey); }
 
-        $url = ($this->env === 'PROD') 
-            ? 'https://api.phonepe.com/apis/identity-manager/v1/oauth/token' 
-            : 'https://api-preprod.phonepe.com/apis/pg-sandbox/v1/oauth/token';
+        $url = ($this->env === "PROD")
+            ? "https://api.phonepe.com/apis/identity-manager/v1/oauth/token"
+            : "https://api-preprod.phonepe.com/apis/pg-sandbox/v1/oauth/token";
+
+        Log::info("PhonePe Access Token Request", ["url" => $url, "client_id" => $this->clientId]);
 
         $response = Http::withoutVerifying()->asForm()->post($url, [
-            'client_id' => $this->clientId,
-            'client_secret' => $this->clientSecret,
-            'client_version' => $this->clientVersion,
-            'grant_type' => 'client_credentials',
+            "client_id" => $this->clientId,
+            "client_secret" => $this->clientSecret,
+            "client_version" => 1,
+            "grant_type" => "client_credentials",
         ]);
 
         if ($response->successful()) {
             $data = $response->json();
-            $token = $data['access_token'];
-            // Cache token slightly less than expiry (usually 3600s)
-            Cache::put($cacheKey, $token, now()->addSeconds($data['expires_in'] - 60));
-            return $token;
-        }
-
-        Log::error('PhonePe Auth Failed', ['response' => $response->json()]);
-        return null;
-    }
-
-    /**
-     * Initiate a Standard Checkout Transaction
-     */
-    public function initiatePayment($amountInRupees, $merchantTransactionId, $redirectUrl)
-    {
-        $accessToken = $this->getAccessToken();
-        if (!$accessToken) return ['success' => false, 'message' => 'Authentication failed'];
-
-        $amountInPaise = (int)($amountInRupees * 100);
-        
-        $payload = [
-            'merchantId' => $this->clientId,
-            'merchantOrderId' => $merchantTransactionId,
-            'merchantTransactionId' => $merchantTransactionId,
-            'merchantUserId' => 'MUID' . auth()->id(),
-            'amount' => $amountInPaise,
-            'redirectUrl' => $redirectUrl,
-            'message' => 'Payment for Session',
-            'mobileNumber' => '9999999999',
-            'useDefaultCustomHooks' => true
-        ];
-
-        $url = ($this->env === 'PROD') 
-            ? 'https://api.phonepe.com/apis/pg/checkout/v2/pay' 
-            : 'https://api-preprod.phonepe.com/apis/pg-sandbox/pg/checkout/v2/pay';
-
-        $response = Http::withoutVerifying()->withHeaders([
-            'Authorization' => 'O-Bearer ' . $accessToken,
-            'Content-Type' => 'application/json',
-        ])->post($url, $payload);
-
-        Log::info('PhonePe Initiation Response', [
-            'status' => $response->status(),
-            'body' => $response->json(),
-            'payload' => $payload
-        ]);
-
-        if ($response->successful()) {
-            $data = $response->json();
-            
-            // Fallback check for different V2 Standard Checkout response structures
-            $redirectUrl = $data['data']['redirectUrl'] ?? $data['redirectUrl'] ?? null;
-
-            if ($data['success'] && $redirectUrl) {
-                return [
-                    'success' => true,
-                    'redirectUrl' => $redirectUrl
-                ];
+            $token = $data["access_token"] ?? null;
+            if ($token) {
+                Cache::put($cacheKey, $token, now()->addSeconds(($data["expires_in"] ?? 3600) - 60));
+                return $token;
             }
         }
 
-        return [
-            'success' => false, 
-            'message' => $response->json()['message'] ?? 'Payment initiation failed'
-        ];
+        Log::error("PhonePe Auth Failed", ["status" => $response->status(), "body" => $response->json()]);
+        return null;
     }
 
-    /**
-     * Verify Transaction Status
-     */
-    public function verifyStatus($merchantTransactionId)
+    public function initiatePayment($amount, $transactionId, $redirectUrl)
     {
-        $accessToken = $this->getAccessToken();
-        if (!$accessToken) return null;
+        Log::info("Service: initiatePayment calling getAccessToken");
+        $token = $this->getAccessToken();
+        if (!$token) {
+            Log::error("Service: initiatePayment - No token");
+            return ["success" => false, "message" => "Auth Failed"];
+        }
 
-        $url = ($this->env === 'PROD') 
-            ? "https://api.phonepe.com/apis/pg/checkout/v2/status/{$this->clientId}/{$merchantTransactionId}" 
-            : "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/checkout/v2/status/{$this->clientId}/{$merchantTransactionId}";
+        $url = ($this->env === "PROD")
+            ? "https://api.phonepe.com/apis/pg/checkout/v2/pay"
+            : "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/checkout/v2/pay";
+
+        $payload = [
+            "merchantOrderId" => $transactionId,
+            "merchantTransactionId" => $transactionId,
+            "amount" => (int)($amount * 100),
+            "merchantUserId" => "MUID" . (auth()->id() ?? 0),
+            "mobileNumber" => "9999999999",
+            "paymentFlow" => [
+                "type" => "PG_CHECKOUT",
+                "merchantUrls" => [
+                    "redirectUrl" => $redirectUrl
+                ]
+            ],
+            "useDefaultCustomHooks" => true
+        ];
+
+        Log::info("PhonePe Payment Request", ["url" => $url, "payload" => $payload]);
 
         $response = Http::withoutVerifying()->withHeaders([
-            'Authorization' => 'O-Bearer ' . $accessToken,
-            'Content-Type' => 'application/json',
-        ])->get($url);
+            "Authorization" => "O-Bearer " . $token,
+            "Content-Type" => "application/json",
+        ])->post($url, $payload);
 
-        return $response->json();
+        $data = $response->json();
+        Log::info("PhonePe Payment Response", ["status" => $response->status(), "body" => $data]);
+
+        if ($response->successful()) {
+            $redirect = $data["data"]["redirectUrl"] ?? $data["redirectUrl"] ?? null;
+            if ($redirect) {
+                return ["success" => true, "redirectUrl" => $redirect];
+            }
+        }
+
+        return ["success" => false, "message" => $data["message"] ?? "Failed"];
+    }
+
+    public function verifyStatus($transactionId)
+    {
+        $token = $this->getAccessToken();
+        if (!$token) return null;
+
+        $url = ($this->env === "PROD")
+            ? "https://api.phonepe.com/apis/pg/checkout/v2/status/{$this->clientId}/{$transactionId}"
+            : "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/checkout/v2/status/{$this->clientId}/{$transactionId}";
+
+        return Http::withoutVerifying()->withHeaders([
+            "Authorization" => "O-Bearer " . $token,
+            "Content-Type" => "application/json",
+        ])->get($url)->json();
     }
 }
