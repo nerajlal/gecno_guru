@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -18,6 +19,8 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
+        Log::info('Registration attempt started', ['email' => $request->email, 'name' => $request->name]);
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -25,20 +28,27 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
+            Log::warning('Registration validation failed', ['errors' => $validator->errors()->toArray()]);
             return redirect('/#register')
                         ->withErrors($validator)
                         ->withInput();
         }
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'user_type' => 'user', 
-            'status' => 0, 
-        ]);
+        try {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'user_type' => 'user', 
+                'status' => 0, 
+            ]);
 
-        return redirect('/')->with('registration_success', true);
+            Log::info('User successfully registered', ['user_id' => $user->id, 'email' => $user->email]);
+            return redirect('/')->with('registration_success', true);
+        } catch (\Exception $e) {
+            Log::error('Registration failed due to exception', ['error' => $e->getMessage()]);
+            throw $e;
+        }
     }
 
     /**

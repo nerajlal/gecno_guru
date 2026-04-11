@@ -11,9 +11,7 @@ class PricingController extends Controller
     public function show()
     {
         $user = Auth::user();
-        $hasActivePlan = Transaction::where('user_id', $user->id)
-                                    ->where('status', 'SUCCESS')
-                                    ->exists();
+        $hasActivePlan = Transaction::where('user_id', $user->id)->exists();
 
         return view('resume-build', ['hasActivePlan' => $hasActivePlan]);
     }

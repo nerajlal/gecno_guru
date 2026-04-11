@@ -1,10 +1,10 @@
 <!-- Footer -->
     <footer id="contact" class="bg-gray-900 text-white py-12 sm:py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-8 mb-8 sm:mb-12">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-8 sm:mb-12">
                 
                 <!-- GecnoGuru -->
-                <div class="md:col-span-2">
+                <div class="col-span-2 md:col-span-3 lg:col-span-2">
                     <div class="text-2xl sm:text-3xl font-bold mb-4">
                         <span class="text-blue-400">Gecno</span>Guru
                     </div>
@@ -43,6 +43,10 @@
                             <i class="fa fa-globe mr-2 text-blue-400"></i>
                             <a href="/portfolio" class="hover:text-blue-400 transition-colors duration-200">Portfolio Sites</a>
                         </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-user-tie mr-2 text-blue-400"></i>
+                            <a href="/career" class="hover:text-blue-400 transition-colors duration-200">Career Coaching</a>
+                        </li>
                     </ul>
                 </div>
 
@@ -62,11 +66,15 @@
                             <i class="fa fa-gavel mr-2 text-blue-400"></i>
                             <a href="/terms" class="hover:text-blue-400 transition-colors duration-200">Terms & Conditions</a>
                         </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-question-circle mr-2 text-blue-400"></i>
+                            <a href="/faq" class="hover:text-blue-400 transition-colors duration-200">FAQ</a>
+                        </li>
                     </ul>
                 </div>  
 
                 <!-- Contact -->
-                <div>
+                <div class="col-span-2 md:col-span-1 lg:col-span-1">
                     <h4 class="text-lg font-semibold mb-4 text-white">Contact</h4>
                     <ul class="space-y-2 text-gray-300">
                         <li class="flex items-center">
@@ -262,6 +270,20 @@
             <!-- Login Form -->
             <div id="login-form">
                 <h2 class="text-3xl font-bold text-white text-center mb-6">Login</h2>
+                @if(session('registration_success'))
+                    <div class="bg-green-500 bg-opacity-80 text-white p-3 rounded mb-4 text-sm text-center">
+                        Registration successful! You can now log in.
+                    </div>
+                @endif
+                @if ($errors->any() && old('name') === null && ($errors->has('email') || $errors->has('password')))
+                    <div class="bg-red-500 bg-opacity-80 text-white p-3 rounded mb-4 text-sm">
+                        <ul class="list-disc pl-5">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form action="{{ route('login') }}" method="POST">
                     @csrf
                     <div class="mb-4">
@@ -282,8 +304,21 @@
             <!-- Register Form -->
             <div id="register-form" class="hidden">
                 <h2 class="text-3xl font-bold text-white text-center mb-6">Register</h2>
+                @if ($errors->any() && old('name') !== null && ($errors->has('email') || $errors->has('password') || $errors->has('name')))
+                    <div class="bg-red-500 bg-opacity-80 text-white p-3 rounded mb-4 text-sm">
+                        <ul class="list-disc pl-5">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form action="{{ route('register') }}" method="POST">
                     @csrf
+                    <div class="mb-4">
+                        <label for="register-name" class="block text-white mb-2">Name</label>
+                        <input type="text" id="register-name" name="name" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg py-2 px-4 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="John Doe" required>
+                    </div>
                     <div class="mb-4">
                         <label for="register-email" class="block text-white mb-2">Email</label>
                         <input type="email" id="register-email" name="email" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg py-2 px-4 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="your@email.com" required>
@@ -304,6 +339,34 @@
             </div>
         </div>
     </div>
+
+    <!-- Generic Error Modal (for non-auth errors) -->
+    @if ($errors->any() && !$errors->has('email') && !$errors->has('password') && !$errors->has('name'))
+    <div id="generic-error-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[60]">
+        <div class="gradient-bg glass-effect rounded-2xl shadow-2xl p-8 w-full max-w-md relative">
+            <button onclick="document.getElementById('generic-error-modal').remove()" class="absolute top-4 right-4 text-white hover:text-red-300">
+                <i class="fa-solid fa-times text-2xl"></i>
+            </button>
+
+            <div class="text-center">
+                <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <i class="fa-solid fa-exclamation-triangle text-3xl text-white"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-white mb-4">Update Failed</h2>
+                <div class="bg-red-500 bg-opacity-30 border border-red-400 text-white p-4 rounded-lg text-sm text-left mb-6">
+                    <ul class="list-disc pl-5">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                <button onclick="document.getElementById('generic-error-modal').remove()" class="w-full bg-white text-gray-900 font-bold py-3 rounded-full hover:bg-gray-200 transition-all duration-200">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+    @endif
     <script>
         // Auth Modal functionality
         const getStartedBtns = document.querySelectorAll('.get-started-btn');
@@ -327,6 +390,21 @@
                 document.body.classList.remove('overflow-hidden');
             }
         };
+
+        // Auto-open modal correctly on errors or success
+        @if ($errors->any() && ($errors->has('email') || $errors->has('password') || $errors->has('name')))
+            openModal();
+            @if (old('name') !== null)
+                if(loginForm && registerForm) {
+                    loginForm.classList.add('hidden');
+                    registerForm.classList.remove('hidden');
+                }
+            @endif
+        @endif
+
+        @if(session('registration_success'))
+            openModal();
+        @endif
 
         getStartedBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {

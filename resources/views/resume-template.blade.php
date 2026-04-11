@@ -50,7 +50,11 @@
           <p class="text-gray-600 mt-2 text-sm">Clean and stylish design for professionals.</p>
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-4">Live Preview</button>
+            @if($hasActivePlan)
+            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-4']) }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            @else
             <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            @endif
           </div>
         </div>
       </div>
@@ -63,7 +67,11 @@
           <p class="text-gray-600 mt-2 text-sm">A professional design with a touch of modern style.</p>
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-2">Live Preview</button>
+            @if($hasActivePlan)
+            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-2']) }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            @else
             <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            @endif
           </div>
         </div>
       </div>
@@ -76,7 +84,11 @@
           <p class="text-gray-600 mt-2 text-sm">Simple white design with subtle highlights.</p>
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-3">Live Preview</button>
+            @if($hasActivePlan)
+            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-3']) }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            @else
             <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            @endif
           </div>
         </div>
       </div>
@@ -89,7 +101,11 @@
           <p class="text-gray-600 mt-2 text-sm">A timeless design for any industry.</p>
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-1">Live Preview</button>
+            @if($hasActivePlan)
+            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-1']) }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            @else
             <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            @endif
           </div>
         </div>
       </div>
@@ -102,7 +118,11 @@
           <p class="text-gray-600 mt-2 text-sm">A corporate design with a blue header.</p>
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-5">Live Preview</button>
+            @if($hasActivePlan)
+            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-5']) }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            @else
             <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            @endif
           </div>
         </div>
       </div>
@@ -115,7 +135,11 @@
           <p class="text-gray-600 mt-2 text-sm">Showcase your journey with a timeline.</p>
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-6">Live Preview</button>
+            @if($hasActivePlan)
+            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-6']) }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            @else
             <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            @endif
           </div>
         </div>
       </div>
@@ -128,7 +152,11 @@
           <p class="text-gray-600 mt-2 text-sm">A modern design using icons.</p>
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-7">Live Preview</button>
+            @if($hasActivePlan)
+            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-7']) }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            @else
             <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            @endif
           </div>
         </div>
       </div>
@@ -141,7 +169,11 @@
           <p class="text-gray-600 mt-2 text-sm">A classic design with a sidebar.</p>
           <div class="mt-6 flex gap-3">
             <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition live-preview-btn" data-template="template-8">Live Preview</button>
+            @if($hasActivePlan)
+            <a href="{{ route('resume.fullscreen.preview', ['template' => 'template-8']) }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            @else
             <a href="{{ route('resume-build') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Use Template</a>
+            @endif
           </div>
         </div>
       </div>
@@ -603,7 +635,7 @@
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 drop-shadow-lg">Ready to Create Your Winning Resume?</h2>
             <p class="text-lg sm:text-xl text-blue-50 mb-10 max-w-2xl mx-auto drop-shadow-md">Join thousands of professionals who have transformed their careers with our AI Resume Builder.</p>
 
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <!-- <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 @guest
                 <button class="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:scale-105 transition-all duration-200 glow shadow-lg login-trigger">
                     Start Building Now
@@ -619,7 +651,7 @@
                     View Live Demo
                 </a>
                 @endguest
-            </div>
+            </div> -->
 
             <p class="text-blue-100 mt-8 text-sm">No credit card required. 7-day money-back guarantee.</p>
         </div>

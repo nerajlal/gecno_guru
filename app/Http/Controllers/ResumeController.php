@@ -22,9 +22,7 @@ class ResumeController extends Controller
             ->where('user_id', $user->id)
             ->first();
 
-        $hasActivePlan = Transaction::where('user_id', $user->id)
-                                    ->where('status', 'SUCCESS')
-                                    ->exists();
+        $hasActivePlan = Transaction::where('user_id', $user->id)->exists();
 
         return view('resume-template', ['resume' => $resume, 'hasActivePlan' => $hasActivePlan]);
     }
@@ -43,6 +41,25 @@ class ResumeController extends Controller
         }
 
         return view($viewName, ['resume' => $resume]);
+    }
+
+    public function fullscreenPreview($template)
+    {
+        $user = Auth::user();
+        $resume = ResumeNamePersonal::with(['experiences', 'educations', 'skills', 'certifications', 'projects'])
+            ->where('user_id', $user->id)
+            ->first();
+
+        $viewName = 'resume-templates.' . $template;
+
+        if (!view()->exists($viewName)) {
+            abort(404);
+        }
+
+        return view('resume-fullscreen-preview', [
+            'resume' => $resume,
+            'template' => $template
+        ]);
     }
 
     public function store(Request $request)
