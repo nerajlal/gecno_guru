@@ -16,6 +16,8 @@ class Booking extends Model
         'booking_time',
         'status',
         'amount',
+        'transaction_id',
+        'response_data',
     ];
 
     public function user()
