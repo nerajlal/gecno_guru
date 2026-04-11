@@ -95,10 +95,14 @@ class PhonePeService
 
         if ($response->successful()) {
             $data = $response->json();
-            if ($data['success'] && isset($data['data']['redirectUrl'])) {
+            
+            // Fallback check for different V2 Standard Checkout response structures
+            $redirectUrl = $data['data']['redirectUrl'] ?? $data['redirectUrl'] ?? null;
+
+            if ($data['success'] && $redirectUrl) {
                 return [
                     'success' => true,
-                    'redirectUrl' => $data['data']['redirectUrl']
+                    'redirectUrl' => $redirectUrl
                 ];
             }
         }
