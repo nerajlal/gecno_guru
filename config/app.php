@@ -157,9 +157,7 @@ return [
 
     'providers' => ServiceProvider::defaultProviders()->merge([
         /*
-         * Package Service Providers...
          */
-        Gemini\Laravel\ServiceProvider::class,
 
         /*
          * Application Service Providers...
