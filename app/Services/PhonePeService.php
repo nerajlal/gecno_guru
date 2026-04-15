@@ -24,7 +24,7 @@ class PhonePeService
         $cacheKey = "phonepe_access_token_" . $this->clientId;
         if (Cache::has($cacheKey)) { return Cache::get($cacheKey); }
 
-        $url = ($this->env === "PROD")
+        $url = ($this->env === "PRODUCTION")
             ? "https://api.phonepe.com/apis/identity-manager/v1/oauth/token"
             : "https://api-preprod.phonepe.com/apis/pg-sandbox/v1/oauth/token";
 
@@ -59,7 +59,7 @@ class PhonePeService
             return ["success" => false, "message" => "Auth Failed"];
         }
 
-        $url = ($this->env === "PROD")
+        $url = ($this->env === "PRODUCTION")
             ? "https://api.phonepe.com/apis/pg/checkout/v2/pay"
             : "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/checkout/v2/pay";
 
@@ -103,7 +103,7 @@ class PhonePeService
         $token = $this->getAccessToken();
         if (!$token) return null;
 
-        $url = ($this->env === "PROD")
+        $url = ($this->env === "PRODUCTION")
             ? "https://api.phonepe.com/apis/pg/checkout/v2/status/{$this->clientId}/{$transactionId}"
             : "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/checkout/v2/status/{$this->clientId}/{$transactionId}";
 
