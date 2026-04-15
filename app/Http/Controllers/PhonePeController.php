@@ -2,33 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Services\PhonePeService;
 use App\Models\Booking;
+use App\Models\PhonePeTransaction;
+use App\Models\PhonePeWebhookLog;
+use App\Services\PhonePeService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class PhonePeController extends Controller
 {
-    protected $phonePeService;
+    protected PhonePeService $phonePeService;
 
     public function __construct(PhonePeService $phonePeService)
     {
         $this->phonePeService = $phonePeService;
     }
 
-    /**
-     * Show a simple payment form (used by GET /pay route).
-     * Normally users reach payment through the session booking flow,
-     * but this handles any direct visits to /pay.
-     */
+    // -------------------------------------------------------------------------
+    // SHOW PAYMENT FORM
+    // -------------------------------------------------------------------------
+
     public function showPaymentForm()
     {
         return view('payment');
     }
 
-    /**
-     * Entry point to initiate payment for a booking.
-     */
+    // -------------------------------------------------------------------------
+    // INITIATE PAYMENT
+    // -------------------------------------------------------------------------
+
     public function initiatePayment(Request $request)
     {
         $request->validate([
@@ -37,89 +41,169 @@ class PhonePeController extends Controller
 
         $booking = Booking::findOrFail($request->booking_id);
 
-        // Security: ensure the booking belongs to the logged-in user (if authenticated)
+        // Security: ensure the booking belongs to the logged-in user
         if (auth()->check() && $booking->user_id !== auth()->id()) {
             abort(403, 'Unauthorized');
         }
 
-        Log::info('Initiating Payment via PhonePeService', [
+        Log::info('PhonePe: Initiating payment', [
             'booking_id' => $booking->id,
             'amount'     => $booking->amount,
+            'user_id'    => auth()->id(),
         ]);
 
         $merchantTransactionId = 'MT' . time() . 'BK' . $booking->id;
 
-        $result = $this->phonePeService->initiatePayment(
-            $booking->amount,
-            $merchantTransactionId,
-            route('payment.callback')
-        );
+        try {
+            $result = $this->phonePeService->initiatePayment(
+                amount:                $booking->amount,
+                merchantTransactionId: $merchantTransactionId,
+                redirectUrl:           route('payment.callback'),
+                bookingId:             $booking->id,
+                userId:                auth()->id()
+            );
 
-        if ($result['success']) {
-            // Store transaction ID for later verification
-            $booking->update(['transaction_id' => $merchantTransactionId]);
+            if ($result['success']) {
+                // Link the transaction ID to the booking for callback lookup
+                $booking->update(['transaction_id' => $merchantTransactionId]);
 
-            Log::info('PhonePe redirect issued', [
-                'booking_id'    => $booking->id,
-                'transaction_id' => $merchantTransactionId,
-                'redirect_url'  => $result['redirectUrl'],
+                Log::info('PhonePe: Redirect issued', [
+                    'booking_id'             => $booking->id,
+                    'merchant_transaction_id'=> $merchantTransactionId,
+                    'redirect_url'           => $result['redirectUrl'],
+                ]);
+
+                return redirect()->away($result['redirectUrl']);
+            }
+
+            Log::error('PhonePe: Payment initiation failed', [
+                'booking_id' => $booking->id,
+                'message'    => $result['message'] ?? 'Unknown error',
             ]);
 
-            return redirect()->away($result['redirectUrl']);
+            return back()->with('error', $result['message'] ?? 'Payment initiation failed. Please try again.');
+
+        } catch (Throwable $e) {
+            Log::error('PhonePe: Unexpected exception in initiatePayment controller', [
+                'booking_id' => $booking->id,
+                'error'      => $e->getMessage(),
+                'trace'      => $e->getTraceAsString(),
+            ]);
+
+            return back()->with('error', 'Something went wrong while initiating payment. Please try again.');
         }
-
-        Log::error('PhonePe initiatePayment failed', [
-            'booking_id' => $booking->id,
-            'message'    => $result['message'] ?? 'Unknown error',
-        ]);
-
-        return back()->with('error', $result['message'] ?? 'Payment initiation failed. Please try again.');
     }
 
-    /**
-     * Server-to-Server Callback / Redirect Handler from PhonePe.
-     *
-     * PhonePe v2 sends merchantOrderId (= our merchantTransactionId) as a query param
-     * on the redirectUrl after payment. We verify status server-side before trusting it.
-     */
+    // -------------------------------------------------------------------------
+    // HANDLE CALLBACK (PhonePe redirects user here after payment)
+    // -------------------------------------------------------------------------
+
     public function handleCallback(Request $request)
     {
-        // PhonePe sends merchantOrderId on the redirect URL
+        // --- 1. Log the raw webhook/callback immediately ---
+        $webhookLog = null;
+        try {
+            $webhookLog = PhonePeWebhookLog::create([
+                'merchant_transaction_id' => $request->input('merchantOrderId')
+                                          ?? $request->input('merchantTransactionId'),
+                'event_type'              => 'payment_callback',
+                'http_method'             => $request->method(),
+                'payload'                 => $request->all(),
+                'headers'                 => $request->headers->all(),
+                'processing_status'       => PhonePeWebhookLog::STATUS_RECEIVED,
+                'ip_address'              => $request->ip(),
+            ]);
+        } catch (Throwable $e) {
+            Log::error('PhonePe: Failed to log webhook', [
+                'error' => $e->getMessage(),
+            ]);
+        }
+
+        // --- 2. Extract transaction ID ---
         $merchantTransactionId = $request->input('merchantOrderId')
-                               ?? $request->input('merchantTransactionId');
+                              ?? $request->input('merchantTransactionId');
 
         if (!$merchantTransactionId) {
             Log::warning('PhonePe Callback: No transaction ID in request', $request->all());
+
+            $this->markWebhookFailed($webhookLog, 'No merchant transaction ID in callback payload');
+
             return redirect('/')->with('error', 'Invalid payment reference. Please contact support.');
         }
 
-        // Server-side status verification — never trust the redirect params alone
-        $statusData = $this->phonePeService->verifyStatus($merchantTransactionId);
+        // --- 3. Verify status server-side (never trust redirect params alone) ---
+        try {
+            $statusData = $this->phonePeService->verifyStatus($merchantTransactionId);
+        } catch (Throwable $e) {
+            Log::error('PhonePe Callback: Exception during status verification', [
+                'merchant_transaction_id' => $merchantTransactionId,
+                'error'                   => $e->getMessage(),
+            ]);
 
-        Log::info('PhonePe Callback — Status Verification Result', [
-            'merchantTransactionId' => $merchantTransactionId,
-            'statusData'            => $statusData,
+            $this->markWebhookFailed($webhookLog, 'Status verification exception: ' . $e->getMessage());
+
+            return redirect('/')->with('error', 'We could not verify your payment. Please contact support.');
+        }
+
+        Log::info('PhonePe Callback: Status verified', [
+            'merchant_transaction_id' => $merchantTransactionId,
+            'status_data'             => $statusData,
         ]);
 
-        // PhonePe v2 status API returns state at top level (not nested under 'data')
+        // --- 4. Extract state ---
         $state = $statusData['state'] ?? ($statusData['data']['state'] ?? null);
 
+        // --- 5. Find the booking ---
         $booking = Booking::where('transaction_id', $merchantTransactionId)->first();
 
         if (!$booking) {
             Log::error('PhonePe Callback: Booking not found', [
-                'merchantTransactionId' => $merchantTransactionId,
+                'merchant_transaction_id' => $merchantTransactionId,
             ]);
+
+            $this->markWebhookFailed($webhookLog, 'Booking not found for merchant_transaction_id: ' . $merchantTransactionId);
+
             return redirect('/')->with('error', 'Booking not found for this transaction.');
         }
 
-        if ($state === 'COMPLETED') {
-            $booking->update([
-                'status'        => 'paid',
-                'response_data' => json_encode($statusData),
+        // --- 6. Update booking + phonepe_transactions atomically ---
+        try {
+            DB::transaction(function () use ($booking, $state, $statusData, $merchantTransactionId) {
+                // Update booking status
+                $bookingStatus = ($state === 'COMPLETED') ? 'paid' : strtolower($state ?? 'failed');
+                $booking->update([
+                    'status'        => $bookingStatus,
+                    'response_data' => json_encode($statusData),
+                ]);
+
+                // Update phonepe_transactions record (service already updated it, but ensure consistency)
+                PhonePeTransaction::where('merchant_transaction_id', $merchantTransactionId)
+                    ->update([
+                        'status'      => $this->mapPhonePeState($state),
+                        'raw_response'=> $statusData,
+                    ]);
+            });
+        } catch (Throwable $e) {
+            Log::error('PhonePe Callback: DB update failed', [
+                'booking_id' => $booking->id,
+                'error'      => $e->getMessage(),
+                'trace'      => $e->getTraceAsString(),
             ]);
 
-            Log::info('PhonePe Payment COMPLETED', ['booking_id' => $booking->id]);
+            $this->markWebhookFailed($webhookLog, 'DB update exception: ' . $e->getMessage());
+
+            return redirect('/')->with('error', 'Payment was received but could not update records. Please contact support.');
+        }
+
+        // --- 7. Mark webhook as processed ---
+        $this->markWebhookProcessed($webhookLog);
+
+        // --- 8. Return appropriate view ---
+        if ($state === 'COMPLETED') {
+            Log::info('PhonePe: Payment COMPLETED', [
+                'booking_id'             => $booking->id,
+                'merchant_transaction_id'=> $merchantTransactionId,
+            ]);
 
             return view('session_booking.status', [
                 'status'  => 'success',
@@ -127,17 +211,46 @@ class PhonePeController extends Controller
             ]);
         }
 
-        // Payment failed or is still pending
-        $booking->update([
-            'status'        => strtolower($state ?? 'failed'),
-            'response_data' => json_encode($statusData),
-        ]);
-
-        Log::warning('PhonePe Payment NOT completed', [
-            'booking_id' => $booking->id,
-            'state'      => $state,
+        Log::warning('PhonePe: Payment NOT completed', [
+            'booking_id'             => $booking->id,
+            'merchant_transaction_id'=> $merchantTransactionId,
+            'state'                  => $state,
         ]);
 
         return view('session_booking.status', ['status' => 'failed']);
+    }
+
+    // -------------------------------------------------------------------------
+    // HELPERS
+    // -------------------------------------------------------------------------
+
+    private function markWebhookProcessed(?PhonePeWebhookLog $log): void
+    {
+        if (!$log) return;
+        try {
+            $log->markProcessed();
+        } catch (Throwable $e) {
+            Log::error('PhonePe: Could not mark webhook as processed', ['error' => $e->getMessage()]);
+        }
+    }
+
+    private function markWebhookFailed(?PhonePeWebhookLog $log, string $reason): void
+    {
+        if (!$log) return;
+        try {
+            $log->markFailed($reason);
+        } catch (Throwable $e) {
+            Log::error('PhonePe: Could not mark webhook as failed', ['error' => $e->getMessage()]);
+        }
+    }
+
+    private function mapPhonePeState(?string $state): string
+    {
+        return match (strtoupper($state ?? '')) {
+            'COMPLETED' => PhonePeTransaction::STATUS_COMPLETED,
+            'PENDING'   => PhonePeTransaction::STATUS_PENDING,
+            'CANCELLED' => PhonePeTransaction::STATUS_CANCELLED,
+            default     => PhonePeTransaction::STATUS_FAILED,
+        };
     }
 }
