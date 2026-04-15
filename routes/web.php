@@ -32,7 +32,7 @@ Route::get('/pay', [PhonePeController::class, 'showPaymentForm'])->name('payment
 Route::post('/pay', [PhonePeController::class, 'initiatePayment'])->name('payment.initiate');
 
 // Route for the callback from PhonePe (must be accessible publicly)
-Route::post('/payment/callback', [PhonePeController::class, 'handleCallback'])->name('payment.callback');
+Route::match(['get', 'post'], '/payment/callback', [PhonePeController::class, 'handleCallback'])->name('payment.callback');
 Route::get('/resume', function () {
     return view('resume');
 });
