@@ -77,6 +77,18 @@ class AuthController extends Controller
     }
 
     /**
+     * Show the profile settings page.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function profile()
+    {
+        return view('profile', [
+            'user' => Auth::user()
+        ]);
+    }
+
+    /**
      * Log the user out of the application.
      *
      * @param  \Illuminate\Http\Request  $request

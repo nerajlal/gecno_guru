@@ -217,7 +217,8 @@ class PhonePeController extends Controller
             'state'                  => $state,
         ]);
 
-        return view('session_booking.status', ['status' => 'failed']);
+        return redirect()->route('session-booking.payment', ['booking' => $booking->id])
+            ->with('error', 'Payment was not successful or was cancelled. Please try again or contact support.');
     }
 
     // -------------------------------------------------------------------------

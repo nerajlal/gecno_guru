@@ -1,219 +1,259 @@
-@include('includes.header')
+<?php
+/**
+ * GecnoGuru — Main Entry Page (Login/Register)
+ * ────────────────────────────────────────────────
+ * This view replaces the old landing page with a premium UI.
+ */
+?>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Sign In | GecnoGuru Career Portal</title>
+    <link rel="icon" type="image/jpg" href="/landing/assets/images/gecnoguru-favicon.jpg">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 
-    <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen gradient-bg flex items-center overflow-hidden pt-16">
-        <!-- Animated Background Elements -->
-        <div class="absolute inset-0">
-            <div class="absolute top-20 left-10 w-20 h-20 bg-white bg-opacity-10 rounded-full floating"></div>
-            <div class="absolute top-40 right-20 w-16 h-16 bg-white bg-opacity-10 rounded-full floating" style="animation-delay: -2s;"></div>
-            <div class="absolute bottom-40 left-1/4 w-12 h-12 bg-white bg-opacity-10 rounded-full floating" style="animation-delay: -4s;"></div>
-        </div>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#ecf3ff',
+                            100: '#dde9ff',
+                            200: '#c2d6ff',
+                            300: '#9cb9ff',
+                            400: '#7592ff',
+                            500: '#465fff',
+                            600: '#3641f5',
+                            700: '#2a31d8',
+                            800: '#252dae',
+                            900: '#262e89',
+                            950: '#161950',
+                        },
+                        error: {
+                            500: '#f04438',
+                        }
+                    },
+                    fontFamily: {
+                        outfit: ['Outfit', 'sans-serif'],
+                    },
+                    fontSize: {
+                        'title-sm': ['30px', '38px'],
+                        'title-md': ['36px', '44px'],
+                    },
+                    boxShadow: {
+                        'theme-xs': '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Alpine.js CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        [x-cloak] { display: none !important; }
+        body { font-family: 'Outfit', sans-serif; }
+    </style>
+</head>
+<body
+    x-data="{ 
+        loaded: true, 
+        darkMode: false, 
+        authMode: 'signin',
+        showPassword: false
+    }"
+    x-init="
+        darkMode = JSON.parse(localStorage.getItem('darkMode')) || false;
+        $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)));
         
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="text-white">
-                    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
-                        Your Complete
-                        <span class="block text-blue-300">Career Development</span>
-                        Solution
-                    </h1>
-                    <p class="text-lg sm:text-xl text-blue-50 mb-8 max-w-lg leading-relaxed">
-                        Elevate your career with AI-powered resume building, expert guidance, and cutting-edge tools designed for the modern professional.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        @guest
-                            <button class="group relative bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg overflow-hidden hover:scale-105 transition-all duration-200 glow shadow-lg login-trigger">
-                                <span class="relative z-10">Start Your Journey</span>
-                                <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-                            </button>
-                            <button class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30 login-trigger">
-                                Watch Demo
-                            </button>
-                        @else
-                            <a href="https://wa.me/918547349691" target="_blank" class="group relative bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg overflow-hidden hover:scale-105 transition-all duration-200 glow shadow-lg">
-                                <span class="relative z-10">Start Your Journey</span>
-                                <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-                            </a>
-                            <a href="https://wa.me/918547349691" target="_blank"  class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30">
-                                Watch Demo
-                            </a>
-                        @endguest
+        // Handle registration hash from backend redirects
+        if (window.location.hash === '#register') {
+            authMode = 'signup';
+        }
+        
+        setTimeout(() => loaded = false, 500);
+    "
+    :class="{'dark bg-gray-900': darkMode === true}"
+    class="bg-gray-50"
+>
+    <!-- ===== Preloader Start ===== -->
+    <div
+        x-show="loaded"
+        class="fixed left-0 top-0 z-[9999] flex h-screen w-screen items-center justify-center bg-white dark:bg-black"
+    >
+        <div class="h-16 w-16 animate-spin rounded-full border-4 border-solid border-brand-500 border-t-transparent"></div>
+    </div>
+    <!-- ===== Preloader End ===== -->
+
+    <!-- ===== Page Wrapper Start ===== -->
+    <div class="relative min-h-screen flex flex-col justify-center lg:flex-row overflow-hidden">
+        
+        <!-- Form Section -->
+        <div class="flex flex-col flex-1 w-full lg:w-1/2 p-6 sm:p-12 z-10 bg-white dark:bg-gray-900 border-r border-gray-100 dark:border-gray-800">
+            <div class="w-full max-w-md mx-auto">
+                <!-- Branding / Back Link -->
+                <!-- Form Section -->
+
+                @if(session('success'))
+                    <div class="mb-6 p-4 bg-green-500/10 border border-green-500/20 text-green-600 rounded-lg text-sm">
+                        {{ session('success') }}
                     </div>
-                    
-                    <!-- Stats -->
-                    <div class="flex space-x-4 sm:space-x-8 mt-8 sm:mt-12">
-                        <div class="text-center">
-                            <div class="text-2xl sm:text-3xl font-bold text-white drop-shadow-md">50K+</div>
-                            <div class="text-blue-100 text-xs sm:text-sm font-medium">Success Stories</div>
+                @endif
+
+                @if($errors->any())
+                    <div class="mb-6 p-4 bg-red-500/10 border border-red-500/20 text-red-600 rounded-lg text-sm">
+                        <ul class="list-disc list-inside">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <!-- SIGN IN FORM -->
+                <div x-show="authMode === 'signin'" x-cloak x-transition>
+                    <div class="mb-8">
+                        <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-2">GecnoGuru Career Portal</h1>
+                        <p class="text-gray-500 dark:text-gray-400">Welcome back! Please enter your details.</p>
+                    </div>
+
+                    <form action="{{ route('login') }}" method="POST" class="space-y-6">
+                        @csrf
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1.5">Email*</label>
+                            <input type="email" name="email" value="{{ old('email') }}" required placeholder="name@company.com" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent text-gray-800 dark:text-white focus:ring-2 focus:ring-brand-500 outline-none transition-all" />
                         </div>
-                        <div class="text-center">
-                            <div class="text-2xl sm:text-3xl font-bold text-white drop-shadow-md">98%</div>
-                            <div class="text-blue-100 text-xs sm:text-sm font-medium">Success Rate</div>
+
+                        <div>
+                            <div class="flex justify-between mb-1.5">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-400">Password*</label>
+                                <a href="#" class="text-sm text-brand-500 hover:text-brand-600 font-medium">Forgot password?</a>
+                            </div>
+                            <div class="relative">
+                                <input :type="showPassword ? 'text' : 'password'" name="password" required placeholder="••••••••" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent text-gray-800 dark:text-white focus:ring-2 focus:ring-brand-500 outline-none transition-all" />
+                                <button type="button" @click="showPassword = !showPassword" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                    <svg x-show="!showPassword" class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/></svg>
+                                    <svg x-show="showPassword" class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26a4 4 0 015.656 5.657l-5.656-5.657zm4.35 9.124l-3.32-3.32a4 4 0 004.764-4.764l3.32 3.32a9.977 9.977 0 01-4.764 4.764zm-7.662-7.662L3.06 6.417A9.974 9.974 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.664-.105 2.447-.305L10.74 15.01a4 4 0 01-6.104-6.104z" clip-rule="evenodd"/></svg>
+                                </button>
+                            </div>
                         </div>
-                        <div class="text-center">
-                            <div class="text-2xl sm:text-3xl font-bold text-white drop-shadow-md">24/7</div>
-                            <div class="text-blue-100 text-xs sm:text-sm font-medium">Support</div>
+
+                        <div class="flex items-center">
+                            <input type="checkbox" name="remember" id="remember" class="w-4 h-4 text-brand-500 border-gray-300 rounded focus:ring-brand-500" />
+                            <label for="remember" class="ml-2 text-sm text-gray-600 dark:text-gray-400">Keep me logged in</label>
                         </div>
+
+                        <button type="submit" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-3.5 rounded-lg transition-colors shadow-lg shadow-brand-500/20">
+                            Sign In
+                        </button>
+                    </form>
+
+                    <div class="mt-8 text-center pt-6 border-t border-gray-100 dark:border-gray-800">
+                        <p class="text-gray-600 dark:text-gray-400">
+                            Don't have an account? 
+                            <button @click="authMode = 'signup'" class="text-brand-500 hover:underline font-bold">Sign Up Free</button>
+                        </p>
                     </div>
                 </div>
+
+                <!-- SIGN UP FORM -->
+                <div x-show="authMode === 'signup'" x-cloak x-transition>
+                    <div class="mb-8">
+                        <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-2">GecnoGuru Career Portal</h1>
+                        <p class="text-gray-500 dark:text-gray-400">Start your career journey with GecnoGuru Career Portal.</p>
+                    </div>
+
+                    <form action="{{ route('register') }}" method="POST" class="space-y-5">
+                        @csrf
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1.5">Full Name*</label>
+                            <input type="text" name="name" value="{{ old('name') }}" required placeholder="John Doe" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent text-gray-800 dark:text-white focus:ring-2 focus:ring-brand-500 outline-none transition-all" />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1.5">Email*</label>
+                            <input type="email" name="email" value="{{ old('email') }}" required placeholder="john@example.com" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent text-gray-800 dark:text-white focus:ring-2 focus:ring-brand-500 outline-none transition-all" />
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1.5">Password*</label>
+                                <input type="password" name="password" required placeholder="••••••••" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent text-gray-800 dark:text-white focus:ring-2 focus:ring-brand-500 outline-none transition-all" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1.5">Confirm Password*</label>
+                                <input type="password" name="password_confirmation" required placeholder="••••••••" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent text-gray-800 dark:text-white focus:ring-2 focus:ring-brand-500 outline-none transition-all" />
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-3.5 rounded-lg transition-colors shadow-lg shadow-brand-500/20">
+                            Create Account
+                        </button>
+                    </form>
+
+                    <div class="mt-8 text-center pt-6 border-t border-gray-100 dark:border-gray-800">
+                        <p class="text-gray-600 dark:text-gray-400">
+                            Already have an account? 
+                            <button @click="authMode = 'signin'" class="text-brand-500 hover:underline font-bold">Sign In</button>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Visual / Graphic Section -->
+        <div class="hidden lg:flex flex-col flex-1 bg-brand-950 items-center justify-center relative">
+            <!-- Decorative Grid Shapes -->
+            <div class="absolute right-0 top-0 -z-1 w-full max-w-[450px]">
+                <img src="/landing/assets/images/shape/grid-01.svg" alt="grid" class="opacity-20" />
+            </div>
+            <div class="absolute bottom-0 left-0 -z-1 w-full max-w-[450px] rotate-180">
+                <img src="/landing/assets/images/shape/grid-01.svg" alt="grid" class="opacity-20" />
+            </div>
+            
+            <div class="z-10 text-center max-w-md px-12">
+                <div class="mb-8 text-center">
+                    <img src="/landing/assets/images/gecnoguru-favicon.jpg" alt="Logo" class="mx-auto h-16 w-16 rounded-2xl shadow-lg border border-white/10" />
+                </div>
+                <h2 class="text-4xl font-bold text-white mb-4">Master Your Career with AI</h2>
+                <p class="text-brand-200 text-lg">Join GecnoGuru Career Portal and access premium tools for resumes, portfolios, and expert career coaching.</p>
                 
-                <div class="relative mt-12 lg:mt-0">
-                    <div class="relative z-10 floating">
-                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Team collaboration" class="rounded-3xl shadow-2xl">
+                <div class="mt-12 flex justify-center space-x-4">
+                    <div class="flex -space-x-3">
+                        <img class="w-10 h-10 rounded-full border-2 border-brand-950" src="/landing/assets/images/user/user-01.png" alt="user" />
+                        <img class="w-10 h-10 rounded-full border-2 border-brand-950" src="/landing/assets/images/user/user-02.png" alt="user" />
+                        <img class="w-10 h-10 rounded-full border-2 border-brand-950" src="/landing/assets/images/user/user-03.png" alt="user" />
                     </div>
-                    <div class="absolute -top-6 -left-6 w-full h-full glass-effect rounded-3xl -z-10 hidden sm:block"></div>
-                    <div class="absolute top-10 -right-10 w-20 h-20 bg-white bg-opacity-20 rounded-full pulse-ring hidden sm:block"></div>
+                    <div class="text-white text-sm">
+                        <span class="block font-bold">500+ Professionals</span>
+                        <span class="text-brand-300">already joined this week</span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-16 sm:py-20 bg-white relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12 sm:mb-16 fade-in">
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Premium Career Services</h2>
-            <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-8">Unlock your potential with our comprehensive suite of professional development tools</p>
-            
-            <div class="inline-block">
-                <a href="/services" class="group inline-flex items-center">
-                    <button class="bg-blue-50 text-blue-600 px-6 py-3 rounded-full font-bold text-sm hover:bg-blue-100 transition-all duration-300 flex items-center border border-blue-200 hover:border-blue-300 shadow-sm hover:shadow-md">
-                        View All Services
-                        <i class="fa-solid fa-arrow-right ml-2 text-sm group-hover:translate-x-1 transition-transform duration-300"></i>
-                    </button>
-                </a>
-            </div>
-        </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            <!-- Resume Builder -->
-            <div class="group card-hover bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-gray-100 fade-in hover:border-blue-200">
-                <div class="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                    <i class="fa-solid fa-file-lines text-white text-2xl sm:text-3xl"></i>
-                </div>
-                <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">AI Resume Builder</h3>
-                <p class="text-gray-700 mb-6 leading-relaxed">Create stunning, ATS-optimized resumes with our intelligent builder. Stand out from the crowd with professional templates.</p>
-                <a href="/resume" class="group">
-                    <button class="text-blue-600 font-bold hover:text-blue-700 transition-colors duration-200 flex items-center">
-                        Build Resume
-                        <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
-                    </button>
-                </a>
-            </div>
-            
-            <!-- Cover Letter Builder -->
-            <div class="group card-hover bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-gray-100 fade-in hover:border-green-200" style="animation-delay: 0.2s;">
-                <div class="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-green-600 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                    <i class="fa-solid fa-envelope-open-text text-white text-2xl sm:text-3xl"></i>
-                </div>
-                <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Smart Cover Letters</h3>
-                <p class="text-gray-700 mb-6 leading-relaxed">Generate personalized, compelling cover letters that capture attention and showcase your unique value proposition.</p>
-                <a href="/coverletter" class="group">
-                    <button class="text-green-600 font-bold hover:text-green-700 transition-colors duration-200 flex items-center">
-                        Write Cover Letter
-                        <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
-                    </button>
-                </a>
-            </div>
-            
-            <!-- Portfolio Website -->
-            <div class="group card-hover bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-gray-100 fade-in hover:border-purple-200" style="animation-delay: 0.4s;">
-                <div class="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                    <i class="fa-solid fa-globe text-white text-2xl sm:text-3xl"></i>
-                </div>
-                <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Portfolio Websites</h3>
-                <p class="text-gray-700 mb-6 leading-relaxed">Build a stunning online presence with our portfolio builder. Showcase your work and attract opportunities.</p>
-                <a href="/portfolio" class="group">
-                    <button class="text-purple-600 font-bold hover:text-purple-700 transition-colors duration-200 flex items-center">
-                        Build Portfolio
-                        <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
-                    </button>
-                </a>
-            </div>
+            <!-- Dark Mode Toggle -->
+            <button
+                @click="darkMode = !darkMode"
+                class="absolute bottom-10 right-10 flex h-14 w-14 items-center justify-center rounded-full bg-white dark:bg-gray-800 text-gray-800 dark:text-white shadow-xl hover:scale-110 transition-transform"
+            >
+                <svg x-show="!darkMode" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                <svg x-show="darkMode" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9h-1m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            </button>
         </div>
     </div>
-</section>
-
-    <!-- Why Choose Section -->
-    <section id="about" class="py-16 sm:py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                <div class="fade-in">
-                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-8">Why Choose GecnoGuru?</h2>
-                    
-                    <div class="space-y-6 sm:space-y-8">
-                        <div class="flex items-start space-x-4">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-brain text-blue-600 text-lg sm:text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">AI-Powered Intelligence</h3>
-                                <p class="text-gray-700">Advanced algorithms analyze job market trends and optimize your applications for maximum impact.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start space-x-4">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-bolt text-green-600 text-lg sm:text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">Lightning Fast Results</h3>
-                                <p class="text-gray-700">Get professional-quality documents in minutes, not hours. Our streamlined process saves you valuable time.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start space-x-4">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-graduation-cap text-purple-600 text-lg sm:text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">Expert Career Guidance</h3>
-                                <p class="text-gray-700">Access insights from industry professionals and career coaches to accelerate your growth.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="relative fade-in" style="animation-delay: 0.3s;">
-                    <div class="relative z-10">
-                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Professional team meeting" class="rounded-3xl shadow-2xl">
-                    </div>
-                    <div class="absolute -bottom-6 -right-6 w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 rounded-3xl -z-10 hidden sm:block"></div>
-                    <div class="absolute -top-6 -left-6 w-24 h-24 bg-yellow-400 rounded-full opacity-80 floating hidden sm:block"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-16 sm:py-20 gradient-bg relative overflow-hidden">
-        <div class="absolute inset-0">
-            <div class="absolute top-10 left-10 w-32 h-32 bg-white bg-opacity-10 rounded-full floating hidden sm:block"></div>
-            <div class="absolute bottom-10 right-10 w-24 h-24 bg-white bg-opacity-10 rounded-full floating hidden sm:block" style="animation-delay: -3s;"></div>
-        </div>
-        
-        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10 fade-in">
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 drop-shadow-lg">Ready to Launch Your Career?</h2>
-            <p class="text-lg sm:text-xl text-blue-50 mb-10 max-w-2xl mx-auto drop-shadow-md">Join thousands of professionals who have transformed their careers with our premium platform.</p>
-            
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                @guest
-                    <button class="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:scale-105 transition-all duration-200 glow shadow-lg login-trigger">
-                        Get Started Now
-                    </button>
-                    <button class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30 login-trigger">
-                        Start Free Trial
-                    </button>
-                @else
-                    <a href="/services" class="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:scale-105 transition-all duration-200 glow shadow-lg">
-                        Get Started Now
-                    </a>
-                    <a href="/services" class="glass-effect px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-white hover:bg-white hover:bg-opacity-25 transition-all duration-200 border border-white border-opacity-30">
-                        Start Free Trial
-                    </a>
-                @endguest
-            </div>
-        </div>
-    </section>
-
-@include('includes.footer')
+</body>
+</html>

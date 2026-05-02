@@ -21,8 +21,11 @@ use App\Http\Controllers\SessionBookingController;
 */
 
 Route::get('/', function () {
+    if (auth()->check()) {
+        return view('dashboard');
+    }
     return view('index');
-});
+})->name('home');
 
 // PhonePe payment routes (kept public so unauthenticated users can pay and PhonePe can hit the callback)
 // Route to show the payment button/form
@@ -79,6 +82,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware('auth')->group(function () {
     Route::get('/cover-letter-template', [CoverLetterController::class, 'show'])->name('cover-letter-template.show');
     Route::post('/cover-letter-template', [CoverLetterController::class, 'store'])->name('cover-letter-template.store');
+    Route::get('/profile', [AuthController::class, 'profile'])->name('profile.show');
     Route::post('/profile/update', [CoverLetterController::class, 'updateProfile'])->name('profile.update');
 
     Route::get('/resume-build', [PricingController::class, 'show'])->name('resume-build');
@@ -101,11 +105,22 @@ Route::middleware('auth')->group(function () {
     Route::post('/book-session', [SessionBookingController::class, 'store'])->name('session-booking.store');
     Route::get('/book-session/payment/{booking}', [SessionBookingController::class, 'payment'])->name('session-booking.payment');
 
+    // Placeholder Routes
+    Route::get('/coming-soon', function () {
+        return view('placeholders.coming-soon');
+    })->name('coming-soon');
+    Route::get('/contact-whatsapp', function () {
+        return view('placeholders.whatsapp-redirect');
+    })->name('whatsapp-redirect');
+
 });
 
 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('admin.dashboard');
+        if (auth()->user()->user_type === 'admin') {
+            return view('admin.dashboard');
+        }
+        return view('dashboard');
     })->name('dashboard');
 });
